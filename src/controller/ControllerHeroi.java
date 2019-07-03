@@ -16,13 +16,7 @@ public class ControllerHeroi extends KeyAdapter implements Runnable {
 		this.heroi = heroi;
 	}
 	
-	public void atira() {
-		heroi.atirar(new Flecha(heroi.getAltura() + heroi.getLargura(), heroi.getPosY() + heroi.getAltura()
-				/ 3));
-	}
-	
-	public void keyPressed(KeyEvent e) {
-		
+	public void parar() {
 		if (heroi.getPosX() > 610) {
 			heroi.setPosX(610);
 		}
@@ -36,7 +30,15 @@ public class ControllerHeroi extends KeyAdapter implements Runnable {
 		if (heroi.getPosY() < 130 ) {
 			heroi.setPosY(130);
 		}
+	}
+	
+	public void atira() {
+		heroi.atirar(new Flecha(heroi.getAltura() + heroi.getLargura(), heroi.getPosY() + heroi.getAltura()/3));
+	}
+	
+	public void keyPressed(KeyEvent e) {
 		
+		parar();
 		
 		if (e.getKeyCode()== KeyEvent.VK_SHIFT) {
 			this.velocidade = 4;

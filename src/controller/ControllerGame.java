@@ -14,9 +14,9 @@ import view.TelaGame;
 
 public class ControllerGame implements Runnable{
 
-	private BufferedImage[] sprites;
+	private BufferedImage[] spritesHeroi, spritesInimigo;
 	private BufferedImage tela;
-	private Sprite heroi;
+	private Sprite heroi, inimigo;
 	private Camada camada1, camada2, camada3;
 	private int FPS = 5;
 	private boolean emJogo;
@@ -24,10 +24,13 @@ public class ControllerGame implements Runnable{
 
 	public ControllerGame() {
 		telaGame = new TelaGame();
-
+		
 		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
-		sprites = heroi.getSprites();
-
+		spritesHeroi = heroi.getSprites();
+		
+		inimigo = new Sprite("img/heroi/personagem.png", 1, 6, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
+		spritesInimigo = inimigo.getSprites();
+		
 		telaGame.addKeyListener(new ControllerHeroi(heroi));
 
 		try {
@@ -59,7 +62,11 @@ public class ControllerGame implements Runnable{
 			List<Flecha> flechas = heroi.getFlechas();
 			flechas.forEach(f->tela.getGraphics().drawImage(f.getImagem(), f.getPosX(), f.getPosY(), telaGame));
 			
-			tela.getGraphics().drawImage(sprites[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
+			tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
+			
+			tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
+			
+			tela.getGraphics().drawImage(spritesInimigo[inimigo.getAparencia()], inimigo.getPosX(), inimigo.getPosY(), null);
 			
 			Graphics2D g2d = (Graphics2D) telaGame.getGraphics();
 			g2d.drawImage(tela, 0, 0, null);
