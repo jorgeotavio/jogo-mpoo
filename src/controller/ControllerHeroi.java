@@ -3,28 +3,48 @@ package controller;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import model.Bala;
+import model.Flecha;
 import model.Sprite;
 
 public class ControllerHeroi extends KeyAdapter implements Runnable {
 	
 	private int up, down, left, right;
 	private Sprite heroi;
-	private int velocidade=1;
-	
+	private int velocidade=4;
+
 	public ControllerHeroi(Sprite heroi) {
 		this.heroi = heroi;
 	}
-
+	
+	public void atira() {
+		heroi.atirar(new Flecha(heroi.getAltura() + heroi.getLargura(), heroi.getPosY() + heroi.getAltura()
+				/ 3));
+	}
+	
 	public void keyPressed(KeyEvent e) {
-
+		
+		if (heroi.getPosX() > 610) {
+			heroi.setPosX(610);
+		}
+		if (heroi.getPosX() <1 ) {
+			heroi.setPosX(1);
+		}
+		if (heroi.getPosY() > 430) {
+			heroi.setPosY(430);
+		}
+		
+		if (heroi.getPosY() < 130 ) {
+			heroi.setPosY(130);
+		}
+		
+		
 		if (e.getKeyCode()== KeyEvent.VK_SHIFT) {
 			this.velocidade = 4;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			heroi.setAparencia(0);
-			heroi.atirar(new Bala(heroi.getPosX()+heroi.getLargura()/3, 
+			heroi.setAparencia(2);
+			heroi.atirar(new Flecha(heroi.getPosX()+heroi.getLargura()/3, 
 					heroi.getPosY() + heroi.getAltura()/6));
 		}
 

@@ -15,7 +15,7 @@ public class Sprite extends Movel{
 	private BufferedImage spriteSheet;
 	private BufferedImage[] sprites;
 	private int aparencia;
-	private List<Bala> balas;
+	private List<Flecha> flechas;
 
 	public Sprite(String arquivo, int aparencia, int columns, int rows, int posX, int posY) {
 		try {
@@ -25,7 +25,7 @@ public class Sprite extends Movel{
 		}
 		this.aparencia=aparencia;
 
-		balas = new ArrayList<Bala>();
+		flechas = new ArrayList<Flecha>();
 		
 		this.largura = spriteSheet.getWidth()/columns;
 		this.altura = spriteSheet.getHeight()/rows;
@@ -41,12 +41,12 @@ public class Sprite extends Movel{
 		}
 	}
 	
-	public void atirar(Bala bala) {
-		this.balas.add(bala);
+	public void atirar(Flecha flecha) {
+		this.flechas.add(flecha);
 	}
 	
-	public List<Bala> getBalas(){
-		return balas;
+	public List<Flecha> getFlechas(){
+		return flechas;
 	}
 	
 	public BufferedImage[] getSprites() {
