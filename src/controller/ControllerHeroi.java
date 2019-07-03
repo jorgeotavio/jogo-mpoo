@@ -10,7 +10,7 @@ public class ControllerHeroi extends KeyAdapter implements Runnable {
 	
 	private int up, down, left, right;
 	private Sprite heroi;
-	private int velocidade=2;
+	private int velocidade=1;
 	
 	public ControllerHeroi(Sprite heroi) {
 		this.heroi = heroi;

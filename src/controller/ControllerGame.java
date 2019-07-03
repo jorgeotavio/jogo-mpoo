@@ -1,115 +1,75 @@
 package controller;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-import model.Bala;
+import model.Camada;
 import model.Sprite;
+import view.TelaErro;
 import view.TelaGame;
 
-public class ControllerGame extends KeyAdapter {
+public class ControllerGame implements Runnable{
 
-	TelaGame telaGame;
-	Sprite personagem;
-	int up, down, left, right;
-	int velocidade = 2;
+	private BufferedImage[] sprites;
+	private BufferedImage tela;
+	private Sprite heroi;
+	private Camada camada1, camada2, camada3;
+	private int FPS = 5;
+	private boolean emJogo;
+	private TelaGame telaGame;
 
-	public ControllerGame(TelaGame telaGame,  Sprite personagem) {
-		this.telaGame = telaGame;
-		this.personagem = personagem;
-	}
-
-	public void keyPressed(KeyEvent e) {
+	public ControllerGame() {
+		telaGame = new TelaGame();
 		
-		if (e.getKeyCode()== KeyEvent.VK_SHIFT) {
-			this.velocidade = 4;
+		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
+		sprites = heroi.getSprites();
+		
+		telaGame.addKeyListener(new ControllerHeroi(heroi));
+		
+		try {
+			camada1 = new Camada(15, 20, 32, 32, "img/mapa/camada01.png", "img/mapa/camada01.txt");
+			camada2 = new Camada(15, 20, 32, 32, "img/mapa/camada02.png", "img/mapa/camada02.txt");
+			camada3 = new Camada(15, 20, 32, 32, "img/mapa/camada01.png", "img/mapa/camada03.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+			new TelaErro();
 		}
-
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			personagem.setAparencia(0);
-			personagem.atirar(new Bala(personagem.getPosX()+personagem.getLargura()/3, 
-					personagem.getPosY() + personagem.getAltura()/6));
-		}
-
-		if (e.getKeyCode()==KeyEvent.VK_UP){
-			personagem.setPosY(personagem.getPosY()-velocidade);
-			switch (up) {
-			case 0:
-				personagem.setAparencia(0);
-				break;
-			case 1:
-				personagem.setAparencia(4);
-				break;
-			case 2:
-				personagem.setAparencia(8);
-				break;
-			case 3:
-				personagem.setAparencia(12);
-				break;
-			}
-			if (up==3) up=0;
-			else up++;
-		}
-		if (e.getKeyCode()==KeyEvent.VK_DOWN){
-			personagem.setPosY(personagem.getPosY()+velocidade);
-			switch (down) {
-			case 0:
-				personagem.setAparencia(2);
-				break;
-			case 1:
-				personagem.setAparencia(6);
-				break;
-			case 2:
-				personagem.setAparencia(10);
-				break;
-			case 3:
-				personagem.setAparencia(14);
-				break;
-			}
-			if (down==3) down=0;
-			else down++;
-		}
-		if (e.getKeyCode()==KeyEvent.VK_LEFT){
-			personagem.setPosX(personagem.getPosX()-velocidade);
-			switch (left) {
-			case 0:
-				personagem.setAparencia(3);
-				break;
-			case 1:
-				personagem.setAparencia(7);
-				break;
-			case 2:
-				personagem.setAparencia(11);
-				break;
-			case 3:
-				personagem.setAparencia(15);
-				break;
-			}
-			if (left==3) left=0;
-			else left++;
-		}
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT){
-			personagem.setPosX(personagem.getPosX()+velocidade);
-			switch (right) {
-			case 0:
-				personagem.setAparencia(1);
-				break;
-			case 1:
-				personagem.setAparencia(5);
-				break;
-			case 2:
-				personagem.setAparencia(9);
-				break;
-			case 3:
-				personagem.setAparencia(13);
-				break;
-			}
-			if (right==3) right=0;
-			else right++;			
-		}
-
-
+		
+		camada1.montarMapa(640, 480);
+		camada2.montarMapa(640, 480);
+		camada3.montarMapa(640, 480);
+		
+		telaGame.setVisible(true);
 	}
 
+	public void paint(Graphics g) {
+		
+		tela.getGraphics().drawImage(camada1.camada, 0, 0,telaGame);
+		tela.getGraphics().drawImage(sprites[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
+		tela.getGraphics().drawImage(camada2.camada, 0, 0,telaGame);
+		tela.getGraphics().drawImage(camada3.camada, 0, 0,telaGame);
+		Graphics2D g2d = (Graphics2D) telaGame.getGraphics();
+		g2d.drawImage(tela, 0, 0, null);
+	}
+
+	@Override
+	public void run() {
+		tela = new BufferedImage(640, 480, BufferedImage.TYPE_4BYTE_ABGR);
+		
+		while (true) {
+			try {
+			
+				paint(telaGame.getGraphics());
+				Thread.sleep(500/FPS);
+			
+			}catch (Exception e) {
+
+			}
+
+		}
+	
+	}
 
 }

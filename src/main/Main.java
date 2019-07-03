@@ -1,18 +1,10 @@
 package main;
 
-import java.io.FileNotFoundException;
-
-import view.TelaGame;
+import controller.ControllerGame;
 
 public class Main {
 	public static void main(String[] args) {
-		
-		TelaGame controll;
-		try {
-			controll = new TelaGame();
-			controll.run();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		ControllerGame cg = new ControllerGame();
+		cg.run();
 	}
 }

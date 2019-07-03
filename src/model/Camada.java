@@ -80,7 +80,7 @@ public class Camada{
 		
 		for (int i = 0; i < mapaWidth; i++) {
 			for (int j = 0; j < mapaHeight; j++) {
-				tile = (mapa[i][j] != 0) ? (mapa[i][j]-1) : 0;
+				tile = (mapa[i][j] != 0) ? (mapa[i][j]) : 0;
 				tileRow = (tile / (colunasTileSet)) | 0;
 				tileCol = (tile % (colunasTileSet)) | 0;
 				camada.getGraphics().drawImage(tileSet, (j * tileHeight), (i * tileWidth), (j * tileHeight) + tileHeight,
