@@ -15,7 +15,6 @@ public class ControllerInimigo {
 	private List<Sprite> inimigos;
 	
 	public ControllerInimigo() {
-		iniciarCoordenadas();
 		inicializarInimigos();
 	}
 	
@@ -26,15 +25,11 @@ public class ControllerInimigo {
 		}
 	}
 	
+
 	public void inicializarInimigos() {
+		
 		inimigos = new ArrayList<Sprite>();
-		for (int i=0;i<50;i++) {
-			inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0], coordenadas[i][1]));
-		}
-	}
-
-	public void iniciarCoordenadas() {
-
+		
 		Random random = new Random();
 
 		for (int i = 0; i<50; i++) {

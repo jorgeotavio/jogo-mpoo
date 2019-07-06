@@ -16,26 +16,26 @@ import view.TelaErro;
 import view.TelaGame;
 
 public class ControllerGame implements Runnable{
-
+	
+	private ControllerInimigo controllerInimigo;
 	private BufferedImage[] spritesHeroi, spritesInimigo;
 	private BufferedImage tela;
-	private Sprite heroi, inimigo;
+	private Sprite heroi;
 	private Camada camada1, camada2, camada3;
 	private int FPS = 5;
 	private boolean emJogo;
 	private TelaGame telaGame;
 	private List<Sprite> inimigos;
-	private int[][] coordenadas = new int[50][2];
 
 	public ControllerGame() {
+		
 		telaGame = new TelaGame();
 		
 		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
 		spritesHeroi = heroi.getSprites();
 		
-		
-		
-		inicializarInimigos();
+		controllerInimigo = new ControllerInimigo();
+		inimigos = controllerInimigo.getInimigos();
 		
 		telaGame.addKeyListener(new ControllerHeroi(heroi));
 
@@ -86,21 +86,7 @@ public class ControllerGame implements Runnable{
 		}
 	
 	}
-	
-	public void inicializarInimigos() {
-		
-		Random random = new Random();
-		inimigos = new ArrayList<Sprite>();
-		for (int i = 0; i<50; i++) {
-			for (int j = 0 ;j <= 1 ; j++) {
-				if (j == 0)
-					coordenadas[i][j] = random.nextInt(600)+100;
-				else
-					coordenadas[i][j] = random.nextInt(800)+400;
-			}
-			inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0], coordenadas[i][1]));
-		}
-	}
+
 	
 	public void checarColisoes() {
 		Rectangle formaNave = heroi.getBounds();
