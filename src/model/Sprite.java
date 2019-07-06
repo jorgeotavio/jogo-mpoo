@@ -16,6 +16,8 @@ public class Sprite extends Movel{
 	private BufferedImage[] sprites;
 	private int aparencia;
 	private List<Flecha> flechas;
+	private static final int VELOCIDADE = 1;
+	private static final int LARGURA_TELA = 500;
 
 	public Sprite(String arquivo, int aparencia, int columns, int rows, int posX, int posY) {
 		try {
@@ -45,6 +47,15 @@ public class Sprite extends Movel{
 	
 	public void atirar(Flecha flecha) {
 		this.flechas.add(flecha);
+	}
+	
+	@Override
+	public void mexer() {
+		this.posY -= VELOCIDADE;
+		if (this.posX > LARGURA_TELA) {
+			visible = false;
+		}
+	
 	}
 	
 	public List<Flecha> getFlechas(){
@@ -112,6 +123,5 @@ public class Sprite extends Movel{
 	public Image getImagem() {
 		return imagem;
 	}
-
 
 }

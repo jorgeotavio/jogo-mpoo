@@ -24,6 +24,12 @@ public class ControllerGame implements Runnable{
 	private boolean emJogo;
 	private TelaGame telaGame;
 	private List<Sprite> inimigos;
+	private int[][] coordenadas = { { 2380, 429 }, { 2600, 459 }, { 1380, 489 },
+			{ 780, 509 }, { 580, 539 }, { 880, 639 }, { 790, 659 },
+			{ 760, 450 }, { 790, 550 }, { 1980, 609 }, { 560, 445 }, { 510, 470 },
+			{ 930, 559 }, { 590, 480 }, { 530, 460 }, { 940, 459 }, { 990, 430 },
+			{ 920, 600 }, { 900, 659 }, { 660, 450 } };
+
 
 	public ControllerGame() {
 		telaGame = new TelaGame();
@@ -79,9 +85,11 @@ public class ControllerGame implements Runnable{
 	}
 	
 	public void inicializarInimigos() {
+		
 		inimigos = new ArrayList<Sprite>();
+		
 		for (int i=0;i<10;i++) {
-			inimigos.add(new Sprite("img/heroi/personagem.png", 1, 6, 4, i*30, i+300));
+			inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0]-600, coordenadas[0][1]));
 		}
 	}
 	
@@ -134,9 +142,10 @@ public class ControllerGame implements Runnable{
 						flechas.remove(f);
 					}
 				}
-
+				
 				for (Sprite s: inimigos){
 					if (s.isVisible()) {
+						s.mexer();
 					}else {
 						inimigos.remove(s);
 					}
