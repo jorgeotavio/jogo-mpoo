@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import model.Flecha;
 import model.Camada;
@@ -24,12 +25,7 @@ public class ControllerGame implements Runnable{
 	private boolean emJogo;
 	private TelaGame telaGame;
 	private List<Sprite> inimigos;
-	private int[][] coordenadas = { { 2380, 429 }, { 2600, 459 }, { 1380, 489 },
-			{ 780, 509 }, { 580, 539 }, { 880, 639 }, { 790, 659 },
-			{ 760, 450 }, { 790, 550 }, { 1980, 609 }, { 560, 445 }, { 510, 470 },
-			{ 930, 559 }, { 590, 480 }, { 530, 460 }, { 940, 459 }, { 990, 430 },
-			{ 920, 600 }, { 900, 659 }, { 660, 450 } };
-
+	private int[][] coordenadas = new int[50][2];
 
 	public ControllerGame() {
 		telaGame = new TelaGame();
@@ -42,9 +38,11 @@ public class ControllerGame implements Runnable{
 		telaGame.addKeyListener(new ControllerHeroi(heroi));
 
 		try {
+			
 			camada1 = new Camada(15, 20, 32, 32, "img/mapa/camada01.png", "img/mapa/camada01.txt");
 			camada2 = new Camada(15, 20, 32, 32, "img/mapa/camada02.png", "img/mapa/camada02.txt");
 			camada3 = new Camada(15, 20, 32, 32, "img/mapa/camada01.png", "img/mapa/camada03.txt");
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			new TelaErro();
@@ -72,11 +70,14 @@ public class ControllerGame implements Runnable{
 			
 			tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
 			
+			/*
 			for (int i = 0; i < inimigos.size(); i++) {
 				Sprite in = inimigos.get(i);
 				spritesInimigo = in.getSprites();
 				tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
-			}			
+  
+ 			}
+			*/
 			
 			Graphics2D g2d = (Graphics2D) telaGame.getGraphics();
 			g2d.drawImage(tela, 0, 0, null);
@@ -84,12 +85,38 @@ public class ControllerGame implements Runnable{
 	
 	}
 	
+	public int[][] iniciarCoordenadas() {
+		
+		Random random = new Random();
+		
+		for (int i = 0; i<100; i++) {
+		
+			for (int j=0;j<2;j++) {
+				int aleatorio = 0;
+				boolean noIs = true;
+				while (noIs) {
+					aleatorio = random.nextInt(1500);
+					if (j == 0) {
+						coordenadas[i][j] = 0;
+						noIs = true;
+					}
+					if (aleatorio >= 480) {
+						coordenadas[i][j] = aleatorio;
+						noIs = true;
+					}
+				} 
+			}
+		}
+		
+		return coordenadas;
+	}
+	
 	public void inicializarInimigos() {
 		
 		inimigos = new ArrayList<Sprite>();
 		
 		for (int i=0;i<10;i++) {
-			inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0]-600, coordenadas[0][1]));
+			//inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0]-600, coordenadas[0][1]));
 		}
 	}
 	
@@ -142,17 +169,17 @@ public class ControllerGame implements Runnable{
 						flechas.remove(f);
 					}
 				}
-				
+				/*
 				for (Sprite s: inimigos){
 					if (s.isVisible()) {
 						s.mexer();
 					}else {
 						inimigos.remove(s);
 					}
-				}
+				}*/
 				paint(telaGame.getGraphics());
 				Thread.sleep(500/FPS);
-				checarColisoes();
+				//checarColisoes();
 			}catch (Exception e) {
 
 			}
