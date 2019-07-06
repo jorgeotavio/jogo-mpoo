@@ -28,11 +28,12 @@ public class ControllerGame implements Runnable{
 	private int[][] coordenadas = new int[50][2];
 
 	public ControllerGame() {
-		iniciarCoordenadas();
 		telaGame = new TelaGame();
 		
 		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
 		spritesHeroi = heroi.getSprites();
+		
+		
 		
 		inicializarInimigos();
 		
@@ -86,10 +87,10 @@ public class ControllerGame implements Runnable{
 	
 	}
 	
-	public void iniciarCoordenadas() {
+	public void inicializarInimigos() {
 		
 		Random random = new Random();
-		
+		inimigos = new ArrayList<Sprite>();
 		for (int i = 0; i<50; i++) {
 			for (int j = 0 ;j <= 1 ; j++) {
 				if (j == 0)
@@ -97,12 +98,6 @@ public class ControllerGame implements Runnable{
 				else
 					coordenadas[i][j] = random.nextInt(800)+400;
 			}
-		}
-	}
-	
-	public void inicializarInimigos() {
-		inimigos = new ArrayList<Sprite>();
-		for (int i=0;i<50;i++) {
 			inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0], coordenadas[i][1]));
 		}
 	}

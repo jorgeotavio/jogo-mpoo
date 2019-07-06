@@ -55,7 +55,6 @@ public class Sprite extends Movel{
 		if (this.posX > LARGURA_TELA) {
 			visible = false;
 		}
-	
 	}
 	
 	public List<Flecha> getFlechas(){
