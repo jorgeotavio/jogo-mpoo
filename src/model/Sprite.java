@@ -16,7 +16,7 @@ public class Sprite extends Movel{
 	private BufferedImage[] sprites;
 	private int aparencia;
 	private List<Flecha> flechas;
-	private static final int VELOCIDADE = 1;
+	private static final int VELOCIDADE = 2;
 	private static final int LARGURA_TELA = 500;
 
 	public Sprite(String arquivo, int aparencia, int columns, int rows, int posX, int posY) {

@@ -17,12 +17,15 @@ public class ControllerHeroi extends KeyAdapter implements Runnable {
 	}
 	
 	public void parar() {
+		
 		if (heroi.getPosX() > 610) {
 			heroi.setPosX(610);
 		}
+		
 		if (heroi.getPosX() <1 ) {
 			heroi.setPosX(1);
 		}
+		
 		if (heroi.getPosY() > 430) {
 			heroi.setPosY(430);
 		}

@@ -28,6 +28,7 @@ public class ControllerGame implements Runnable{
 	private int[][] coordenadas = new int[50][2];
 
 	public ControllerGame() {
+		iniciarCoordenadas();
 		telaGame = new TelaGame();
 		
 		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
@@ -70,14 +71,14 @@ public class ControllerGame implements Runnable{
 			
 			tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
 			
-			/*
+			
 			for (int i = 0; i < inimigos.size(); i++) {
 				Sprite in = inimigos.get(i);
 				spritesInimigo = in.getSprites();
 				tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
   
  			}
-			*/
+			
 			
 			Graphics2D g2d = (Graphics2D) telaGame.getGraphics();
 			g2d.drawImage(tela, 0, 0, null);
@@ -85,38 +86,24 @@ public class ControllerGame implements Runnable{
 	
 	}
 	
-	public int[][] iniciarCoordenadas() {
+	public void iniciarCoordenadas() {
 		
 		Random random = new Random();
 		
-		for (int i = 0; i<100; i++) {
-		
-			for (int j=0;j<2;j++) {
-				int aleatorio = 0;
-				boolean noIs = true;
-				while (noIs) {
-					aleatorio = random.nextInt(1500);
-					if (j == 0) {
-						coordenadas[i][j] = 0;
-						noIs = true;
-					}
-					if (aleatorio >= 480) {
-						coordenadas[i][j] = aleatorio;
-						noIs = true;
-					}
-				} 
+		for (int i = 0; i<50; i++) {
+			for (int j = 0 ;j <= 1 ; j++) {
+				if (j == 0)
+					coordenadas[i][j] = random.nextInt(600)+100;
+				else
+					coordenadas[i][j] = random.nextInt(800)+400;
 			}
 		}
-		
-		return coordenadas;
 	}
 	
 	public void inicializarInimigos() {
-		
 		inimigos = new ArrayList<Sprite>();
-		
-		for (int i=0;i<10;i++) {
-			//inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0]-600, coordenadas[0][1]));
+		for (int i=0;i<50;i++) {
+			inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0], coordenadas[i][1]));
 		}
 	}
 	
@@ -169,17 +156,17 @@ public class ControllerGame implements Runnable{
 						flechas.remove(f);
 					}
 				}
-				/*
+				
 				for (Sprite s: inimigos){
 					if (s.isVisible()) {
 						s.mexer();
 					}else {
 						inimigos.remove(s);
 					}
-				}*/
+				}
 				paint(telaGame.getGraphics());
 				Thread.sleep(500/FPS);
-				//checarColisoes();
+				checarColisoes();
 			}catch (Exception e) {
 
 			}
