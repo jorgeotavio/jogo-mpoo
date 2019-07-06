@@ -32,7 +32,9 @@ public class Sprite extends Movel{
 
 		this.posX=posX;
 		this.posY=posY;
-
+		
+		visible = true;
+		
 		sprites = new BufferedImage[columns * rows];
 		for(int i = 0; i < columns; i++) {
 			for(int j = 0; j < rows; j++) {

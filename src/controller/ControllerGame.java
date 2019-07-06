@@ -2,8 +2,10 @@ package controller;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Flecha;
@@ -21,6 +23,7 @@ public class ControllerGame implements Runnable{
 	private int FPS = 5;
 	private boolean emJogo;
 	private TelaGame telaGame;
+	private List<Sprite> inimigos;
 
 	public ControllerGame() {
 		telaGame = new TelaGame();
@@ -28,8 +31,7 @@ public class ControllerGame implements Runnable{
 		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
 		spritesHeroi = heroi.getSprites();
 		
-		inimigo = new Sprite("img/heroi/personagem.png", 1, 6, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
-		spritesInimigo = inimigo.getSprites();
+		inicializarInimigos();
 		
 		telaGame.addKeyListener(new ControllerHeroi(heroi));
 
@@ -41,7 +43,7 @@ public class ControllerGame implements Runnable{
 			e.printStackTrace();
 			new TelaErro();
 		}
-
+		
 		emJogo = true;
 
 		camada1.montarMapa(640, 480);
@@ -64,24 +66,66 @@ public class ControllerGame implements Runnable{
 			
 			tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
 			
-			tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
-			
-			tela.getGraphics().drawImage(spritesInimigo[inimigo.getAparencia()], inimigo.getPosX(), inimigo.getPosY(), null);
+			for (int i = 0; i < inimigos.size(); i++) {
+				Sprite in = inimigos.get(i);
+				spritesInimigo = in.getSprites();
+				tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
+			}			
 			
 			Graphics2D g2d = (Graphics2D) telaGame.getGraphics();
 			g2d.drawImage(tela, 0, 0, null);
 		}
 	
 	}
+	
+	public void inicializarInimigos() {
+		inimigos = new ArrayList<Sprite>();
+		for (int i=0;i<10;i++) {
+			inimigos.add(new Sprite("img/heroi/personagem.png", 1, 6, 4, i*30, i+300));
+		}
+	}
+	
+	public void checarColisoes() {
+		Rectangle formaNave = heroi.getBounds();
+		Rectangle formaInimigo;
+		Rectangle formaFlecha;
+
+		for (int i = 0; i < inimigos.size(); i++) {
+
+			Sprite tempInimigo = inimigos.get(i);
+			formaInimigo = tempInimigo.getBounds();
+
+			if (formaNave.intersects(formaInimigo)) {
+				heroi.setVisible(false);
+				tempInimigo.setVisible(false);
+				emJogo = false;
+			}
+		}
+
+		List<Flecha> flechas = heroi.getFlechas();
+
+		for (int i = 0; i < flechas.size(); i++) {
+			Flecha tempFlecha = flechas.get(i);
+			formaFlecha = tempFlecha.getBounds();
+
+			for (int j = 0; j < inimigos.size(); j++) {
+				Sprite tempInimigo = inimigos.get(j);
+				formaInimigo = tempInimigo.getBounds();
+
+				if (formaFlecha.intersects(formaInimigo)) {
+					tempInimigo.setVisible(false);
+					tempFlecha.setVisible(false);
+				}
+			}
+		}
+	}
 
 	@Override
 	public void run() {
 		tela = new BufferedImage(640, 480, BufferedImage.TYPE_4BYTE_ABGR);
-		
 		while (true) {
 			
 			try {
-				
 				List<Flecha> flechas = heroi.getFlechas();
 				for (Flecha f: flechas ){
 					if (f.isVisible()) {
@@ -90,10 +134,16 @@ public class ControllerGame implements Runnable{
 						flechas.remove(f);
 					}
 				}
-				
+
+				for (Sprite s: inimigos){
+					if (s.isVisible()) {
+					}else {
+						inimigos.remove(s);
+					}
+				}
 				paint(telaGame.getGraphics());
 				Thread.sleep(500/FPS);
-
+				checarColisoes();
 			}catch (Exception e) {
 
 			}
