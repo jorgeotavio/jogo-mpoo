@@ -1,7 +1,6 @@
 package main;
 
 import controller.ControllerGame;
-import view.TelaPerdeu;
 
 public class Main {
 	public static void main(String[] args) {

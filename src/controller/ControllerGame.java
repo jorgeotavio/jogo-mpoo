@@ -13,7 +13,6 @@ import model.Camada;
 import model.Sprite;
 import view.TelaErro;
 import view.TelaGame;
-import view.TelaPerdeu;
 
 public class ControllerGame implements Runnable{
 	

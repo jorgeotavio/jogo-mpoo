@@ -57,7 +57,12 @@ public class ControllerInimigo extends ControllerMovel{
 				else
 					coordenadas[i][j] = random.nextInt(1000)+470;
 			}
-			inimigos.add(new Sprite(inimigo1, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
+			if (i%2 == 0)
+				inimigos.add(new Sprite(inimigo1, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
+			else if (i%3 == 0)
+				inimigos.add(new Sprite(inimigo2, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
+			else 
+				inimigos.add(new Sprite(inimigo3, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
 		}
 	}
 
