@@ -10,7 +10,6 @@ public abstract class Movel {
 	protected boolean visible;
 	protected Image imagem;
 	
-	public abstract void mexer();
 	public abstract Rectangle getBounds();
 	public abstract int getPosY();
 	public abstract int getPosX();

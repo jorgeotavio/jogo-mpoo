@@ -60,9 +60,9 @@ public class ControllerGame implements Runnable{
 	}
 
 	public void paint(Graphics g) {
-
+		
 		if (emJogo) {
-
+			
 			tela.getGraphics().drawImage(camada1.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camada2.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camada3.camada, 0, 0,telaGame);
@@ -72,7 +72,11 @@ public class ControllerGame implements Runnable{
 
 			tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
 
-
+			if (inimigos.size() == 0) {
+				ganhou = true;
+				emJogo = false;
+			}	
+			
 			for (int i = 0; i < inimigos.size(); i++) {
 				Sprite in = inimigos.get(i);
 				spritesInimigo = in.getSprites();
@@ -97,19 +101,20 @@ public class ControllerGame implements Runnable{
 
 
 	public void checarColisoes() {
-		Rectangle formaNave = heroi.getBounds();
+		Rectangle formaHeroi = heroi.getBounds();
 		Rectangle formaInimigo;
 		Rectangle formaFlecha;
-
+		
 		for (int i = 0; i < inimigos.size(); i++) {
 
 			Sprite tempInimigo = inimigos.get(i);
 			formaInimigo = tempInimigo.getBounds();
 
-			if (formaNave.intersects(formaInimigo)) {
+			if (formaHeroi.intersects(formaInimigo)) {
 				heroi.setVisible(false);
 				tempInimigo.setVisible(false);
 				emJogo = false;
+				perdeu = true;
 			}
 		}
 
@@ -118,14 +123,15 @@ public class ControllerGame implements Runnable{
 		for (int i = 0; i < flechas.size(); i++) {
 			Flecha tempFlecha = flechas.get(i);
 			formaFlecha = tempFlecha.getBounds();
-
+			
 			for (int j = 0; j < inimigos.size(); j++) {
 				Sprite tempInimigo = inimigos.get(j);
 				formaInimigo = tempInimigo.getBounds();
-
+				
 				if (formaFlecha.intersects(formaInimigo)) {
 					tempInimigo.setVisible(false);
 					tempFlecha.setVisible(false);
+					
 				}
 			}
 		}
@@ -143,9 +149,9 @@ public class ControllerGame implements Runnable{
 
 		for (Sprite s: inimigos){
 			if (s.isVisible()) {
-				s.mexer();
+				controllerInimigo.mexer(s);
 			}else {
-				inimigos.remove(s);
+				controllerInimigo.getInimigos().remove(s);
 			}
 		}
 	}
