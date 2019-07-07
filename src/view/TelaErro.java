@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class TelaErro extends JFrame {
 
 	private JPanel panel;

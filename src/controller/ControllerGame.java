@@ -5,9 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import model.Flecha;
 import model.Camada;
@@ -23,10 +21,10 @@ public class ControllerGame implements Runnable{
 	private Sprite heroi;
 	private Camada camada1, camada2, camada3;
 	private int FPS = 5;
-	private boolean emJogo;
+	private boolean emJogo, perdeu, ganhou;
 	private TelaGame telaGame;
 	private List<Sprite> inimigos;
-
+	
 	public ControllerGame() {
 
 		telaGame = new TelaGame();
@@ -51,6 +49,8 @@ public class ControllerGame implements Runnable{
 		}
 
 		emJogo = true;
+		perdeu = false;
+		ganhou = false;
 
 		camada1.montarMapa(640, 480);
 		camada2.montarMapa(640, 480);
@@ -80,8 +80,16 @@ public class ControllerGame implements Runnable{
 
 			}
 
-
 		}
+		
+		if (perdeu) {
+			
+		}
+		
+		if (ganhou) {
+			
+		}
+		
 		Graphics2D g2d = (Graphics2D) telaGame.getGraphics();
 		g2d.drawImage(tela, 0, 0, null);
 
