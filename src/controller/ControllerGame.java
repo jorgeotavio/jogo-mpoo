@@ -3,6 +3,8 @@ package controller;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
@@ -14,16 +16,16 @@ import model.Sprite;
 import view.TelaErro;
 import view.TelaGame;
 
-public class ControllerGame implements Runnable{
+public class ControllerGame extends KeyAdapter implements Runnable{
 	
 	private Player player;
 	private ControllerInimigo controllerInimigo;
 	private BufferedImage[] spritesHeroi, spritesInimigo;
 	private BufferedImage tela;
 	private Sprite heroi;
-	private Camada camada1, camada2, camada3, camada4;
+	private Camada camada1, camada2, camada3, camada4, camadaInicio;
 	private int FPS = 5;
-	protected static boolean perdeu, emJogo, ganhou;
+	protected static boolean perdeu, emJogo, ganhou, inicio;
 	private TelaGame telaGame;
 	private List<Sprite> inimigos;
 	
@@ -33,13 +35,14 @@ public class ControllerGame implements Runnable{
 		
 		telaGame = new TelaGame();
 		
+		
 		heroi = new Sprite("img/sprites/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
 		spritesHeroi = heroi.getSprites();
 
 		controllerInimigo = new ControllerInimigo();
 		inimigos = controllerInimigo.getInimigos();
-
-		telaGame.addKeyListener(new ControllerHeroi(heroi));
+		
+		telaGame.addKeyListener(this);
 
 		try {
 
@@ -47,12 +50,15 @@ public class ControllerGame implements Runnable{
 			camada2 = new Camada(15, 20, 32, 32, "img/mapa/castelo.png", "img/mapa/camada02.txt");
 			camada3 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/camada03.txt");
 			camada4 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/painel.txt");
+			camadaInicio = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/sistema/camadaInicio.txt");
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			new TelaErro();
 		}
-
-		emJogo = true;
+		
+		inicio = true;
+		emJogo = false;
 		perdeu = false;
 		ganhou = false;
 
@@ -60,11 +66,29 @@ public class ControllerGame implements Runnable{
 		camada2.montarMapa(640, 480);
 		camada3.montarMapa(640, 480);
 		camada4.montarMapa(640, 480);
-
+		camadaInicio.montarMapa(640, 480);
+		
 		telaGame.setVisible(true);
 	}
 
 	public void paint(Graphics g) {
+		
+		if (inicio) {
+			
+			tela.getGraphics().drawImage(camada1.camada, 0, 0,telaGame);
+			tela.getGraphics().drawImage(camada2.camada, 0, 0,telaGame);
+			tela.getGraphics().drawImage(camada3.camada, 0, 0,telaGame);
+			
+			for (int i = 0; i < inimigos.size(); i++) {
+				Sprite in = inimigos.get(i);
+				spritesInimigo = in.getSprites();
+				tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
+
+			}
+			
+			tela.getGraphics().drawImage(camadaInicio.camada, 0, 0,telaGame);
+			
+		}
 		
 		if (emJogo) {
 			
@@ -157,8 +181,19 @@ public class ControllerGame implements Runnable{
 			if (s.isVisible()) {
 				controllerInimigo.mexer(s);
 			}else {
+				controllerInimigo.mexer(s);
 				controllerInimigo.getInimigos().remove(s);
 			}
+		
+		}
+	}
+	
+	
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			emJogo = true;
+			inicio = false;
+			telaGame.addKeyListener(new ControllerHeroi(heroi));
 		}
 	}
 

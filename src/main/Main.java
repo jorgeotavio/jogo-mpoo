@@ -7,4 +7,5 @@ public class Main {
 		ControllerGame cg = new ControllerGame();
 		cg.run();
 	}
+	
 }

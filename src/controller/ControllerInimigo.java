@@ -23,6 +23,12 @@ public class ControllerInimigo extends ControllerMovel{
 		
 		inimigo.setPosY(inimigo.getPosY()-VELOCIDADE); 
 		
+		if (inimigo.getPosY() < ALTURA_TELA) {
+			inimigo.setVisible(false);
+			ControllerGame.perdeu = true;
+			ControllerGame.emJogo = false;
+		}
+		
 		switch (up) {
 		case 0:
 			inimigo.setAparencia(3);
@@ -35,13 +41,7 @@ public class ControllerInimigo extends ControllerMovel{
 			break;
 		}
 		
-		if (up==1) up=0; else up++;
-		
-		if (inimigo.getPosY() < ALTURA_TELA) {
-			inimigo.setVisible(false);
-			ControllerGame.perdeu = true;
-			ControllerGame.emJogo = false;
-		}
+		if (up==2) up=0; else up++;
 	}
 	
 	public void inicializarInimigos() {
