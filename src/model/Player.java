@@ -3,11 +3,10 @@ package model;
 public class Player {
 	
 	private String nome;
-	private int pontuacao;
+	private int pontuacao, abatesInimigos;
 	private boolean vencedor;
 	
-	public Player(String nome) {
-		this.nome = nome;
+	public Player() {
 		pontuacao = 0;
 		vencedor = false;
 	}
@@ -35,6 +34,15 @@ public class Player {
 	public void setVencedor(boolean vencedor) {
 		this.vencedor = vencedor;
 	}
+
+	public int getAbatesInimigos() {
+		return abatesInimigos;
+	}
+
+	public void setAbatesInimigos(int abatesInimigos) {
+		this.abatesInimigos = abatesInimigos;
+	}
+	
 	
 	
 }

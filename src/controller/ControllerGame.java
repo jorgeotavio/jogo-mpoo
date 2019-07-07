@@ -8,25 +8,28 @@ import java.io.IOException;
 import java.util.List;
 
 import model.Flecha;
+import model.Player;
 import model.Camada;
 import model.Sprite;
 import view.TelaErro;
 import view.TelaGame;
 
 public class ControllerGame implements Runnable{
-
+	
+	private Player player;
 	private ControllerInimigo controllerInimigo;
 	private BufferedImage[] spritesHeroi, spritesInimigo;
 	private BufferedImage tela;
 	private Sprite heroi;
 	private Camada camada1, camada2, camada3;
 	private int FPS = 5;
-	private boolean emJogo, perdeu, ganhou;
+	protected static boolean perdeu, emJogo, ganhou;
 	private TelaGame telaGame;
 	private List<Sprite> inimigos;
 	
 	public ControllerGame() {
-
+		player = new Player();
+		
 		telaGame = new TelaGame();
 
 		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
@@ -131,7 +134,7 @@ public class ControllerGame implements Runnable{
 				if (formaFlecha.intersects(formaInimigo)) {
 					tempInimigo.setVisible(false);
 					tempFlecha.setVisible(false);
-					
+					player.setPontuacao(player.getPontuacao()+1);
 				}
 			}
 		}

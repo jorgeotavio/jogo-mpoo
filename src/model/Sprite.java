@@ -85,7 +85,7 @@ public class Sprite extends Movel{
 	
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(posX, posY, largura, altura);
+		return new Rectangle(posX, posY, largura-17, altura-17);
 	}
 
 	@Override

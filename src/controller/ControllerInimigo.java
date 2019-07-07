@@ -22,6 +22,8 @@ public class ControllerInimigo {
 		
 		if (inimigo.getPosY() < ALTURA_TELA) {
 			inimigo.setVisible(false);
+			ControllerGame.perdeu = true;
+			ControllerGame.emJogo = false;
 		}
 	}
 	
@@ -36,7 +38,7 @@ public class ControllerInimigo {
 				if (j == 0)
 					coordenadas[i][j] = random.nextInt(380)+120;
 				else
-					coordenadas[i][j] = random.nextInt(800)+400;
+					coordenadas[i][j] = random.nextInt(1000)+400;
 			}
 			inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0], coordenadas[i][1]));
 		}
