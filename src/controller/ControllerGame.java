@@ -9,10 +9,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
+import com.sun.prism.paint.Stop;
+
 import model.Flecha;
 import model.Player;
 import model.Camada;
 import model.Sprite;
+import view.ExibirMensagem;
 import view.TelaErro;
 import view.TelaGame;
 import view.TelaInicio;
@@ -46,7 +49,7 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 		telaGame.addKeyListener(this);
 
 		try {
-
+			
 			camada1 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/camada01.txt");
 			camada2 = new Camada(15, 20, 32, 32, "img/mapa/castelo.png", "img/mapa/camada02.txt");
 			camada3 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/camada03.txt");
@@ -81,13 +84,6 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 			tela.getGraphics().drawImage(camada1.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camada2.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camada3.camada, 0, 0,telaGame);
-			
-			for (int i = 0; i < inimigos.size(); i++) {
-				Sprite in = inimigos.get(i);
-				spritesInimigo = in.getSprites();
-				tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
-
-			}
 			
 			tela.getGraphics().drawImage(camadaInicio.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camadaTexto.camada, 0, 0,telaGame);
@@ -211,7 +207,7 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 				Thread.sleep(500/FPS);
 				checarColisoes();
 			}catch (Exception e) {
-
+				
 			}
 
 		}
