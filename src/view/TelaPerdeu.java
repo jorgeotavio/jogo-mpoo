@@ -21,7 +21,7 @@ public class TelaPerdeu extends JFrame {
 		setContentPane(panel);
 		panel.setLayout(null);
 		
-		label = new JLabel(new ImageIcon("img/imagens-sistema/tela_perdeu.png"));
+		label = new JLabel(new ImageIcon("img/tela_perdeu.png"));
 		label.setSize(400, 200);
 		panel.add(label);
 		

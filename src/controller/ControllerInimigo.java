@@ -30,6 +30,9 @@ public class ControllerInimigo extends ControllerMovel{
 		case 1:
 			inimigo.setAparencia(7);
 			break;
+		case 2:
+			inimigo.setAparencia(11);
+			break;
 		}
 		
 		if (up==1) up=0; else up++;

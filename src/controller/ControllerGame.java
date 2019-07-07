@@ -13,6 +13,7 @@ import model.Camada;
 import model.Sprite;
 import view.TelaErro;
 import view.TelaGame;
+import view.TelaPerdeu;
 
 public class ControllerGame implements Runnable{
 	
@@ -21,7 +22,7 @@ public class ControllerGame implements Runnable{
 	private BufferedImage[] spritesHeroi, spritesInimigo;
 	private BufferedImage tela;
 	private Sprite heroi;
-	private Camada camada1, camada2, camada3;
+	private Camada camada1, camada2, camada3, camada4;
 	private int FPS = 5;
 	protected static boolean perdeu, emJogo, ganhou;
 	private TelaGame telaGame;
@@ -43,10 +44,10 @@ public class ControllerGame implements Runnable{
 
 		try {
 
-			camada1 = new Camada(15, 20, 32, 32, "img/mapa/camada01.png", "img/mapa/camada01.txt");
-			camada2 = new Camada(15, 20, 32, 32, "img/mapa/camada02.png", "img/mapa/camada02.txt");
-			camada3 = new Camada(15, 20, 32, 32, "img/mapa/camada01.png", "img/mapa/camada03.txt");
-
+			camada1 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/camada01.txt");
+			camada2 = new Camada(15, 20, 32, 32, "img/mapa/castelo.png", "img/mapa/camada02.txt");
+			camada3 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/camada03.txt");
+			camada4 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/painel.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 			new TelaErro();
@@ -59,6 +60,7 @@ public class ControllerGame implements Runnable{
 		camada1.montarMapa(640, 480);
 		camada2.montarMapa(640, 480);
 		camada3.montarMapa(640, 480);
+		camada4.montarMapa(640, 480);
 
 		telaGame.setVisible(true);
 	}
@@ -70,6 +72,7 @@ public class ControllerGame implements Runnable{
 			tela.getGraphics().drawImage(camada1.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camada2.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camada3.camada, 0, 0,telaGame);
+			tela.getGraphics().drawImage(camada4.camada, 0, 0,telaGame);
 
 			List<Flecha> flechas = heroi.getFlechas();
 			flechas.forEach(f->tela.getGraphics().drawImage(f.getImagem(), f.getPosX(), f.getPosY(), telaGame));
@@ -87,6 +90,7 @@ public class ControllerGame implements Runnable{
 				tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
 
 			}
+
 		}
 		
 		if (perdeu) {
