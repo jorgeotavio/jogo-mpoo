@@ -28,11 +28,12 @@ public class ControllerGame implements Runnable{
 	private List<Sprite> inimigos;
 	
 	public ControllerGame() {
+		
 		player = new Player();
 		
 		telaGame = new TelaGame();
-
-		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
+		
+		heroi = new Sprite("img/sprites/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
 		spritesHeroi = heroi.getSprites();
 
 		controllerInimigo = new ControllerInimigo();
@@ -86,7 +87,6 @@ public class ControllerGame implements Runnable{
 				tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
 
 			}
-
 		}
 		
 		if (perdeu) {
@@ -165,7 +165,7 @@ public class ControllerGame implements Runnable{
 		while (true) {
 
 			try {
-				animacoes();
+				animacoes(); 
 				paint(telaGame.getGraphics());
 				Thread.sleep(500/FPS);
 				checarColisoes();

@@ -33,15 +33,13 @@ public class Camada{
 		tileSet = ImageIO.read(new File(img));
 	}
 
-	public int[][] carregaMatriz(int[][] matz, String arquivo) throws FileNotFoundException {
+	public int[][] carregaMatriz(int[][] matz, String arquivo) throws IOException {
 		ArrayList<String> linhasMatrizCamada = new ArrayList<String>();
 		InputStream is = new FileInputStream(new File(arquivo));
 		BufferedReader br = new BufferedReader (new InputStreamReader (is));
 		String linha="";
-		try {
 
 			while ((linha = br.readLine()) != null){
-				System.out.println(linha);
 				linhasMatrizCamada.add(linha);
 			}
 			
@@ -56,14 +54,6 @@ public class Camada{
 				j = 0;
 			}
 			
-		} catch (FileNotFoundException fileNotFoundException) {
-			System.out.println("nao carregou arquivo mapa");
-			System.exit(0);
-		}
-		catch (IOException ioException) {
-			System.out.println("erro na leitura do mapa");
-			System.exit(0);
-		}
 		return matz;
 	}
 
@@ -76,7 +66,6 @@ public class Camada{
 		int tileRow;
 		int tileCol;
 		int colunasTileSet=tileSet.getWidth()/tileWidth;
-		System.out.println(colunasTileSet);
 		
 		for (int i = 0; i < mapaWidth; i++) {
 			for (int j = 0; j < mapaHeight; j++) {

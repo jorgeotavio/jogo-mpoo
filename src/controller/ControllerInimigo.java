@@ -6,19 +6,33 @@ import java.util.Random;
 
 import model.Sprite;
 
-public class ControllerInimigo {
+public class ControllerInimigo extends ControllerMovel{
 
-	private static final int VELOCIDADE = 4;
-	private static final int ALTURA_TELA = 130;
 	private int[][] coordenadas = new int[50][2];
 	private List<Sprite> inimigos;
+	private String inimigo1, inimigo2, inimigo3;
 	
 	public ControllerInimigo() {
+		inimigo1 = "img/sprites/inimigo1.png";
+		inimigo2 = "img/sprites/inimigo2.png";
+		inimigo3 = "img/sprites/inimigo3.png";
 		inicializarInimigos();
 	}
 	
 	public void mexer(Sprite inimigo) {	
+		
 		inimigo.setPosY(inimigo.getPosY()-VELOCIDADE); 
+		
+		switch (up) {
+		case 0:
+			inimigo.setAparencia(3);
+			break;
+		case 1:
+			inimigo.setAparencia(7);
+			break;
+		}
+		
+		if (up==1) up=0; else up++;
 		
 		if (inimigo.getPosY() < ALTURA_TELA) {
 			inimigo.setVisible(false);
@@ -38,9 +52,9 @@ public class ControllerInimigo {
 				if (j == 0)
 					coordenadas[i][j] = random.nextInt(380)+120;
 				else
-					coordenadas[i][j] = random.nextInt(1000)+400;
+					coordenadas[i][j] = random.nextInt(1000)+470;
 			}
-			inimigos.add(new Sprite("img/heroi/personagem.png", 0, 6, 4, coordenadas[i][0], coordenadas[i][1]));
+			inimigos.add(new Sprite(inimigo1, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
 		}
 	}
 

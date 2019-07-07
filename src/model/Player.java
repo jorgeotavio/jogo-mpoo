@@ -4,11 +4,9 @@ public class Player {
 	
 	private String nome;
 	private int pontuacao, abatesInimigos;
-	private boolean vencedor;
 	
 	public Player() {
 		pontuacao = 0;
-		vencedor = false;
 	}
 
 	public String getNome() {
@@ -25,14 +23,6 @@ public class Player {
 
 	public void setPontuacao(int pontuacao) {
 		this.pontuacao = pontuacao;
-	}
-
-	public boolean isVencedor() {
-		return vencedor;
-	}
-
-	public void setVencedor(boolean vencedor) {
-		this.vencedor = vencedor;
 	}
 
 	public int getAbatesInimigos() {

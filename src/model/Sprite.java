@@ -43,10 +43,6 @@ public class Sprite extends Movel{
 		}
 	}
 	
-	public void atirar(Flecha flecha) {
-		this.flechas.add(flecha);
-	}
-	
 	public List<Flecha> getFlechas(){
 		return flechas;
 	}
