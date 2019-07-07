@@ -16,7 +16,7 @@ import view.TelaErro;
 import view.TelaGame;
 
 public class ControllerGame implements Runnable{
-	
+
 	private ControllerInimigo controllerInimigo;
 	private BufferedImage[] spritesHeroi, spritesInimigo;
 	private BufferedImage tela;
@@ -28,28 +28,28 @@ public class ControllerGame implements Runnable{
 	private List<Sprite> inimigos;
 
 	public ControllerGame() {
-		
+
 		telaGame = new TelaGame();
-		
+
 		heroi = new Sprite("img/heroi/heroi.png", 1, 4, 4, telaGame.getWidth()/2, telaGame.getHeight()/2);
 		spritesHeroi = heroi.getSprites();
-		
+
 		controllerInimigo = new ControllerInimigo();
 		inimigos = controllerInimigo.getInimigos();
-		
+
 		telaGame.addKeyListener(new ControllerHeroi(heroi));
 
 		try {
-			
+
 			camada1 = new Camada(15, 20, 32, 32, "img/mapa/camada01.png", "img/mapa/camada01.txt");
 			camada2 = new Camada(15, 20, 32, 32, "img/mapa/camada02.png", "img/mapa/camada02.txt");
 			camada3 = new Camada(15, 20, 32, 32, "img/mapa/camada01.png", "img/mapa/camada03.txt");
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			new TelaErro();
 		}
-		
+
 		emJogo = true;
 
 		camada1.montarMapa(640, 480);
@@ -60,34 +60,34 @@ public class ControllerGame implements Runnable{
 	}
 
 	public void paint(Graphics g) {
-		
+
 		if (emJogo) {
-			
+
 			tela.getGraphics().drawImage(camada1.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camada2.camada, 0, 0,telaGame);
 			tela.getGraphics().drawImage(camada3.camada, 0, 0,telaGame);
-			
+
 			List<Flecha> flechas = heroi.getFlechas();
 			flechas.forEach(f->tela.getGraphics().drawImage(f.getImagem(), f.getPosX(), f.getPosY(), telaGame));
-			
+
 			tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
-			
-			
+
+
 			for (int i = 0; i < inimigos.size(); i++) {
 				Sprite in = inimigos.get(i);
 				spritesInimigo = in.getSprites();
 				tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
-  
- 			}
-			
-			
-			Graphics2D g2d = (Graphics2D) telaGame.getGraphics();
-			g2d.drawImage(tela, 0, 0, null);
+
+			}
+
+
 		}
-	
+		Graphics2D g2d = (Graphics2D) telaGame.getGraphics();
+		g2d.drawImage(tela, 0, 0, null);
+
 	}
 
-	
+
 	public void checarColisoes() {
 		Rectangle formaNave = heroi.getBounds();
 		Rectangle formaInimigo;
@@ -122,29 +122,33 @@ public class ControllerGame implements Runnable{
 			}
 		}
 	}
+	
+	public void animacoes() {
+		List<Flecha> flechas = heroi.getFlechas();
+		for (Flecha f: flechas ){
+			if (f.isVisible()) {
+				f.mexer();
+			}else {
+				flechas.remove(f);
+			}
+		}
+
+		for (Sprite s: inimigos){
+			if (s.isVisible()) {
+				s.mexer();
+			}else {
+				inimigos.remove(s);
+			}
+		}
+	}
 
 	@Override
 	public void run() {
 		tela = new BufferedImage(640, 480, BufferedImage.TYPE_4BYTE_ABGR);
 		while (true) {
-			
+
 			try {
-				List<Flecha> flechas = heroi.getFlechas();
-				for (Flecha f: flechas ){
-					if (f.isVisible()) {
-						f.mexer();
-					}else {
-						flechas.remove(f);
-					}
-				}
-				
-				for (Sprite s: inimigos){
-					if (s.isVisible()) {
-						s.mexer();
-					}else {
-						inimigos.remove(s);
-					}
-				}
+				animacoes();
 				paint(telaGame.getGraphics());
 				Thread.sleep(500/FPS);
 				checarColisoes();
