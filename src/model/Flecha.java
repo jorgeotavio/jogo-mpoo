@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 
 public class Flecha extends Movel {
 
-	private static final int LARGURA_TELA = 500;
 	private static final int VELOCIDADE = 20;
 
 	public Flecha(int posX, int posY) {
@@ -24,9 +23,6 @@ public class Flecha extends Movel {
 	
 	public void mexer() {
 		this.posY += VELOCIDADE;
-		if (this.posX > LARGURA_TELA) {
-			visible = false;
-		}
 	}
 
 	@Override

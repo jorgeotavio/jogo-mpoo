@@ -15,6 +15,7 @@ import model.Camada;
 import model.Sprite;
 import view.TelaErro;
 import view.TelaGame;
+import view.TelaInicio;
 
 public class ControllerGame extends KeyAdapter implements Runnable{
 	
@@ -23,7 +24,7 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 	private BufferedImage[] spritesHeroi, spritesInimigo;
 	private BufferedImage tela;
 	private Sprite heroi;
-	private Camada camada1, camada2, camada3, camada4, camadaInicio;
+	private Camada camada1, camada2, camada3, camada4, camadaInicio, camadaTexto;
 	private int FPS = 5;
 	protected static boolean perdeu, emJogo, ganhou, inicio;
 	private TelaGame telaGame;
@@ -51,6 +52,7 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 			camada3 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/camada03.txt");
 			camada4 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/painel.txt");
 			camadaInicio = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/sistema/camadaInicio.txt");
+			camadaTexto = new Camada(15, 20, 32, 32, "img/sistema/texto.png", "img/sistema/texto.txt");
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -67,10 +69,11 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 		camada3.montarMapa(640, 480);
 		camada4.montarMapa(640, 480);
 		camadaInicio.montarMapa(640, 480);
+		camadaTexto.montarMapa(640, 480);
 		
 		telaGame.setVisible(true);
 	}
-
+	
 	public void paint(Graphics g) {
 		
 		if (inicio) {
@@ -87,6 +90,7 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 			}
 			
 			tela.getGraphics().drawImage(camadaInicio.camada, 0, 0,telaGame);
+			tela.getGraphics().drawImage(camadaTexto.camada, 0, 0,telaGame);
 			
 		}
 		
@@ -129,6 +133,13 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 
 	}
 
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			emJogo = true;
+			inicio = false;
+			telaGame.addKeyListener(new ControllerHeroi(heroi));
+		}
+	}
 
 	public void checarColisoes() {
 		Rectangle formaHeroi = heroi.getBounds();
@@ -188,14 +199,6 @@ public class ControllerGame extends KeyAdapter implements Runnable{
 		}
 	}
 	
-	
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			emJogo = true;
-			inicio = false;
-			telaGame.addKeyListener(new ControllerHeroi(heroi));
-		}
-	}
 
 	@Override
 	public void run() {
