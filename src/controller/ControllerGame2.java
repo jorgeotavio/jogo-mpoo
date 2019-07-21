@@ -49,6 +49,7 @@ public class ControllerGame2 extends KeyAdapter implements Runnable {
 		
 		while ( true ) {
 			animacoes();
+			
 			telaGame.repaint();
 			try {
 				Thread.sleep(500/5);
