@@ -8,6 +8,8 @@ import model.Sprite;
 
 public class ControllerHeroi extends ControllerMovel implements KeyListener {
 	
+	private Flecha flecha;
+	
 	public ControllerHeroi(Sprite heroi) {
 		this.sprite = heroi;
 	}
@@ -32,8 +34,8 @@ public class ControllerHeroi extends ControllerMovel implements KeyListener {
 	}
 	
 	public void atira() {
-		sprite.getFlechas().add((new Flecha(sprite.getPosX()+sprite.getLargura()/3, 
-				sprite.getPosY() + sprite.getAltura()/6)));
+		flecha = new Flecha(sprite.getPosX()+sprite.getLargura()/3, sprite.getPosY() + sprite.getAltura()/6);
+		sprite.getFlechas().add(flecha);
 	}
 	
 	public void keyPressed(KeyEvent e) {
