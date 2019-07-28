@@ -13,10 +13,10 @@ public class ControllerInimigo extends ControllerMovel{
 	private String inimigo1, inimigo2, inimigo3;
 	
 	public ControllerInimigo() {
-		inimigo1 = "img/sprites/inimigo1.png";
-		inimigo2 = "img/sprites/inimigo2.png";
-		inimigo3 = "img/sprites/inimigo3.png";
-		inicializarInimigos();
+//		inimigo1 = "img/sprites/inimigo1.png";
+//		inimigo2 = "img/sprites/inimigo2.png";
+//		inimigo3 = "img/sprites/inimigo3.png";
+//		inicializarInimigos();
 	}
 	
 	public void mexer(Sprite inimigo) {	
@@ -25,8 +25,6 @@ public class ControllerInimigo extends ControllerMovel{
 		
 		if (inimigo.getPosY() < ALTURA_TELA) {
 			inimigo.setVisible(false);
-			ControllerGame.perdeu = true;
-			ControllerGame.emJogo = false;
 		}
 		
 		switch (up) {
@@ -44,27 +42,27 @@ public class ControllerInimigo extends ControllerMovel{
 		if (up==2) up=0; else up++;
 	}
 	
-	public void inicializarInimigos() {
-		
-		inimigos = new ArrayList<Sprite>();
-		
-		Random random = new Random();
-		
-		for (int i = 0; i<20; i++) {
-			for (int j = 0 ;j <= 1 ; j++) {
-				if (j == 0)
-					coordenadas[i][j] = random.nextInt(380)+120;
-				else
-					coordenadas[i][j] = random.nextInt(800)+470;
-			}
-			if (i%2 == 0)
-				inimigos.add(new Sprite(inimigo1, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
-			else if (i%3 == 0)
-				inimigos.add(new Sprite(inimigo2, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
-			else 
-				inimigos.add(new Sprite(inimigo3, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
-		}
-	}
+//	public void inicializarInimigos() {
+//		
+//		inimigos = new ArrayList<Sprite>();
+//		
+//		Random random = new Random();
+//		
+//		for (int i = 0; i<20; i++) {
+//			for (int j = 0 ;j <= 1 ; j++) {
+//				if (j == 0)
+//					coordenadas[i][j] = random.nextInt(380)+120;
+//				else
+//					coordenadas[i][j] = random.nextInt(800)+470;
+//			}
+//			if (i%2 == 0)
+//				inimigos.add(new Sprite(inimigo1, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
+//			else if (i%3 == 0)
+//				inimigos.add(new Sprite(inimigo2, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
+//			else 
+//				inimigos.add(new Sprite(inimigo3, 3, 3, 4, coordenadas[i][0], coordenadas[i][1]));
+//		}
+//	}
 
 	public int[][] getCoordenadas() {
 		return coordenadas;

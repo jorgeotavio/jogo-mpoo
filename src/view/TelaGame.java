@@ -48,20 +48,16 @@ public class TelaGame extends JFrame {
 
 		List<Flecha> flechas = heroi.getFlechas();
 		flechas.forEach(f->tela.getGraphics().drawImage(f.getImagem(), f.getPosX(), f.getPosY(), this));
-
+		
 		tela.getGraphics().drawImage(spritesHeroi[heroi.getAparencia()], heroi.getPosX(), heroi.getPosY(), null);
 
-//		if (inimigos.size() == 0) {
-//			ganhou = true;
-//			emJogo = false;
-//		}	
+		for (int i = 0; i < inimigos.size(); i++) {
+			Sprite in = inimigos.get(i);
+			spritesInimigo = in.getSprites();
+			tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
 
-//		for (int i = 0; i < inimigos.size(); i++) {
-//			Sprite in = inimigos.get(i);
-//			spritesInimigo = in.getSprites();
-//			tela.getGraphics().drawImage(spritesInimigo[in.getAparencia()], in.getPosX(), in.getPosY(), null);
-//
-//		}
+		}
+		
 //		tela.getGraphics().drawImage(spritesPontuacao[pontuacao.getAparencia()], pontuacao.getPosX(), pontuacao.getPosY(), null);
 		
 		Graphics2D g2d = (Graphics2D) this.getGraphics();
@@ -187,14 +183,6 @@ public class TelaGame extends JFrame {
 
 	public void setCamadaTexto(Camada camadaTexto) {
 		this.camadaTexto = camadaTexto;
-	}
-
-	public Camada getCamadaOver() {
-		return camadaOver;
-	}
-
-	public void setCamadaOver(Camada camadaOver) {
-		this.camadaOver = camadaOver;
 	}
 
 	public static boolean isPerdeu() {

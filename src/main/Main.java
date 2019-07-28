@@ -1,19 +1,16 @@
 package main;
 
 import controller.ControllerGame;
-import controller.ControllerGame2;
+import controller.ControllerGame;
 import view.TelaGame;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-//		ControllerGame cg = new ControllerGame();
-//		cg.run();
-		
 		TelaGame tg = new TelaGame();
 		
-		ControllerGame2 cg2 = new ControllerGame2(tg);
+		ControllerGame cg2 = new ControllerGame(tg);
 		cg2.run();
 	
 	}
