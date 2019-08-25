@@ -35,8 +35,30 @@ public class TelaMenu extends JFrame {
 		add(startButton);
 		add(leaveButton);
 		
-		setVisible(true);
+		setVisible(false);
 		
 	}
+
+	public JLabel getTitleLabel() {
+		return titleLabel;
+	}
+
+	public void setTitleLabel(JLabel titleLabel) {
+		this.titleLabel = titleLabel;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public JButton getStartButton() {
+		return startButton;
+	}
+
+	public JButton getLeaveButton() {
+		return leaveButton;
+	}
+	
+	
 	
 }
