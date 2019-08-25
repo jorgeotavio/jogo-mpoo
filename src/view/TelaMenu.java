@@ -13,5 +13,13 @@ public class TelaMenu extends JFrame {
 	private JLabel titleLabel;
 	private JButton startButton, leaveButton;
 	
+	public TelaMenu() {
+		
+	}
+	
+	public void paint() {
+		
+	}
+	
 	
 }
