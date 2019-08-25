@@ -3,13 +3,13 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import view.TelaMenu;
+import view.ViewMenu;
 
 public class ControllerMenu implements ActionListener{
 	
-	private TelaMenu telaMenu;
+	private ViewMenu telaMenu;
 	
-	public ControllerMenu(TelaMenu telaMenu) {
+	public ControllerMenu(ViewMenu telaMenu) {
 		this.telaMenu = telaMenu;
 		this.telaMenu.setVisible(true);
 		controll();
