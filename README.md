@@ -7,6 +7,9 @@ com o foco na `educação`.
 ## Sendo utilizado:
   
 - Java
+- TiledMap
+- Adobe Illustrator
+- Pacotes de Sprites
 - Eclipse
 - Biblioteca java.swing
 - Muito Café :)
