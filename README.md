@@ -1,2 +1,12 @@
 # Jogo-Mpoo
-Jogo de MPOO, UFRPE - UAST, modelagem e programação orientada a objetos.
+  
+Esse repositório trata-se do projeto da cadeira de `Mpoo` (Modelagem e Programação Orientada a Objetos)  
+da Uast - UFRPE, sendo assim estou disponibilizando aqui os códigos do projeto, que na realidade é um `jogo`  
+com o foco na `educação`.  
+  
+## Sendo utilizado:
+  
+- Java
+- Eclipse
+- Biblioteca java.swing
+- Muito Café :)
