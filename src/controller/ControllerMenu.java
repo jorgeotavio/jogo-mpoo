@@ -33,16 +33,16 @@ public class ControllerMenu implements ActionListener{
 			//
 		}
 		
-		if(e.getSource() == viewMenu.getLeaveButton()) {
-			System.exit(0);
-		}
-		
 		if(e.getSource() == viewMenu.getAboutButton()) {
 			viewAbout.setVisible(true);
 		}
 		
 		if(e.getSource() == viewAbout.getBackButton()) {
 			viewAbout.setVisible(false);
+		}
+		
+		if(e.getSource() == viewMenu.getLeaveButton()) {
+			System.exit(0);
 		}
 		
 	}
