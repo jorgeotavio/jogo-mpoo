@@ -23,11 +23,13 @@ levando o personagem do jogo até o local de atirar na que condizer com a palavr
   
 ## Requisitos
   
-- Multiplayer
+- Construir o projeto em MVC
 - Lógica educativa
-- Salvar dados em XML
-- Inventário
+- Tela "Sobre" com informações sobre a Uast e o Professor
+- Tela de tutorial
 - Pontuação
 - Missão
+- Inventário
 - Life/vida
-- Construir o projeto em MVC
+- Multiplayer
+- Salvar dados em XML (pontuações e dados do jogador)
