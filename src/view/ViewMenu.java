@@ -72,8 +72,4 @@ public class ViewMenu extends JFrame {
 	public JButton getAboutButton() {
 		return aboutButton;
 	}
-	
-	
-	
-	
 }
