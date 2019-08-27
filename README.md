@@ -13,3 +13,8 @@ com o foco na `educação`.
 - Eclipse
 - Biblioteca java.swing
 - Muito Café :)
+  
+## Sobre o Game  
+  
+O jogador vai poder escolher o modo `história` e o modo de `aprendizagem`, onde no primeiro modo ele vai ter  
+um conto simples de `RPG`, e no segundo ele vai aprender algumas palavras em `inglês`.  
