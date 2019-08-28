@@ -14,8 +14,12 @@ public class ViewAbout extends JFrame {
 		setLayout(null);
 		setUndecorated(true);
 		
-		descriptionLabel = new JLabel("Description");
-		descriptionLabel.setBounds(165, 100, 150, 10);
+		descriptionLabel = new JLabel("<html>Jogo feito pelo aluno: <br/>"
+				+ "Jorge Luiz Otávio da Silva Brito,<br/> "
+				+ "para a cadeira "
+				+ "de Mpoo, da UAST-UFRPE.<br/>"
+				+ "Professor: Rico D'Emery");
+		descriptionLabel.setBounds(90, 10, 300, 300);
 		
 		backButton = new JButton("Back");
 		backButton.setBounds(165, 350, 80, 30);

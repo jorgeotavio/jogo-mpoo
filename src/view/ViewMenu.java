@@ -23,20 +23,20 @@ public class ViewMenu extends JFrame {
 		titleLabel = new JLabel("See The Moon");
 		titleLabel.setBounds(210, 150, 500, 10);
 		
-		startSoloButton = new JButton("Start Solo");
+		startSoloButton = new JButton("Start 1");
 		startSoloButton.setBounds(210, 200, 80, 30);
 		
-		startDuoButton = new JButton("Start Duo");
-		startDuoButton.setBounds(210, 200, 80, 30);
+		startDuoButton = new JButton("Start 2");
+		startDuoButton.setBounds(210, 250, 80, 30);
 		
 		tutorialButton = new JButton("Tutorial");
-		tutorialButton.setBounds(210, 250, 80, 30);
+		tutorialButton.setBounds(210, 300, 80, 30);
 		
 		aboutButton = new JButton("About");
-		aboutButton.setBounds(210, 300, 80, 30);
+		aboutButton.setBounds(210, 350, 80, 30);
 		
 		leaveButton = new JButton("Leave");
-		leaveButton.setBounds(210, 350, 80, 30);
+		leaveButton.setBounds(210, 400, 80, 30);
 		
 		add(titleLabel);
 		add(startSoloButton);
