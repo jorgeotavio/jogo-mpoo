@@ -31,7 +31,7 @@ public class ViewMenu extends JFrame {
 		
 		aboutButton = new JButton("About");
 		aboutButton.setBounds(210, 300, 80, 30);
-
+		
 		leaveButton = new JButton("Leave");
 		leaveButton.setBounds(210, 350, 80, 30);
 		
