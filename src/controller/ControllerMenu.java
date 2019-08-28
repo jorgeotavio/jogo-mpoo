@@ -35,10 +35,12 @@ public class ControllerMenu implements ActionListener{
 		
 		if(e.getSource() == viewMenu.getAboutButton()) {
 			viewAbout.setVisible(true);
+			viewMenu.setVisible(false);
 		}
 		
 		if(e.getSource() == viewAbout.getBackButton()) {
 			viewAbout.setVisible(false);
+			viewMenu.setVisible(true);
 		}
 		
 		if(e.getSource() == viewMenu.getLeaveButton()) {

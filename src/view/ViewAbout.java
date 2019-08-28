@@ -9,16 +9,16 @@ public class ViewAbout extends JFrame {
 	private JButton backButton;
 	
 	public ViewAbout() {
-		setSize(300, 300);
+		setSize(400, 400);
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setUndecorated(true);
 		
 		descriptionLabel = new JLabel("Description");
-		descriptionLabel.setBounds(100, 100, 150, 10);
+		descriptionLabel.setBounds(165, 100, 150, 10);
 		
 		backButton = new JButton("Back");
-		backButton.setBounds(100, 250, 80, 30);
+		backButton.setBounds(165, 350, 80, 30);
 		
 		add(descriptionLabel);
 		add(backButton);
