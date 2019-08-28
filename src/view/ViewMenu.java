@@ -11,7 +11,7 @@ public class ViewMenu extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel titleLabel;
-	private JButton startButton, leaveButton, tutorialButton, aboutButton;
+	private JButton startSoloButton, startDuoButton, leaveButton, tutorialButton, aboutButton;
 	
 	public ViewMenu() {
 		setSize(500, 500);
@@ -23,8 +23,11 @@ public class ViewMenu extends JFrame {
 		titleLabel = new JLabel("See The Moon");
 		titleLabel.setBounds(210, 150, 500, 10);
 		
-		startButton = new JButton("Start");
-		startButton.setBounds(210, 200, 80, 30);
+		startSoloButton = new JButton("Start Solo");
+		startSoloButton.setBounds(210, 200, 80, 30);
+		
+		startDuoButton = new JButton("Start Duo");
+		startDuoButton.setBounds(210, 200, 80, 30);
 		
 		tutorialButton = new JButton("Tutorial");
 		tutorialButton.setBounds(210, 250, 80, 30);
@@ -36,7 +39,8 @@ public class ViewMenu extends JFrame {
 		leaveButton.setBounds(210, 350, 80, 30);
 		
 		add(titleLabel);
-		add(startButton);
+		add(startSoloButton);
+		add(startDuoButton);
 		add(tutorialButton);
 		add(aboutButton);
 		add(leaveButton);
@@ -57,8 +61,12 @@ public class ViewMenu extends JFrame {
 		return serialVersionUID;
 	}
 
-	public JButton getStartButton() {
-		return startButton;
+	public JButton getStartSoloButton() {
+		return startSoloButton;
+	}
+
+	public JButton getStartDuoButton() {
+		return startDuoButton;
 	}
 
 	public JButton getLeaveButton() {

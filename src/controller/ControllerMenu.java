@@ -19,7 +19,8 @@ public class ControllerMenu implements ActionListener{
 	}
 	
 	public void controll() {
-		viewMenu.getStartButton().addActionListener(this);
+		viewMenu.getStartSoloButton().addActionListener(this);
+		viewMenu.getStartDuoButton().addActionListener(this);
 		viewMenu.getAboutButton().addActionListener(this);
 		viewMenu.getLeaveButton().addActionListener(this);
 		
@@ -29,7 +30,11 @@ public class ControllerMenu implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == viewMenu.getStartButton()) {
+		if(e.getSource() == viewMenu.getStartSoloButton()) {
+			//
+		}
+		
+		if(e.getSource() == viewMenu.getStartDuoButton()) {
 			//
 		}
 		
