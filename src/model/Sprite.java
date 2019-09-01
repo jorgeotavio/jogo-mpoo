@@ -14,14 +14,14 @@ import controller.ControllerGame;
 
 public class Sprite{
 	
-	private int largura, altura;
+	private int width, heigth;
 	private int posX, posY;
 	private BufferedImage spriteSheet;
 	private BufferedImage[] sprites;
 	private int aparencia;
 	private boolean visible;
 	protected Image imagem;
-
+	
 	public Sprite(String arquivo, int aparencia, int columns, int rows, int posX, int posY) {
 		try {
 			spriteSheet = ImageIO.read(new File(arquivo));
@@ -31,8 +31,8 @@ public class Sprite{
 		
 		this.aparencia=aparencia;
 
-		this.largura = spriteSheet.getWidth()/columns;
-		this.altura = spriteSheet.getHeight()/rows;
+		this.width = spriteSheet.getWidth()/columns;
+		this.heigth = spriteSheet.getHeight()/rows;
 
 		this.posX=posX;
 		this.posY=posY;
@@ -42,7 +42,7 @@ public class Sprite{
 		sprites = new BufferedImage[columns * rows];
 		for(int i = 0; i < columns; i++) {
 			for(int j = 0; j < rows; j++) {
-				sprites[(i * rows) + j] = spriteSheet.getSubimage(i * largura, j * altura, largura, altura);
+				sprites[(i * rows) + j] = spriteSheet.getSubimage(i * width, j * heigth, width, heigth);
 			}
 		}
 	}
@@ -77,15 +77,15 @@ public class Sprite{
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(posX, posY, largura-17, altura-17);
+		return new Rectangle(posX, posY, width-17, heigth-17);
 	}
 
 	public int getAltura() {
-		return this.altura;
+		return this.heigth;
 	}
 
 	public int getLargura() {
-		return this.largura;
+		return this.width;
 	}
 
 	public boolean isVisible() {
