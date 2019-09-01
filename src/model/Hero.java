@@ -6,5 +6,4 @@ public class Hero extends Sprite{
 		super(file, appearance, columns, rows, posX, posY);
 	}
 	
-	
 }
