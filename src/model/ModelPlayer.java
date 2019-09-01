@@ -1,13 +1,13 @@
 package model;
 
-public class Player {
+public class ModelPlayer {
 	
 	private String name;
 	private String password;
-	private Hero hero;
+	private ModelHero hero;
 	private int points;
 	
-	public Player(String name, String password, Hero hero) {
+	public ModelPlayer(String name, String password, ModelHero hero) {
 		this.name = name;
 		this.password = password;
 		this.hero = hero;
@@ -29,11 +29,11 @@ public class Player {
 		this.password = password;
 	}
 
-	public Hero getHero() {
+	public ModelHero getHero() {
 		return hero;
 	}
 
-	public void setHero(Hero hero) {
+	public void setHero(ModelHero hero) {
 		this.hero = hero;
 	}
 
