@@ -16,10 +16,10 @@ com o foco na `educação`.
   
 ## Sobre o Game  
   
-O jogador vai poder escolher o modo `história` e o modo de `aprendizagem`, onde no primeiro modo ele vai ter  
-um conto simples de `RPG`, e no segundo ele vai aprender algumas palavras em `inglês`.  
-Mas como vai funcionar o segundo modo? Bem eu irei dar uma palavra e o player terá que dizer a tradução dela  
-levando o personagem do jogo até o local de atirar na que condizer com a palavra indicada.
+O game terá um embasamento simples em um `RPG`, eu terei alguns inimigos para serem vencidos e entrar em um minigame  
+que será educativo, estou pensando em algo relacionado à aprendizagem do inglês, como acerta uma tradução de uma determinada  
+palavra na lingua estrangeira, no modo multiplayer os jogadores irão se enfrentar para ver quem consegue uma pontuação e  
+entrar no minigame antes do outro.
   
 ## Requisitos
   
