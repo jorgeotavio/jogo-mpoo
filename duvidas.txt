@@ -1,0 +1,5 @@
+Duvidas sobre o jogo
+
+- o Model Mapa da forma como estou fazendo está correto?
+- a App cadastra realmente os models?
+- sobre a modelagem

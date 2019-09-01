@@ -47,7 +47,6 @@ public class ModelSprite{
 		}
 	}
 
-
 	public BufferedImage[] getSprites() {
 		return this.sprites;
 	}
