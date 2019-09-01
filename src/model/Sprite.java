@@ -20,11 +20,11 @@ public class Sprite{
 	private BufferedImage[] sprites;
 	private int appearance;
 	private boolean visible;
-	protected Image imagem;
+	protected Image image;
 	
-	public Sprite(String arquivo, int appearance, int columns, int rows, int posX, int posY) {
+	public Sprite(String file, int appearance, int columns, int rows, int posX, int posY) {
 		try {
-			spriteSheet = ImageIO.read(new File(arquivo));
+			spriteSheet = ImageIO.read(new File(file));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -52,12 +52,12 @@ public class Sprite{
 		return this.sprites;
 	}
 
-	public int getAparencia() {
+	public int getAppearance() {
 		return this.appearance;
 	}
 
-	public void setAparencia(int aparencia) {
-		this.appearance = aparencia;
+	public void setAppearance(int appearance) {
+		this.appearance = appearance;
 	}
 
 	public int getPosX() {
@@ -80,11 +80,11 @@ public class Sprite{
 		return new Rectangle(posX, posY, width-17, heigth-17);
 	}
 
-	public int getAltura() {
+	public int getHeigth() {
 		return this.heigth;
 	}
 
-	public int getLargura() {
+	public int getWidth() {
 		return this.width;
 	}
 
@@ -96,8 +96,8 @@ public class Sprite{
 		this.visible = visible;
 	}
 
-	public Image getImagem() {
-		return imagem;
+	public Image getImage() {
+		return image;
 	}
 
 }
