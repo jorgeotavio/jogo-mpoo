@@ -18,18 +18,18 @@ public class Sprite{
 	private int posX, posY;
 	private BufferedImage spriteSheet;
 	private BufferedImage[] sprites;
-	private int aparencia;
+	private int appearance;
 	private boolean visible;
 	protected Image imagem;
 	
-	public Sprite(String arquivo, int aparencia, int columns, int rows, int posX, int posY) {
+	public Sprite(String arquivo, int appearance, int columns, int rows, int posX, int posY) {
 		try {
 			spriteSheet = ImageIO.read(new File(arquivo));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		this.aparencia=aparencia;
+		this.appearance=appearance;
 
 		this.width = spriteSheet.getWidth()/columns;
 		this.heigth = spriteSheet.getHeight()/rows;
@@ -53,11 +53,11 @@ public class Sprite{
 	}
 
 	public int getAparencia() {
-		return this.aparencia;
+		return this.appearance;
 	}
 
 	public void setAparencia(int aparencia) {
-		this.aparencia = aparencia;
+		this.appearance = aparencia;
 	}
 
 	public int getPosX() {
