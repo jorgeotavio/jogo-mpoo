@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -24,5 +25,7 @@ public class ViewGame extends JFrame{
 		
 	}
 	
-	
+	public void paint(Graphics g) {
+		
+	}
 }
