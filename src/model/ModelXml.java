@@ -12,22 +12,22 @@ import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 
 public class ModelXml {
 
-	private List<Questao> questaos;
+	private List<ModelPlayer> players;
 	private XStream xStream;
 	private File file;
 
 	public ModelXml() {
 
 		xStream = new XStream(new Dom4JDriver());
-		xStream.alias("Questao", Questao.class);
+		xStream.alias("ModelPlayer", ModelPlayer.class);
 		
-		file = new File("res/questoes.xml");
-		questaos = new ArrayList<>();
+		file = new File("res/players.xml");
+		players = new ArrayList<>();
 	}
 
-	public void salvar(Questao questao) {
+	public void salvar(ModelPlayer player) {
 		
-		questaos.add(questao);
+		players.add(player);
 
 		try {
 			if (!file.exists())
@@ -38,7 +38,7 @@ public class ModelXml {
 			}
 			
 			OutputStream stream = new FileOutputStream(file);
-			xStream.toXML(questaos, stream);
+			xStream.toXML(players, stream);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -47,13 +47,13 @@ public class ModelXml {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Questao> ler()
+	public List<ModelPlayer> ler()
 	{
 		try {
 			if (!file.exists())
 				file.createNewFile();
 			else {
-				return (List<Questao>) xStream.fromXML(file);				
+				return (List<ModelPlayer>) xStream.fromXML(file);				
 			}
 			
 		} catch (IOException e) {
@@ -65,26 +65,26 @@ public class ModelXml {
 	}
 	
 	
-	public List<Questao> getQuestaos() {
-		return questaos;
+	public List<ModelPlayer> getPlayers() {
+		return players;
 	}
 	
-	public void setQuestaos(List<Questao> questaos) {
-		this.questaos = questaos;
+	public void setPlayers(List<ModelPlayer> players) {
+		this.players = players;
 	}
 	
-	public static void main(String[] args) {
-		
-		Xml xml = new Xml();
-		
-		xml.setQuestaos(xml.ler());
-		
-		xml.salvar(new Questao(1, 1, 2));
-		xml.salvar(new Questao(2, 2, 4));
-		
-		System.out.println(xml.ler());
-		
-	}
+//	public static void main(String[] args) {
+//		
+//		Xml xml = new Xml();
+//		
+//		xml.setQuestaos(xml.ler());
+//		
+//		xml.salvar(new Questao(1, 1, 2));
+//		xml.salvar(new Questao(2, 2, 4));
+//		
+//		System.out.println(xml.ler());
+//		
+//	}
 	
 	
 
