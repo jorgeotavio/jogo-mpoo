@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 import controller.ControllerGame;
 
-public class ModelSprite{
+public class Sprite{
 	
 	private int width, heigth;
 	private int posX, posY;
@@ -22,7 +22,7 @@ public class ModelSprite{
 	private boolean visible;
 	protected Image image;
 	
-	public ModelSprite(String file, int appearance, int columns, int rows, int posX, int posY) {
+	public Sprite(String file, int appearance, int columns, int rows, int posX, int posY) {
 		try {
 			spriteSheet = ImageIO.read(new File(file));
 		} catch (IOException e) {

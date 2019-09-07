@@ -10,22 +10,22 @@ import java.util.List;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 
-public class ModelXml {
+public class Xml {
 
-	private List<ModelPlayer> players;
+	private List<Player> players;
 	private XStream xStream;
 	private File file;
 
-	public ModelXml() {
+	public Xml() {
 
 		xStream = new XStream(new Dom4JDriver());
-		xStream.alias("ModelPlayer", ModelPlayer.class);
+		xStream.alias("ModelPlayer", Player.class);
 		
 		file = new File("res/players.xml");
 		players = new ArrayList<>();
 	}
 
-	public void salvar(ModelPlayer player) {
+	public void salvar(Player player) {
 		
 		players.add(player);
 
@@ -47,13 +47,13 @@ public class ModelXml {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ModelPlayer> ler()
+	public List<Player> ler()
 	{
 		try {
 			if (!file.exists())
 				file.createNewFile();
 			else {
-				return (List<ModelPlayer>) xStream.fromXML(file);				
+				return (List<Player>) xStream.fromXML(file);				
 			}
 			
 		} catch (IOException e) {
@@ -65,11 +65,11 @@ public class ModelXml {
 	}
 	
 	
-	public List<ModelPlayer> getPlayers() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 	
-	public void setPlayers(List<ModelPlayer> players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 	

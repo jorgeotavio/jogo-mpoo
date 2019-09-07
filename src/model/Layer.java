@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
 
-public class ModelLayer{
+public class Layer{
 	public  int map[][];
 	public  BufferedImage camada;
 	private BufferedImage tileSet;
@@ -21,7 +21,7 @@ public class ModelLayer{
 	private int tileWidth;
 	private int tileHeight;
 
-	public ModelLayer(int mapWidth, int mapHeight, int tileWidth, int tileHeight, String img, String file) throws IOException {
+	public Layer(int mapWidth, int mapHeight, int tileWidth, int tileHeight, String img, String file) throws IOException {
 		this.mapWidth=mapWidth;
 		this.mapHeight=mapHeight;
 		this.tileWidth=tileWidth;

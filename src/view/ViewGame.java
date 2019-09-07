@@ -5,19 +5,19 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import model.ModelEnemy;
-import model.ModelHero;
-import model.ModelMap;
-import model.ModelPlayer;
+import model.Enemy;
+import model.Hero;
+import model.Map;
+import model.Player;
 
 public class ViewGame extends JFrame{
 	
-	private ArrayList<ModelHero> heros; 
-	private ArrayList<ModelEnemy> enemies;
-	private ArrayList<ModelPlayer> players;
-	private ArrayList<ModelMap> maps;
+	private ArrayList<Hero> heros; 
+	private ArrayList<Enemy> enemies;
+	private ArrayList<Player> players;
+	private ArrayList<Map> maps;
 	
-	public ViewGame(ArrayList<ModelHero> heros, ArrayList<ModelEnemy> enemies, ArrayList<ModelPlayer> players, ArrayList<ModelMap> maps) {
+	public ViewGame(ArrayList<Hero> heros, ArrayList<Enemy> enemies, ArrayList<Player> players, ArrayList<Map> maps) {
 		this.heros = heros;
 		this.enemies = enemies;
 		this.players = players;
