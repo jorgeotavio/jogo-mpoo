@@ -14,8 +14,10 @@ import controller.ControllerGame;
 
 public class Sprite{
 	
-	private int width, heigth;
-	private int posX, posY;
+	private int width;
+	private int heigth;
+	private int posX;
+	private int posY;
 	private BufferedImage spriteSheet;
 	private BufferedImage[] sprites;
 	private int appearance;
