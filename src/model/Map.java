@@ -6,7 +6,7 @@ public class Map {
 	private ArrayList<Player> players;
 	private ArrayList<Layer> layers;
 	private ArrayList<Enemy> enemies;
-	
+
 	public Map(ArrayList<Player> players, ArrayList<Layer> layers, ArrayList<Enemy> enemies) {
 		this.players = players;
 		this.layers = layers;
