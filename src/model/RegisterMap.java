@@ -2,8 +2,10 @@ package model;
 
 public class RegisterMap {
 	
-	public RegisterMap() {
-		
+	private Map map;
+	
+	public RegisterMap(Map map) {
+		this.map = map;
 	}
 	
 }
