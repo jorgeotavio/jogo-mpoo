@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class ViewGame extends JFrame{
 				tela.getGraphics().drawImage(layer.camada, 0, 0, this); 
 			}
 		}
+		Graphics2D g2d = (Graphics2D) this.getGraphics();
+		g2d.drawImage(tela, 0, 0, null);
 	}
 
 	public ArrayList<Enemy> getEnemies() {
