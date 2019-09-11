@@ -5,14 +5,25 @@ import java.util.ArrayList;
 import view.ViewGame;
 
 public class Map {
+	
+	private boolean activated;
 	private ArrayList<Player> players;
 	private ArrayList<Layer> layers;
 	private ArrayList<Enemy> enemies;
 
-	public Map(ViewGame viewGame, ArrayList<Player> players, ArrayList<Layer> layers, ArrayList<Enemy> enemies) {
+	public Map(ArrayList<Player> players, ArrayList<Layer> layers, ArrayList<Enemy> enemies) {
+		activated = false;
 		this.players = players;
 		this.layers = layers;
 		this.enemies = enemies;
+	}
+	
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
 	}
 
 	public ArrayList<Player> getPlayers() {

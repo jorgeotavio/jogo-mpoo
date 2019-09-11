@@ -7,15 +7,11 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import model.Enemy;
 import model.Layer;
 import model.Map;
-import model.Player;
 
 public class ViewGame extends JFrame{
 	
-	private ArrayList<Enemy> enemies;
-	private ArrayList<Player> players;
 	private ArrayList<Map> maps;
 	private BufferedImage tela;
 	
@@ -26,6 +22,10 @@ public class ViewGame extends JFrame{
 	public void paint(Graphics g) {
 		
 		for (Map map: maps) {
+			
+			if (!map.isActivated())
+				continue;
+			
 			for (Layer layer: map.getLayers()) {
 				tela.getGraphics().drawImage(layer.camada, 0, 0, this); 
 			}
@@ -33,22 +33,6 @@ public class ViewGame extends JFrame{
 		
 		Graphics2D g2d = (Graphics2D) this.getGraphics();
 		g2d.drawImage(tela, 0, 0, null);
-	}
-
-	public ArrayList<Enemy> getEnemies() {
-		return enemies;
-	}
-
-	public void setEnemies(ArrayList<Enemy> enemies) {
-		this.enemies = enemies;
-	}
-
-	public ArrayList<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(ArrayList<Player> players) {
-		this.players = players;
 	}
 
 	public ArrayList<Map> getMaps() {
