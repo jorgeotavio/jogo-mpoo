@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import model.Enemy;
-import model.Hero;
 import model.Layer;
 import model.Map;
 import model.Player;
@@ -25,11 +24,13 @@ public class ViewGame extends JFrame{
 	}
 	
 	public void paint(Graphics g) {
+		
 		for (Map map: maps) {
 			for (Layer layer: map.getLayers()) {
 				tela.getGraphics().drawImage(layer.camada, 0, 0, this); 
 			}
 		}
+		
 		Graphics2D g2d = (Graphics2D) this.getGraphics();
 		g2d.drawImage(tela, 0, 0, null);
 	}
