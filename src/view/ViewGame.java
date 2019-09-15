@@ -58,7 +58,21 @@ public class ViewGame extends JFrame{
 	public void setTela(BufferedImage tela) {
 		this.tela = tela;
 	}
-	
-	
+
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
+	}
+
+	public void setEnemies(ArrayList<Enemy> enemies) {
+		this.enemies = enemies;
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
 	
 }
