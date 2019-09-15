@@ -7,15 +7,23 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import model.Enemy;
 import model.Layer;
 import model.Map;
- 
+import model.Player;
+
 public class ViewGame extends JFrame{
 	
+	private ArrayList<Enemy> enemies;
+	private ArrayList<Player> players;
 	private ArrayList<Map> maps;
 	private BufferedImage tela;
 	
-	public ViewGame() {
+	public ViewGame(ArrayList<Map> maps, ArrayList<Enemy> enemies, ArrayList<Player> players) {
+		this.enemies = enemies;
+		this.players = players;
+		this.maps = maps;
+		
 		tela = new BufferedImage(640, 480, BufferedImage.TYPE_4BYTE_ABGR);
 	}
 	
