@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 import model.Layer;
 import model.Map;
-
+ 
 public class ViewGame extends JFrame{
 	
 	private ArrayList<Map> maps;
