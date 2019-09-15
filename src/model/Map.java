@@ -7,15 +7,11 @@ import view.ViewGame;
 public class Map {
 	
 	private boolean activated;
-	private ArrayList<Player> players;
 	private ArrayList<Layer> layers;
-	private ArrayList<Enemy> enemies;
 
-	public Map(ArrayList<Player> players, ArrayList<Layer> layers, ArrayList<Enemy> enemies) {
+	public Map(ArrayList<Layer> layers) {
 		activated = false;
-		this.players = players;
 		this.layers = layers;
-		this.enemies = enemies;
 	}
 	
 	public boolean isActivated() {
@@ -26,14 +22,6 @@ public class Map {
 		this.activated = activated;
 	}
 
-	public ArrayList<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(ArrayList<Player> players) {
-		this.players = players;
-	}
-
 	public ArrayList<Layer> getLayers() {
 		return layers;
 	}
@@ -41,16 +29,5 @@ public class Map {
 	public void setLayers(ArrayList<Layer> layers) {
 		this.layers = layers;
 	}
-
-	public ArrayList<Enemy> getEnemies() {
-		return enemies;
-	}
-
-	public void setEnemies(ArrayList<Enemy> enemies) {
-		this.enemies = enemies;
-	}
-	
-	
-	
 	
 }
