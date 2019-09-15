@@ -6,11 +6,13 @@ public class Player {
 	private String password;
 	private Hero hero;
 	private int points;
+	private Inventary inventary;
 	
-	public Player(String name, String password, Hero hero) {
+	public Player(String name, String password, Hero hero, Inventary inventary) {
 		this.name = name;
 		this.password = password;
 		this.hero = hero;
+		this.inventary = inventary;
 	}
 
 	public String getName() {
@@ -43,6 +45,14 @@ public class Player {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public Inventary getInventary() {
+		return inventary;
+	}
+
+	public void setInventary(Inventary inventary) {
+		this.inventary = inventary;
 	}
 	
 }
