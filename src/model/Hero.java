@@ -8,11 +8,10 @@ public class Hero implements Runnable{
 	private Sprite sprite;
 	
 	public Hero(Sprite sprite) {
-		
 		this.sprite = sprite;
-	
 	}
-
+	
+	
 	public List<Projectile> getProjectiles() {
 		return projectiles;
 	}
