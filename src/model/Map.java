@@ -7,11 +7,11 @@ import view.ViewGame;
 public class Map {
 	
 	private boolean activated;
-	private ArrayList<Layer> layers;
+	private ArrayList<Camada> camadas;
 
-	public Map(ArrayList<Layer> layers) {
-		activated = false;
-		this.layers = layers;
+	public Map(ArrayList<Camada> camadas) {
+		this.activated = false;
+		this.camadas = camadas;
 	}
 	
 	public boolean isActivated() {
@@ -22,12 +22,12 @@ public class Map {
 		this.activated = activated;
 	}
 
-	public ArrayList<Layer> getLayers() {
-		return layers;
+	public ArrayList<Camada> getCamadas() {
+		return camadas;
 	}
 
-	public void setLayers(ArrayList<Layer> layers) {
-		this.layers = layers;
+	public void setCamadas(ArrayList<Camada> camadas) {
+		this.camadas = camadas;
 	}
 	
 }

@@ -7,38 +7,53 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import model.Camada;
 import model.Enemy;
-import model.Layer;
 import model.Map;
 import model.Player;
 
 public class ViewGame extends JFrame{
-	
+
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Player> players;
 	private ArrayList<Map> maps;
 	private BufferedImage tela;
-	
-	public ViewGame(ArrayList<Map> maps, ArrayList<Enemy> enemies, ArrayList<Player> players) {
-		this.enemies = enemies;
-		this.players = players;
-		this.maps = maps;
+
+	public ViewGame() {
+		setSize(640, 480);
+		setLayout(null);
+		setResizable(false);
+		setUndecorated(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		setVisible(false);
 		
 		tela = new BufferedImage(640, 480, BufferedImage.TYPE_4BYTE_ABGR);
+
 	}
 	
-	public void paint(Graphics g) {
-		
+	public void montarCamadas() {
 		for (Map map: maps) {
-			
-			if (!map.isActivated())
-				continue;
-			
-			for (Layer layer: map.getLayers()) {
-				tela.getGraphics().drawImage(layer.camada, 0, 0, this); 
+
+			for (Camada camada: map.getCamadas()) {
+				camada.montarMapa(680, 480);
 			}
 		}
-		
+	}
+
+	public void paint(Graphics g) {	
+//		System.out.println("teste");
+		for (Map map: maps) {
+
+			if (!map.isActivated())
+				continue;
+
+			for (Camada camada: map.getCamadas()) {
+				tela.getGraphics().drawImage(camada.camada, 0, 0, this); 
+			}
+		}
+
 		Graphics2D g2d = (Graphics2D) this.getGraphics();
 		g2d.drawImage(tela, 0, 0, null);
 	}
@@ -74,5 +89,5 @@ public class ViewGame extends JFrame{
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
-	
+
 }

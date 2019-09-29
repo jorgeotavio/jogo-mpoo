@@ -4,16 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import view.ViewAbout;
+import view.ViewGame;
 import view.ViewMenu;
 
 public class ControllerMenu implements ActionListener{
 	
 	private ViewMenu viewMenu;
 	private ViewAbout viewAbout;
+	private ViewGame viewGame;
 	
-	public ControllerMenu(ViewMenu telaMenu) {
+	public ControllerMenu(ViewMenu telaMenu, ViewGame viewGame) {
 		this.viewMenu = telaMenu;
 		this.viewMenu.setVisible(true);
+		this.viewGame = viewGame;
 		viewAbout = new ViewAbout();
 		controll();
 	}
@@ -31,7 +34,15 @@ public class ControllerMenu implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == viewMenu.getStartSoloButton()) {
-			//
+			
+			this.viewMenu.setVisible(false);
+			
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					new ControllerGame(viewGame).run();
+				}
+			}).start();
 		}
 		
 		if(e.getSource() == viewMenu.getStartDuoButton()) {

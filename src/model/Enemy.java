@@ -1,15 +1,15 @@
 package model;
 
-public class Enemy extends Sprite implements Mobile{
-
-	public Enemy(String file, int appearance, int columns, int rows, int posX, int posY) {
-		super(file, appearance, columns, rows, posX, posY);
+public class Enemy {
+	
+	private Sprite sprite;
+	
+	public Enemy(Sprite sprite) {
+		this.sprite = sprite;
 	}
 
-	@Override
-	public void mexer() {
-		// TODO Auto-generated method stub
-		
+	public Sprite getSprite() {
+		return sprite;
 	}
-
+	
 }
