@@ -4,13 +4,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import model.Hero;
+import view.ViewGame;
 
 public class ControllerHero extends ControllerMovel implements KeyListener {
 	
 	private Hero hero;
 	
-	public ControllerHero() {
+	public ControllerHero(Hero hero) {
 		// TODO Auto-generated constructor stub
+		
+		this.hero = hero;
 	}
 	
 	@Override

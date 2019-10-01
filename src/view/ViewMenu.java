@@ -6,9 +6,6 @@ import javax.swing.JLabel;
 
 public class ViewMenu extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel titleLabel;
 	private JButton startSoloButton, startDuoButton, leaveButton, tutorialButton, aboutButton;

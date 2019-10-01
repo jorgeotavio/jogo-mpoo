@@ -38,6 +38,22 @@ public class RegistrarJogo {
 		}
 				
 	}
+	
+	public void registerPlayer() {
+		
+		Player player = new Player("Joao");
+		
+		Sprite sprite = new Sprite("img/sprites/heroi.png", 3, 4, 4, 100, 100);
+		Hero hero = new Hero(sprite);
+		
+		player.setHero(hero);
+		
+		ArrayList<Player> players =  new ArrayList<Player>();
+		players.add(player);
+		
+		viewGame.setPlayers(players);
+		
+	}
 
 	public ViewGame getViewGame() {
 		return viewGame;

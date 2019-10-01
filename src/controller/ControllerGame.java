@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+
+import model.Player;
 import view.ViewGame;
 
 public class ControllerGame implements Runnable {
@@ -10,6 +13,10 @@ public class ControllerGame implements Runnable {
 		this.viewGame = viewGame;
 		this.viewGame.setVisible(true);
 		
+		ArrayList<Player> players = this.viewGame.getPlayers();
+		for (Player player: players) {
+			viewGame.addKeyListener(new ControllerHero(player.getHero()));
+		}
 	}
 
 	@Override

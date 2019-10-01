@@ -18,6 +18,7 @@ public class ViewGame extends JFrame{
 	private ArrayList<Player> players;
 	private ArrayList<Map> maps;
 	private BufferedImage tela;
+	private BufferedImage[] heroi, inimigo;
 
 	public ViewGame() {
 		setSize(640, 480);
@@ -43,15 +44,19 @@ public class ViewGame extends JFrame{
 	}
 
 	public void paint(Graphics g) {	
-//		System.out.println("teste");
-		for (Map map: maps) {
 
+		for (Map map: maps) {
 			if (!map.isActivated())
 				continue;
-
 			for (Camada camada: map.getCamadas()) {
 				tela.getGraphics().drawImage(camada.camada, 0, 0, this); 
 			}
+		}
+
+		for(Player player: this.players) {
+			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
+			tela.getGraphics().drawImage(sprites[player.getHero().getSprite().getAparencia()], 
+					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this); 
 		}
 
 		Graphics2D g2d = (Graphics2D) this.getGraphics();

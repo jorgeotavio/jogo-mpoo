@@ -1,61 +1,54 @@
 package model;
 
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import controller.ControllerGame;
+
 public class Sprite {
-
-	private int larguraPersonagem, alturaPersonagem;
-
-	protected BufferedImage personagem;
-	protected int largura, altura;
-	protected int linhas, colunas;
+	
 	private int posX, posY;
+	private int altura, largura;
+	private boolean visible;
+	private Image imagem;
+	private BufferedImage spriteSheet;
 	private BufferedImage[] sprites;
 	private int aparencia;
-	private boolean visible;
 
-	public Sprite(int aparencia, int largura, int altura, int colunas, int linhas, int x, int y, String endereco) 
-			throws IOException {
-
+	public Sprite(String arquivo, int aparencia, int columns, int rows, int posX, int posY) {
 		try {
-			
-			this.personagem = ImageIO.read(getClass().getClassLoader().getResourceAsStream(endereco));
-			this.aparencia = aparencia;
-			this.largura = largura;
-			this.altura = altura;
-
-			this.linhas = colunas;
-			this.colunas = linhas;
-			this.posX = x;
-			this.posY = y;
-			
-			this.visible = true;
-			
-			sprites = new BufferedImage[colunas * linhas];
-
-			for (int i = 0; i < colunas; i++) {
-				for (int j = 0; j < linhas; j++) {
-					sprites[(i * linhas) + j] = personagem.getSubimage(i * (largura/colunas), 
-							j * (altura/linhas), largura/colunas, altura/linhas);
-				}
-			}
+			spriteSheet = ImageIO.read(new File(arquivo));
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Nao foi possivel carregar a Sprite");
 		}
+		this.aparencia=aparencia;
 
-		larguraPersonagem = sprites[0].getWidth();
-		alturaPersonagem = sprites[0].getHeight();
+		this.largura = spriteSheet.getWidth()/columns;
+		this.altura = spriteSheet.getHeight()/rows;
+
+		this.posX=posX;
+		this.posY=posY;
+
+		visible = true;
+
+		sprites = new BufferedImage[columns * rows];
+		for(int i = 0; i < columns; i++) {
+			for(int j = 0; j < rows; j++) {
+				sprites[(i * rows) + j] = spriteSheet.getSubimage(i * largura, j * altura, largura, altura);
+			}
+		}
 	}
 
-	public BufferedImage getPersonagem() {
-		return personagem;
+	public BufferedImage[] getSprites() {
+		return sprites;
 	}
-
 
 	public int getAparencia() {
 		return aparencia;
@@ -63,22 +56,6 @@ public class Sprite {
 
 	public void setAparencia(int aparencia) {
 		this.aparencia = aparencia;
-	}
-
-	public BufferedImage[] getSprites() {
-		return sprites;
-	}
-
-	public int getLarguraPersonagem() {
-		return larguraPersonagem;
-	}
-
-	public int getAlturaPersonagem() {
-		return alturaPersonagem;
-	}
-
-	public Rectangle getBounds() {
-		return new Rectangle(posX+5, posY+5, larguraPersonagem-10, alturaPersonagem-10);
 	}
 
 	public int getPosX() {
@@ -97,6 +74,18 @@ public class Sprite {
 		this.posY = posY;
 	}
 
+	public Rectangle getBounds() {
+		return new Rectangle(posX, posY, largura-17, altura-17);
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public int getLargura() {
+		return largura;
+	}
+
 	public boolean isVisible() {
 		return visible;
 	}
@@ -104,6 +93,9 @@ public class Sprite {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
-	
+
+	public Image getImagem() {
+		return imagem;
+	}
+
 }
