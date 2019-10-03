@@ -27,11 +27,12 @@ public class RegistrarJogo {
 
 			Map mapa = new Map(camadas);
 			mapa.setActivated(true);
-			
+
 			ArrayList<Map> maps = new ArrayList<Map>();
 			maps.add(mapa);
 			
 			this.viewGame.setMaps(maps);
+			this.viewGame.getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 480)));
 			
 		} catch (IOException e) {
 			e.printStackTrace();

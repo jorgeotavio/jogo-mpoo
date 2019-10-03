@@ -13,7 +13,6 @@ public class Main {
 		
 		RegistrarJogo registrarJogo = new RegistrarJogo(viewGame);
 		registrarJogo.registerMap();
-		registrarJogo.getViewGame().montarCamadas();
 		registrarJogo.registerPlayer();
 		ViewMenu viewMenu = new ViewMenu();
 		

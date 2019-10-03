@@ -18,7 +18,6 @@ public class ViewGame extends JFrame{
 	private ArrayList<Player> players;
 	private ArrayList<Map> maps;
 	private BufferedImage tela;
-	private BufferedImage[] heroi, inimigo;
 
 	public ViewGame() {
 		setSize(640, 480);
@@ -34,27 +33,25 @@ public class ViewGame extends JFrame{
 
 	}
 	
-	public void montarCamadas() {
-		for (Map map: maps) {
-
-			for (Camada camada: map.getCamadas()) {
-				camada.montarMapa(680, 480);
-			}
-		}
-	}
 
 	public void paint(Graphics g) {	
 
 		for (Map map: maps) {
+			
 			if (!map.isActivated())
 				continue;
+			
 			for (Camada camada: map.getCamadas()) {
+				
 				tela.getGraphics().drawImage(camada.camada, 0, 0, this); 
+			
 			}
 		}
 
 		for(Player player: this.players) {
+			
 			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
+			
 			tela.getGraphics().drawImage(sprites[player.getHero().getSprite().getAparencia()], 
 					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this); 
 		}
@@ -73,10 +70,6 @@ public class ViewGame extends JFrame{
 
 	public BufferedImage getTela() {
 		return tela;
-	}
-
-	public void setTela(BufferedImage tela) {
-		this.tela = tela;
 	}
 
 	public ArrayList<Enemy> getEnemies() {
