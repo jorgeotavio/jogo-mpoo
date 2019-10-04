@@ -1,11 +1,13 @@
 package model;
 
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-public class Hero implements Runnable{
+public class Hero {
 	
 	private List<Projectile> projectiles;
 	private Sprite sprite;
+	private Rectangle2D retangulo;
 	
 	public Hero(Sprite sprite) {
 		this.sprite = sprite;
@@ -24,10 +26,15 @@ public class Hero implements Runnable{
 		return sprite;
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
+
+	public Rectangle2D getRetangulo() {
+		return retangulo;
 	}
+
+
+	public void setRetangulo(Rectangle2D retangulo) {
+		this.retangulo = retangulo;
+	}
+
 	
 }

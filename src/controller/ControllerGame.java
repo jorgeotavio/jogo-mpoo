@@ -22,9 +22,10 @@ public class ControllerGame implements Runnable {
 	@Override
 	public void run() {
 		while ( true ) {
+			
 			this.viewGame.repaint();
 			try {
-				Thread.sleep(500/5);
+				Thread.sleep(20);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

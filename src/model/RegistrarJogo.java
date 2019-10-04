@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -47,6 +48,8 @@ public class RegistrarJogo {
 		Sprite sprite = new Sprite("img/sprites/heroi.png", 3, 4, 4, 100, 100);
 		Hero hero = new Hero(sprite);
 		
+		Rectangle2D.Float r = new Rectangle2D.Float(0,0, viewGame.getWidth()-1,viewGame.getHeight()-1);
+		hero.setRetangulo(r);
 		player.setHero(hero);
 		
 		ArrayList<Player> players =  new ArrayList<Player>();

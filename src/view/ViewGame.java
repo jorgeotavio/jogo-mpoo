@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -35,29 +36,31 @@ public class ViewGame extends JFrame{
 	
 
 	public void paint(Graphics g) {	
-
+		Graphics2D g2d = (Graphics2D) this.getGraphics();
+//		g2d.drawImage(tela, 0, 0, null);
+		
+		for(Player player: this.players) {
+//			BufferedImage[] sprites = player.getHero().getSprite().getSprites();s
+//			tela.getGraphics().drawImage(sprites[player.getHero().getSprite().getAparencia()], 
+//					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this); 			
+			g2d.setColor(Color.RED);
+			g2d.fillRect(player.getHero().getSprite().getPosX(),player.getHero().getSprite().getPosY(),32,32);
+		
+		}
+		
 		for (Map map: maps) {
-			
 			if (!map.isActivated())
 				continue;
-			
 			for (Camada camada: map.getCamadas()) {
-				
-				tela.getGraphics().drawImage(camada.camada, 0, 0, this); 
-			
+//				tela.getGraphics().drawImage(camada.camada, 0, 0, this); 
+				g.setColor(Color.GREEN);
+				g.fillRect(0,0,this.getHeight(),this.getWidth());
 			}
 		}
 
-		for(Player player: this.players) {
-			
-			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
-			
-			tela.getGraphics().drawImage(sprites[player.getHero().getSprite().getAparencia()], 
-					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this); 
-		}
+		
 
-		Graphics2D g2d = (Graphics2D) this.getGraphics();
-		g2d.drawImage(tela, 0, 0, null);
+		
 	}
 
 	public ArrayList<Map> getMaps() {
