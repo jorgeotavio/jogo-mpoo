@@ -38,7 +38,7 @@ public class RegistrarJogo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-				
+
 	}
 	
 	public void registerPlayer() {
