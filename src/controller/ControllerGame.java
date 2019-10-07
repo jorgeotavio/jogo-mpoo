@@ -25,7 +25,7 @@ public class ControllerGame implements Runnable {
 			
 			this.viewGame.repaint();
 			try {
-				Thread.sleep(20);
+				Thread.sleep(0);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
