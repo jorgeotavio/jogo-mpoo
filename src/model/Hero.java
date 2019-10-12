@@ -47,8 +47,8 @@ public class Hero {
 	}
 
 	public Rectangle getRetangulo() {
-		return new Rectangle(this.sprite.getPosX(), this.sprite.getPosY(), 
-				this.sprite.getLargura(), this.sprite.getAltura());
+		return new Rectangle(this.sprite.getPosX()+5, this.sprite.getPosY()+35, 
+				this.sprite.getLargura()/2, this.sprite.getAltura()/6);
 	}
 
 	public int getVELOCIDADE() {

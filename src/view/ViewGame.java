@@ -59,8 +59,7 @@ public class ViewGame extends JFrame{
 					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this); 			
 			
 			g2d.setColor(Color.RED);
-			g2d.drawRect(player.getHero().getSprite().getPosX(),player.getHero().getSprite().getPosY(),
-					player.getHero().getSprite().getLargura(),player.getHero().getSprite().getAltura());
+			g2d.draw(player.getHero().getRetangulo());
 		}
 		
 	}

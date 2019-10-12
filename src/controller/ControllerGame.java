@@ -31,7 +31,6 @@ public class ControllerGame implements Runnable {
 				if(camada.isCamadaColisao()) {
 					for (Rectangle rectangle : camada.getRectsColisao()) {
 						for(Player player: players) {
-							
 							if(rectangle.intersects(player.getHero().getRetangulo()))
 								player.getHero().parar();
 						}
