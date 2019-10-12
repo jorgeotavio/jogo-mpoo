@@ -39,13 +39,6 @@ public class ViewGame extends JFrame{
 		Graphics2D g2d = (Graphics2D) this.getGraphics();
 		g2d.drawImage(tela, 0, 0, null);
 		
-		for(Player player: this.players) {
-			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
-			tela.getGraphics().drawImage(sprites[player.getHero().getSprite().getAparencia()], 
-					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this); 			
-			//g2d.setColor(Color.RED);
-			//g2d.fillRect(player.getHero().getSprite().getPosX(),player.getHero().getSprite().getPosY(),32,32);
-		}
 		
 		for (Map map: maps) {
 			if (!map.isActivated())
@@ -56,9 +49,17 @@ public class ViewGame extends JFrame{
 		//		g.fillRect(0,0,this.getHeight(),this.getWidth());
 			}
 		}
-
 		
-
+		for(Player player: this.players) {
+			
+			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
+			tela.getGraphics().drawImage(sprites[player.getHero().getSprite().getAparencia()], 
+					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this); 			
+			
+			g2d.setColor(Color.RED);
+			g2d.drawRect(player.getHero().getSprite().getPosX(),player.getHero().getSprite().getPosY(),
+					player.getHero().getSprite().getLargura(),player.getHero().getSprite().getAltura());
+		}
 		
 	}
 

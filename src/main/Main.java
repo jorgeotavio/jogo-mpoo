@@ -14,6 +14,7 @@ public class Main {
 		RegistrarJogo registrarJogo = new RegistrarJogo(viewGame);
 		registrarJogo.registerMap();
 		registrarJogo.registerPlayer();
+		
 		ViewMenu viewMenu = new ViewMenu();
 		
 		ControllerMenu cm = new ControllerMenu(viewMenu ,registrarJogo.getViewGame());
