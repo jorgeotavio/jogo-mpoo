@@ -1,18 +1,38 @@
 package model;
 
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hero {
 	
 	private List<Projectile> projectiles;
 	private Sprite sprite;
-	private Rectangle2D retangulo;
+	private final int VELOCIDADE = 2;
+	private String direcao;
 	
 	public Hero(Sprite sprite) {
 		this.sprite = sprite;
+		
 	}
 	
+	public void parar() {
+		switch(direcao) {
+			case "up":
+				this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
+				break;
+			case "down":
+				this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
+				break;
+			case "left":
+				this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
+				break;
+			case "right":
+				this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
+				break;
+		}
+	}
 	
 	public List<Projectile> getProjectiles() {
 		return projectiles;
@@ -23,18 +43,26 @@ public class Hero {
 	}
 	
 	public Sprite getSprite() {
-		return sprite;
+		return this.sprite;
 	}
 
-
-	public Rectangle2D getRetangulo() {
-		return retangulo;
+	public Rectangle getRetangulo() {
+		return new Rectangle(this.sprite.getPosX(), this.sprite.getPosY(), 
+				this.sprite.getLargura(), this.sprite.getAltura());
 	}
 
-
-	public void setRetangulo(Rectangle2D retangulo) {
-		this.retangulo = retangulo;
+	public int getVELOCIDADE() {
+		return VELOCIDADE;
 	}
 
+	public String getDirecao() {
+		return direcao;
+	}
+
+	public void setDirecao(String direcao) {
+		this.direcao = direcao;
+	}
+	
+	
 	
 }

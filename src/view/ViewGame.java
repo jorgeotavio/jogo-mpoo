@@ -41,8 +41,10 @@ public class ViewGame extends JFrame{
 		
 		
 		for (Map map: maps) {
+			
 			if (!map.isActivated())
 				continue;
+			
 			for (Camada camada: map.getCamadas()) {
 				tela.getGraphics().drawImage(camada.camada, 0, 0, this); 
 		//		g.setColor(Color.GREEN);

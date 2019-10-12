@@ -74,10 +74,6 @@ public class Sprite {
 		this.posY = posY;
 	}
 
-	public Rectangle getBounds() {
-		return new Rectangle(posX, posY, largura-17, altura-17);
-	}
-
 	public int getAltura() {
 		return altura;
 	}

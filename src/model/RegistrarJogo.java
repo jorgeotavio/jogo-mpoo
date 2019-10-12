@@ -3,6 +3,7 @@ package model;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import view.ViewGame;
 
@@ -20,13 +21,14 @@ public class RegistrarJogo {
 		ArrayList<Camada> camadas = new ArrayList<Camada>();
 		
 		try {
-			Camada camada1 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/camada01.txt");
-			Camada camada2 = new Camada(15, 20, 32, 32, "img/mapa/castelo.png",  "img/mapa/camada02.txt");
-			Camada camada3 = new Camada(15, 20, 32, 32, "img/mapa/chipset.png", "img/mapa/camada03.txt");
+			Camada camada1 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png", "img/mapa/mapa01_camada01.txt");
+			Camada camada2 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png",  "img/mapa/mapa01_camada_colisao.txt");
+			
+			camada2.colisoes();
+			camada2.setCamadaColisao(true);
 			
 			camadas.add(camada1);
 			camadas.add(camada2);
-			camadas.add(camada3);
 
 			Map mapa = new Map(camadas);
 			mapa.setActivated(true);
@@ -43,25 +45,28 @@ public class RegistrarJogo {
 	}
 	
 	public void registerPlayer() {
-		
+
+//		Xml xml = new Xml();
+//		
 		Player player = new Player("Joao");
-		Player player2 = new Player("Maria");
-		
-		Sprite sprite = new Sprite("img/sprites/heroi.png", 3, 4, 4, 100, 100);
-		Sprite sprite2 = new Sprite("img/sprites/heroi.png", 3, 4, 4, 200, 200);
-		
+//		Player player2 = new Player("Maria");
+//		
+//		
+		Sprite sprite = new Sprite("img/sprites/heroi.png", 3, 4, 4, 300, 200);
+//		Sprite sprite2 = new Sprite("img/sprites/heroi.png", 3, 4, 4, 200, 200);
+//		
 		Hero hero = new Hero(sprite);
-		Hero hero2 = new Hero(sprite2);
-		
-		//Rectangle2D.Float r = new Rectangle2D.Float(0,0, viewGame.getWidth()-1,viewGame.getHeight()-1);
-		//hero.setRetangulo(r);
-		
+//		Hero hero2 = new Hero(sprite2);
+//		
 		player.setHero(hero);
-		player2.setHero(hero2);
+//		player2.setHero(hero2);
 		
-		ArrayList<Player> players =  new ArrayList<Player>();
+		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player);
-		players.add(player2);
+//		ArrayList<Player> players = xml.ler();
+		
+//		xml.salvar(player);
+//		xml.salvar(player2);
 		
 		viewGame.setPlayers(players);
 		

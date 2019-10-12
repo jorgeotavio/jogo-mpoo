@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,6 +21,8 @@ public class Camada{
 	private int mapaHeight;
 	private int tileWidth;
 	private int tileHeight;
+	ArrayList<Rectangle> rectsColisao;
+	private boolean camadaColisao;
 
 	public Camada(int mapaWidth, int mapaHeight, int tileWidth, int tileHeight, String img, String arquivo) throws IOException {
 		this.mapaWidth=mapaWidth;
@@ -29,6 +32,7 @@ public class Camada{
 		mapa = new int[mapaWidth][mapaHeight];
 		mapa = carregaMatriz(mapa, arquivo);
 		tileSet = ImageIO.read(new File(img));
+		this.camadaColisao = false;
 	}
 
 	public int[][] carregaMatriz(int[][] matz, String arquivo) throws IOException {
@@ -76,4 +80,30 @@ public class Camada{
 			}
 		}
 	}
+	
+	public void colisoes() {
+		
+		ArrayList<Rectangle> rectsColisao=new ArrayList<>();
+		for (int i = 0; i < mapaWidth; i++) {
+			for (int j = 0; j < mapaHeight; j++) {
+				if(mapa[i][j] != 0) {
+					rectsColisao.add(new Rectangle( (j * tileWidth), (i * tileWidth), tileWidth, tileWidth));
+				}
+			}
+		}
+		this.rectsColisao = rectsColisao;
+	}
+
+	public boolean isCamadaColisao() {
+		return camadaColisao;
+	}
+
+	public void setCamadaColisao(boolean camadaColisao) {
+		this.camadaColisao = camadaColisao;
+	}
+
+	public ArrayList<Rectangle> getRectsColisao() {
+		return rectsColisao;
+	}
+	
 }

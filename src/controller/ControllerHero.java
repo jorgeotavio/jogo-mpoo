@@ -7,24 +7,25 @@ import model.Hero;
 import view.ViewGame;
 
 public class ControllerHero extends ControllerMovel implements KeyListener {
-	
+
 	private Hero hero;
-	
+
 	public ControllerHero(Hero hero) {
 		// TODO Auto-generated constructor stub
-		
 		this.hero = hero;
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			hero.getSprite().setAparencia(2);
 		}
-		
+
 		if (e.getKeyCode()==KeyEvent.VK_UP){
-			hero.getSprite().setPosY(hero.getSprite().getPosY()-VELOCIDADE);
+			
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
+			hero.setDirecao("up");
 			switch (up) {
 			case 0:
 				hero.getSprite().setAparencia(0);
@@ -42,8 +43,10 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			if (up==3) up=0;
 			else up++;
 		}
+ 
 		if (e.getKeyCode()==KeyEvent.VK_DOWN){
-			hero.getSprite().setPosY(hero.getSprite().getPosY()+VELOCIDADE);
+			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
+			hero.setDirecao("down");
 			switch (down) {
 			case 0:
 				hero.getSprite().setAparencia(2);
@@ -62,7 +65,9 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else down++;
 		}
 		if (e.getKeyCode()==KeyEvent.VK_LEFT){
-			hero.getSprite().setPosX(hero.getSprite().getPosX()-VELOCIDADE);
+
+			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
+			hero.setDirecao("left");
 			switch (left) {
 			case 0:
 				hero.getSprite().setAparencia(3);
@@ -81,7 +86,9 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else left++;
 		}
 		if (e.getKeyCode()==KeyEvent.VK_RIGHT){
-			hero.getSprite().setPosX(hero.getSprite().getPosX()+VELOCIDADE);
+
+			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
+			hero.setDirecao("right");
 			switch (right) {
 			case 0:
 				hero.getSprite().setAparencia(1);
@@ -105,13 +112,13 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
