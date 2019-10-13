@@ -17,10 +17,14 @@ public class ControllerGame implements Runnable {
 	private ArrayList<ControllerHero> controllersHero;
 
 	public ControllerGame(ViewGame viewGame) {
+		
 		this.viewGame = viewGame;
 		this.viewGame.setVisible(true);
+		
 		controllersHero = new ArrayList<ControllerHero>();
+		
 		ArrayList<Player> players = this.viewGame.getPlayers();
+		
 		for (Player player: players) {
 			ControllerHero ch = new ControllerHero(player.getHero(), players.indexOf(player));
 			controllersHero.add(ch);
