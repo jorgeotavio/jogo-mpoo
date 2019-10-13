@@ -1,15 +1,12 @@
 package model;
 
-import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import view.ViewGame;
 
 public class RegistrarJogo {
 	
-	private ArrayList<Map> maps;
 	private ViewGame viewGame;
 
 	public RegistrarJogo( ViewGame viewGame ) {
@@ -46,24 +43,24 @@ public class RegistrarJogo {
 	
 	public void registerPlayer() {
 
-//		Xml xml = new Xml();
+		Xml xml = new Xml();
 //		
-		Player player = new Player("Joao");
+//		Player player = new Player("Joao");
 //		Player player2 = new Player("Maria");
 //		
 //		
-		Sprite sprite = new Sprite("img/sprites/heroi.png", 3, 4, 4, 300, 200);
+//		Sprite sprite = new Sprite("img/sprites/heroi.png", 3, 4, 4, 300, 200);
 //		Sprite sprite2 = new Sprite("img/sprites/heroi.png", 3, 4, 4, 200, 200);
 //		
-		Hero hero = new Hero(sprite);
+//		Hero hero = new Hero(sprite);
 //		Hero hero2 = new Hero(sprite2);
 //		
-		player.setHero(hero);
+//		player.setHero(hero);
 //		player2.setHero(hero2);
 		
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player);
-//		ArrayList<Player> players = xml.ler();
+//		ArrayList<Player> players = new ArrayList<Player>();
+//		players.add(player);
+		ArrayList<Player> players = xml.ler();
 		
 //		xml.salvar(player);
 //		xml.salvar(player2);

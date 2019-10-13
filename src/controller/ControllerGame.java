@@ -14,14 +14,17 @@ public class ControllerGame implements Runnable {
 
 	private ViewGame viewGame;
 	private ArrayList<Rectangle> retangulosColisao;
+	private ArrayList<ControllerHero> controllersHero;
 
 	public ControllerGame(ViewGame viewGame) {
 		this.viewGame = viewGame;
 		this.viewGame.setVisible(true);
-
+		controllersHero = new ArrayList<ControllerHero>();
 		ArrayList<Player> players = this.viewGame.getPlayers();
 		for (Player player: players) {
-			viewGame.addKeyListener(new ControllerHero(player.getHero()));
+			ControllerHero ch = new ControllerHero(player.getHero(), players.indexOf(player));
+			controllersHero.add(ch);
+			viewGame.addKeyListener(ch);
 		}
 	}
 
@@ -54,10 +57,14 @@ public class ControllerGame implements Runnable {
 			
 			checarColisoes(viewGame.getMaps(), viewGame.getPlayers());
 			
-			this.viewGame.repaint();			
+			for(ControllerHero ch: controllersHero) {
+				ch.atualizaHero();
+			}
+			
+			this.viewGame.repaint();	
 			
 			try {
-				Thread.sleep(0);
+				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

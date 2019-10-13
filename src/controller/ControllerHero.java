@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 
 import model.Hero;
 import view.ViewGame;
@@ -9,110 +10,70 @@ import view.ViewGame;
 public class ControllerHero extends ControllerMovel implements KeyListener {
 
 	private Hero hero;
-
-	public ControllerHero(Hero hero) {
-		// TODO Auto-generated constructor stub
+	private Hero hero2;
+	private HashMap<Integer, Boolean> keyPool;
+	private int tipoPlayer;
+	
+	public ControllerHero(Hero hero, int tipoPlayer) {
 		this.hero = hero;
+		this.tipoPlayer = tipoPlayer;
+		keyPool = new HashMap<Integer, Boolean>();
+	}
+	
+	public void atualizaHero() {
+		
+		if (keyPool.get(KeyEvent.VK_UP) != null && tipoPlayer ==0) {
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
+			hero.setDirecao("up");
+        }
+        
+		if (keyPool.get(KeyEvent.VK_DOWN) != null && tipoPlayer ==0) {
+        	hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
+			hero.setDirecao("down");
+        }
+        
+        if (keyPool.get(KeyEvent.VK_LEFT) != null && tipoPlayer ==0) {
+        	hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
+			hero.setDirecao("left");
+        }
+        
+        if (keyPool.get(KeyEvent.VK_RIGHT) != null && tipoPlayer ==0) {
+        	hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
+			hero.setDirecao("right");
+        }
+        
+        if (keyPool.get(KeyEvent.VK_W) != null && tipoPlayer ==1) {
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
+			hero.setDirecao("up");
+        }
+        
+		if (keyPool.get(KeyEvent.VK_S) != null && tipoPlayer ==1) {
+        	hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
+			hero.setDirecao("down");
+        }
+        
+        if (keyPool.get(KeyEvent.VK_A) != null && tipoPlayer ==1) {
+        	hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
+			hero.setDirecao("left");
+        }
+        
+        if (keyPool.get(KeyEvent.VK_D) != null && tipoPlayer ==1) {
+        	hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
+			hero.setDirecao("right");
+        }
+        
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			hero.getSprite().setAparencia(2);
-		}
-
-		if (e.getKeyCode()==KeyEvent.VK_UP){
-			
-			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
-			hero.setDirecao("up");
-			switch (up) {
-			case 0:
-				hero.getSprite().setAparencia(0);
-				break;
-			case 1:
-				hero.getSprite().setAparencia(4);
-				break;
-			case 2:
-				hero.getSprite().setAparencia(8);
-				break;
-			case 3:
-				hero.getSprite().setAparencia(12);
-				break;
-			}
-			if (up==3) up=0;
-			else up++;
-		}
- 
-		if (e.getKeyCode()==KeyEvent.VK_DOWN){
-			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
-			hero.setDirecao("down");
-			switch (down) {
-			case 0:
-				hero.getSprite().setAparencia(2);
-				break;
-			case 1:
-				hero.getSprite().setAparencia(6);
-				break;
-			case 2:
-				hero.getSprite().setAparencia(10);
-				break;
-			case 3:
-				hero.getSprite().setAparencia(14);
-				break;
-			}
-			if (down==3) down=0;
-			else down++;
-		}
-		if (e.getKeyCode()==KeyEvent.VK_LEFT){
-
-			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
-			hero.setDirecao("left");
-			switch (left) {
-			case 0:
-				hero.getSprite().setAparencia(3);
-				break;
-			case 1:
-				hero.getSprite().setAparencia(7);
-				break;
-			case 2:
-				hero.getSprite().setAparencia(11);
-				break;
-			case 3:
-				hero.getSprite().setAparencia(15);
-				break;
-			}
-			if (left==3) left=0;
-			else left++;
-		}
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT){
-
-			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
-			hero.setDirecao("right");
-			switch (right) {
-			case 0:
-				hero.getSprite().setAparencia(1);
-				break;
-			case 1:
-				hero.getSprite().setAparencia(5);
-				break;
-			case 2:
-				hero.getSprite().setAparencia(9);
-				break;
-			case 3:
-				hero.getSprite().setAparencia(13);
-				break;
-			}
-			if (right==3) right=0;
-			else right++;			
-		}
-
+		keyPool.put(e.getKeyCode(), true);
+		
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void keyReleased(KeyEvent e) {
+		keyPool.remove(e.getKeyCode());
+		
 	}
 
 	@Override
@@ -121,4 +82,20 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 
 	}
 
+	public Hero getHero() {
+		return hero;
+	}
+
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+
+	public Hero getHero2() {
+		return hero2;
+	}
+
+	public void setHero2(Hero hero2) {
+		this.hero2 = hero2;
+	}
+	
 }
