@@ -20,14 +20,41 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		keyPool = new HashMap<Integer, Boolean>();
 	}
 	
-	public void atualizaHero() {
+	public boolean atualizaHero() {
+		if (keyPool.get(KeyEvent.VK_UP) != null && keyPool.get(KeyEvent.VK_RIGHT) != null && tipoPlayer ==0) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
+			hero.setDirecao("diagonalUpRight");
+			return true;
+		}
+		
+		if (keyPool.get(KeyEvent.VK_UP) != null && keyPool.get(KeyEvent.VK_LEFT) != null && tipoPlayer ==0) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
+			hero.setDirecao("diagonalUpLeft");
+			return true;
+		}
+		
+		if (keyPool.get(KeyEvent.VK_DOWN) != null && keyPool.get(KeyEvent.VK_RIGHT) != null && tipoPlayer ==0) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
+			hero.setDirecao("diagonalDownRight");
+			return true;
+		}
+		
+		if (keyPool.get(KeyEvent.VK_DOWN) != null && keyPool.get(KeyEvent.VK_LEFT) != null && tipoPlayer ==0) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
+			hero.setDirecao("diagonalDownLeft");
+			return true;
+		}
 		
 		if (keyPool.get(KeyEvent.VK_UP) != null && tipoPlayer ==0) {
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
 			hero.setDirecao("up");
         }
         
-		if (keyPool.get(KeyEvent.VK_DOWN) != null && tipoPlayer ==0) {
+		if (keyPool.get(KeyEvent.VK_DOWN) != null && tipoPlayer ==0 ) {
         	hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
 			hero.setDirecao("down");
         }
@@ -41,6 +68,34 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
         	hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
 			hero.setDirecao("right");
         }
+        
+        if (keyPool.get(KeyEvent.VK_W) != null && keyPool.get(KeyEvent.VK_D) != null && tipoPlayer ==1) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
+			hero.setDirecao("diagonalUpRight");
+			return true;
+		}
+		
+		if (keyPool.get(KeyEvent.VK_W) != null && keyPool.get(KeyEvent.VK_A) != null && tipoPlayer ==1) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
+			hero.setDirecao("diagonalUpLeft");
+			return true;
+		}
+		
+		if (keyPool.get(KeyEvent.VK_S) != null && keyPool.get(KeyEvent.VK_D) != null && tipoPlayer ==1) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
+			hero.setDirecao("diagonalDownRight");
+			return true;
+		}
+		
+		if (keyPool.get(KeyEvent.VK_S) != null && keyPool.get(KeyEvent.VK_A) != null && tipoPlayer ==1) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
+			hero.setDirecao("diagonalDownLeft");
+			return true;
+		}
         
         if (keyPool.get(KeyEvent.VK_W) != null && tipoPlayer ==1) {
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
@@ -62,8 +117,14 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			hero.setDirecao("right");
         }
         
+        return false;
+        
 	}
-
+	
+	public void atualizarAparencia() {
+		
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		keyPool.put(e.getKeyCode(), true);
