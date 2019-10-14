@@ -19,36 +19,35 @@ public class Hero {
 	}
 	
 	public void parar() {
-		
-		System.out.println(direcao);
-		
-		if (direcao == "up")
+		switch (direcao) {
+		case "up":
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
-		if (direcao == "down")
+			break;
+		case "down":
 			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
-		if (direcao == "left")
+			break;
+		case "left":
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
-		if (direcao == "right")
+			break;
+		case "right":
 			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
-			
-		if (direcao == "diagonalUpRight") {
+			break;
+		case "diagonalUpRight":
 			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
-		}
-		
-		if (direcao == "diagonalUpLeft") {
+			break;
+		case "diagonalUpLeft":
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
-		}
-		
-		if (direcao == "diagonalDownRight") {
+			break;
+		case "diagonalDownRight":
 			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
-		}
-		
-		if (direcao == "diagonalDownLeft") {
+			break;
+		case "diagonalDownLeft":
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
+			break;
 		}
 	}
 	
