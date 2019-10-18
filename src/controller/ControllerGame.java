@@ -34,13 +34,16 @@ public class ControllerGame implements Runnable {
 
 	public void checarColisoes(ArrayList<Map> maps, ArrayList<Player> players) {
 		for(Map map: maps) {
+			
+			if(!map.isActivated())
+				continue;
+			
 			for(Camada camada: map.getCamadas()) {
 				if(camada.isCamadaColisao()) {
 					for (Rectangle rectangle : camada.getRectsColisao()) {
 						for(Player player: players) {
 							if(rectangle.intersects(player.getHero().getRetangulo())) {
 								player.getHero().parar();
-								//player.getHero().setColidiu(true);
 							}
 						}
 					}

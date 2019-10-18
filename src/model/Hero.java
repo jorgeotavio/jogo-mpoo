@@ -6,52 +6,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hero {
-	
+
 	private List<Projectile> projectiles;
 	private Sprite sprite;
 	private final int VELOCIDADE = 2;
 	private String direcao;
 	private boolean colidiu;
-	
+
 	public Hero(Sprite sprite) {
 		this.sprite = sprite;
-		
+
 	}
-	
+
 	public void parar() {
-		
-		System.out.println(direcao);
-		
-		if (direcao == "up")
+
+		switch(direcao) {
+
+		case"up":
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
-		if (direcao == "down")
+			break;
+		
+		case "down":
 			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
-		if (direcao == "left")
+			break;
+		
+		case "left":
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
-		if (direcao == "right")
+			break;
+		
+		case "right":
 			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
-			
-		if (direcao == "diagonalUpRight") {
+			break;
+
+		case "diagonalUpRight":
 			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
-		}
-		
-		if (direcao == "diagonalUpLeft") {
+			break;
+
+		case "diagonalUpLeft":
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
-		}
-		
-		if (direcao == "diagonalDownRight") {
+			break;
+
+		case "diagonalDownRight": 
 			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
-		}
-		
-		if (direcao == "diagonalDownLeft") {
+			break;
+
+		case "diagonalDownLeft": 
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
+			break;
+
 		}
 	}
-	
+
 	public List<Projectile> getProjectiles() {
 		return projectiles;
 	}
@@ -59,7 +68,7 @@ public class Hero {
 	public void setProjectiles(List<Projectile> projectiles) {
 		this.projectiles = projectiles;
 	}
-	
+
 	public Sprite getSprite() {
 		return this.sprite;
 	}
@@ -88,7 +97,7 @@ public class Hero {
 	public void setColidiu(boolean colidiu) {
 		this.colidiu = colidiu;
 	}
-	
-	
-	
+
+
+
 }

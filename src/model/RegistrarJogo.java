@@ -15,23 +15,28 @@ public class RegistrarJogo {
 	
 	public void registerMap() {
 		
-		ArrayList<Camada> camadas = new ArrayList<Camada>();
 		
 		try {
-			Camada camada1 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png", "img/mapa/mapa01_camada01.txt");
-			Camada camada2 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png",  "img/mapa/mapa01_camada_colisao.txt");
+			Camada mapa1_camada1 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png", "img/mapa/mapa01_camada01.txt");
+			Camada mapa1_camada2 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png",  "img/mapa/mapa01_camada_colisao.txt");
 			
-			camada2.colisoes();
-			camada2.setCamadaColisao(true);
+			mapa1_camada2.colisoes();
+			mapa1_camada2.setCamadaColisao(true);
 			
-			camadas.add(camada1);
-			camadas.add(camada2);
+			ArrayList<Camada> camadas = new ArrayList<Camada>();
+
+			camadas.add(mapa1_camada1);
+			camadas.add(mapa1_camada2);
 
 			Map mapa = new Map(camadas);
 			mapa.setActivated(true);
+			
+			Map mapa2 = new Map(camadas);
+			mapa2.setActivated(false);
 
 			ArrayList<Map> maps = new ArrayList<Map>();
 			maps.add(mapa);
+			maps.add(mapa2);
 			
 			this.viewGame.setMaps(maps);
 			this.viewGame.getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 480)));
@@ -43,24 +48,25 @@ public class RegistrarJogo {
 	
 	public void registerPlayer() {
 
-		Xml xml = new Xml();
-//		
-//		Player player = new Player("Joao");
-//		Player player2 = new Player("Maria");
-//		
-//		
-//		Sprite sprite = new Sprite("img/sprites/heroi.png", 3, 4, 4, 300, 200);
-//		Sprite sprite2 = new Sprite("img/sprites/heroi.png", 3, 4, 4, 200, 200);
-//		
-//		Hero hero = new Hero(sprite);
-//		Hero hero2 = new Hero(sprite2);
-//		
-//		player.setHero(hero);
-//		player2.setHero(hero2);
+//		Xml xml = new Xml();
 		
-//		ArrayList<Player> players = new ArrayList<Player>();
-//		players.add(player);
-		ArrayList<Player> players = xml.ler();
+		Player player = new Player("Joao");
+		Player player2 = new Player("Maria");
+		
+		
+		Sprite sprite = new Sprite("img/sprites/heroina.png", 5, 6, 4, 300, 200);
+		Sprite sprite2 = new Sprite("img/sprites/heroi3.png", 5, 6, 4, 200, 200);
+		
+		Hero hero = new Hero(sprite);
+		Hero hero2 = new Hero(sprite2);
+		
+		player.setHero(hero);
+		player2.setHero(hero2);
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player);
+		players.add(player2);
+//		ArrayList<Player> players = xml.ler();
 		
 //		xml.salvar(player);
 //		xml.salvar(player2);
