@@ -162,6 +162,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 				hero.getSprite().setAparencia(4);
 				break;
 			case 2:
+				
 				hero.getSprite().setAparencia(8);
 				break;
 			}
