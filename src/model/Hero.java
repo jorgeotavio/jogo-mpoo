@@ -42,7 +42,6 @@ public class Hero {
 			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
 			break;
-
 		case "diagonalUpLeft":
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
