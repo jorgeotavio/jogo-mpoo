@@ -11,7 +11,7 @@ public class Hero {
 	private Sprite sprite;
 	private final int VELOCIDADE = 2;
 	private String direcao;
-	private boolean colidiu;
+	
 
 	public Hero(Sprite sprite) {
 		this.sprite = sprite;
@@ -87,15 +87,5 @@ public class Hero {
 	public void setDirecao(String direcao) {
 		this.direcao = direcao;
 	}
-
-	public boolean isColidiu() {
-		return colidiu;
-	}
-
-	public void setColidiu(boolean colidiu) {
-		this.colidiu = colidiu;
-	}
-
-
 
 }
