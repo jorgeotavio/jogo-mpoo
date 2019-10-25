@@ -17,14 +17,14 @@ public class ControllerGame implements Runnable {
 	private ArrayList<ControllerHero> controllersHero;
 
 	public ControllerGame(ViewGame viewGame) {
-		
+
 		this.viewGame = viewGame;
 		this.viewGame.setVisible(true);
-		
+
 		controllersHero = new ArrayList<ControllerHero>();
-		
+
 		ArrayList<Player> players = this.viewGame.getPlayers();
-		
+
 		for (Player player: players) {
 			ControllerHero ch = new ControllerHero(player.getHero(), players.indexOf(player));
 			controllersHero.add(ch);
@@ -33,21 +33,25 @@ public class ControllerGame implements Runnable {
 	}
 
 	public void checarColisoes(ArrayList<Map> maps, ArrayList<Player> players) {
+		
 		for(Map map: maps) {
-			
+
 			if(!map.isActivated())
 				continue;
-			
+
 			for(Camada camada: map.getCamadas()) {
-				if(camada.isCamadaColisao()) {
-					for (Rectangle rectangle : camada.getRectsColisao()) {
-						for(Player player: players) {
-							if(rectangle.intersects(player.getHero().getRetangulo())) {
-								player.getHero().parar();
-							}
+
+				if(!camada.isCamadaColisao()) 
+					continue;
+
+				for (Rectangle rectangle : camada.getRectsColisao()) {
+					for(Player player: players) {
+						if(rectangle.intersects(player.getHero().getRetangulo())) {
+							player.getHero().parar();
 						}
 					}
 				}
+
 			}
 		}
 	}
@@ -63,15 +67,15 @@ public class ControllerGame implements Runnable {
 	@Override
 	public void run() {
 		while ( true ) {
-			
+
 			checarColisoes(viewGame.getMaps(), viewGame.getPlayers());
-			
+
 			for(ControllerHero ch: controllersHero) {
 				ch.atualizaHero();
 			}
-			
+
 			this.viewGame.repaint();	
-			
+
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
