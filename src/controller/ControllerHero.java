@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 import model.Hero;
-import view.ViewGame;
 
 public class ControllerHero extends ControllerMovel implements KeyListener {
 
@@ -23,7 +22,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		if (keyPool.get(KeyEvent.VK_UP) != null && keyPool.get(KeyEvent.VK_RIGHT) != null && tipoPlayer ==0) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
-			hero.setDirecao("diagonalUpRight");
+			hero.setDirecao("upRight");
 			atualizarAparencia("upRight");
 			return true;
 		}
@@ -31,7 +30,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		if (keyPool.get(KeyEvent.VK_UP) != null && keyPool.get(KeyEvent.VK_LEFT) != null && tipoPlayer ==0) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
-			hero.setDirecao("diagonalUpLeft");
+			hero.setDirecao("upLeft");
 			atualizarAparencia("upLeft");
 			return true;
 		}
@@ -39,7 +38,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		if (keyPool.get(KeyEvent.VK_DOWN) != null && keyPool.get(KeyEvent.VK_RIGHT) != null && tipoPlayer ==0) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
-			hero.setDirecao("diagonalDownRight");
+			hero.setDirecao("downRight");
 			atualizarAparencia("downRight");
 			return true;
 		}
@@ -47,7 +46,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		if (keyPool.get(KeyEvent.VK_DOWN) != null && keyPool.get(KeyEvent.VK_LEFT) != null && tipoPlayer ==0) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
-			hero.setDirecao("diagonalDownLeft");
+			hero.setDirecao("downLeft");
 			atualizarAparencia("downLeft");
 			return true;
 		}
@@ -79,7 +78,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		if (keyPool.get(KeyEvent.VK_W) != null && keyPool.get(KeyEvent.VK_D) != null && tipoPlayer ==1) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
-			hero.setDirecao("diagonalUpRight");
+			hero.setDirecao("upRight");
 			atualizarAparencia("upRight");
 			return true;
 		}
@@ -87,7 +86,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		if (keyPool.get(KeyEvent.VK_W) != null && keyPool.get(KeyEvent.VK_A) != null && tipoPlayer ==1) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
-			hero.setDirecao("diagonalUpLeft");
+			hero.setDirecao("upLeft");
 			atualizarAparencia("upLeft");
 			return true;
 		}
@@ -95,7 +94,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		if (keyPool.get(KeyEvent.VK_S) != null && keyPool.get(KeyEvent.VK_D) != null && tipoPlayer ==1) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
-			hero.setDirecao("diagonalDownRight");
+			hero.setDirecao("downRight");
 			atualizarAparencia("downRight");
 			return true;
 		}
@@ -103,7 +102,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		if (keyPool.get(KeyEvent.VK_S) != null && keyPool.get(KeyEvent.VK_A) != null && tipoPlayer ==1) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
-			hero.setDirecao("diagonalDownLeft");
+			hero.setDirecao("downLeft");
 			atualizarAparencia("downLeft");
 			return true;
 		}
@@ -137,7 +136,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 	}
 
 	public void atualizarAparencia(String direcao) {
-		if (direcao == "up") {			
+		if (direcao == "up") {
 			switch (up) {
 			case 0:
 				hero.getSprite().setAparencia(3);
@@ -153,7 +152,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else up++;
 		}
 
-		if(direcao == "down") {			
+		if(direcao == "down") {
 			switch (down) {
 			case 0:
 				hero.getSprite().setAparencia(0);
@@ -171,7 +170,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else down++;
 		}
 
-		if ( direcao == "right") {			
+		if ( direcao == "right") {
 			switch (left) {
 			case 0:
 				hero.getSprite().setAparencia(2);
@@ -187,7 +186,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else left++;
 		}
 
-		if (direcao == "left") {			
+		if (direcao == "left") {
 			switch (right) {
 			case 0:
 				hero.getSprite().setAparencia(1);
@@ -200,10 +199,10 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 				break;
 			}
 			if (right==2) right=0;
-			else right++;			
+			else right++;
 		}
 		
-		if (direcao == "upRight") {			
+		if (direcao == "upRight") {
 			switch (upRight) {
 			case 0:
 				hero.getSprite().setAparencia(15);
@@ -216,10 +215,10 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 				break;
 			}
 			if (upRight==2) upRight=0;
-			else upRight++;			
+			else upRight++;
 		}
 		
-		if (direcao == "upLeft") {			
+		if (direcao == "upLeft") {
 			switch (upLeft) {
 			case 0:
 				hero.getSprite().setAparencia(13);
@@ -232,10 +231,10 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 				break;
 			}
 			if (upLeft==2) upLeft=0;
-			else upLeft++;			
+			else upLeft++;
 		}
 		
-		if (direcao == "downRight") {			
+		if (direcao == "downRight") {
 			switch (downRight) {
 			case 0:
 				hero.getSprite().setAparencia(14);
@@ -248,10 +247,10 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 				break;
 			}
 			if (downRight==2) downRight=0;
-			else downRight++;			
+			else downRight++;
 		}
 		
-		if (direcao == "downLeft") {			
+		if (direcao == "downLeft") {
 			switch (downLeft) {
 			case 0:
 				hero.getSprite().setAparencia(12);
@@ -264,7 +263,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 				break;
 			}
 			if (downLeft==2) downLeft=0;
-			else downLeft++;			
+			else downLeft++;
 		}
 	}
 
