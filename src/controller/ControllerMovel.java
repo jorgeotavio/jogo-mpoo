@@ -11,8 +11,5 @@ public abstract class ControllerMovel {
 	protected int upLeft;
 	protected int downRight;
 	protected int downLeft;
-	protected int velocidade=4;
-	protected static final int ALTURA_TELA = 130;
-	protected static final int LARGURA_TELA = 610;
 
 }
