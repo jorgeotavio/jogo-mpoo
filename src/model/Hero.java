@@ -72,7 +72,7 @@ public class Hero {
 	}
 
 	public Rectangle getRetangulo() {
-		return new Rectangle(this.sprite.getPosX()+5, this.sprite.getPosY()+35, 
+		return new Rectangle(this.sprite.getPosX()+5, this.sprite.getPosY()+25, 
 				this.sprite.getLargura()/2, this.sprite.getAltura()/6);
 	}
 
