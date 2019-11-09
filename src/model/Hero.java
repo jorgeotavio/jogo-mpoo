@@ -11,7 +11,6 @@ public class Hero {
 	private Sprite sprite;
 	private final int VELOCIDADE = 2;
 	private String direcao;
-	
 
 	public Hero(Sprite sprite) {
 		this.sprite = sprite;
@@ -19,7 +18,6 @@ public class Hero {
 	}
 
 	public void parar() {
-
 		switch(direcao) {
 		case"up":
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
