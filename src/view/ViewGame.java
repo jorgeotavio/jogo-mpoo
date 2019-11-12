@@ -39,7 +39,6 @@ public class ViewGame extends JFrame{
 		Graphics2D g2d = (Graphics2D) this.getGraphics();
 		g2d.drawImage(tela, 0, 0, null);
 		
-		
 		for (Map map: maps) {
 			
 			if (!map.isActivated())
