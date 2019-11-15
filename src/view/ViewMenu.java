@@ -4,17 +4,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ViewMenu extends JFrame {
+public class ViewMenu extends AbstractView{
 
 	private static final long serialVersionUID = 1L;
 	private JLabel titleLabel;
 	private JButton startSoloButton, startDuoButton, leaveButton, tutorialButton, aboutButton;
 	
 	public ViewMenu() {
-		setSize(500, 500);
-		setLocationRelativeTo(null);
-		setLayout(null);
-		setUndecorated(true);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		titleLabel = new JLabel("See The Moon");

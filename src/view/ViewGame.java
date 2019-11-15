@@ -1,37 +1,35 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import model.Camada;
 import model.Enemy;
+import model.Item;
 import model.Map;
 import model.Player;
 
-public class ViewGame extends JFrame{
+@SuppressWarnings("serial")
+public class ViewGame extends AbstractView{
 
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Player> players;
 	private ArrayList<Map> maps;
 	private BufferedImage tela;
-
+	
 	public ViewGame() {
-		setSize(640, 480);
-		setLayout(null);
-		setResizable(false);
-		setUndecorated(true);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		setVisible(false);
+		
+		JLabel label = new JLabel("teste");
+		label.setBounds(10, 10, 100, 100);
+		add(label);
 		
 		tela = new BufferedImage(640, 480, BufferedImage.TYPE_4BYTE_ABGR);
-
+		
+		setVisible(false);
 	}
 	
 
@@ -42,22 +40,21 @@ public class ViewGame extends JFrame{
 		
 		for (Map map: maps) {
 			
-			if (!map.isActivated())
-				continue;
+			if (!map.isActivated()) continue;
 			
 			for (Camada camada: map.getCamadas()) {
-				tela.getGraphics().drawImage(camada.camada, 0, 0, this); 
+				tela.getGraphics().drawImage(camada.getCamada(), 0, 0, this);
+			}
+			
+			for (Item item: map.getItens()) {
+				tela.getGraphics().drawImage(item.getImagem(), 50, 50, this);
 			}
 		}
 		
 		for(Player player: this.players) {
-			
 			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
 			tela.getGraphics().drawImage(sprites[player.getHero().getSprite().getAparencia()], 
-					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this); 			
-			
-			g2d.setColor(Color.RED);
-			g2d.draw(player.getHero().getRetangulo());
+					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this);
 		}
 		
 	}

@@ -8,11 +8,13 @@ public class Map {
 	
 	private boolean activated;
 	private ArrayList<Camada> camadas;
+	private ArrayList<Item> itens;
 
-	public Map(ArrayList<Camada> camadas) {
+	public Map(ArrayList<Camada> camadas, ArrayList<Item> itens) {
 		this.activated = false;
 		this.camadas = camadas;
-	}
+		this.itens = itens;
+ 	}
 	
 	public boolean isActivated() {
 		return activated;
@@ -28,6 +30,14 @@ public class Map {
 
 	public void setCamadas(ArrayList<Camada> camadas) {
 		this.camadas = camadas;
+	}
+
+	public ArrayList<Item> getItens() {
+		return itens;
+	}
+
+	public void setItens(ArrayList<Item> itens) {
+		this.itens = itens;
 	}
 	
 }

@@ -1,18 +1,14 @@
 package view;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ViewAbout extends JFrame {
+@SuppressWarnings("serial")
+public class ViewAbout extends AbstractView{
 	private JLabel descriptionLabel;
 	private JButton backButton;
 	
 	public ViewAbout() {
-		setSize(400, 300);
-		setLocationRelativeTo(null);
-		setLayout(null);
-		setUndecorated(true);
 		
 		descriptionLabel = new JLabel("<html><div style='font-size: 16; padding: 10px'>"
 				+ "Jogo feito pelo aluno, <br/>"

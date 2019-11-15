@@ -4,11 +4,9 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import model.Camada;
-import model.Hero;
 import model.Map;
 import model.Player;
 import view.ViewGame;
-import view.ViewTutorial;
 
 public class ControllerGame implements Runnable {
 

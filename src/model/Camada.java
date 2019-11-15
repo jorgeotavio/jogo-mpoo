@@ -14,8 +14,8 @@ import java.util.StringTokenizer;
 import javax.imageio.ImageIO;
 
 public class Camada{
-	public  int mapa[][];
-	public  BufferedImage camada;
+	private int mapa[][];
+	private BufferedImage camada;
 	private BufferedImage tileSet;
 	private int mapaWidth;
 	private int mapaHeight;
@@ -104,6 +104,10 @@ public class Camada{
 
 	public ArrayList<Rectangle> getRectsColisao() {
 		return rectsColisao;
+	}
+
+	public BufferedImage getCamada() {
+		return camada;
 	}
 	
 }

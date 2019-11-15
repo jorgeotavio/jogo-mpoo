@@ -34,10 +34,14 @@ public class RegistrarJogo {
 			camadas.add(mapa1_camada3);
 			camadas.add(mapa1_camada4);
 			
-			Map mapa = new Map(camadas);
+			Item item1 = new Item("porção", 10, "img/acessorios/flecha.png");
+			
+			ArrayList<Item> itens = new ArrayList<Item>();
+			
+			Map mapa = new Map(camadas, itens);
 			mapa.setActivated(true);
 			
-			Map mapa2 = new Map(camadas);
+			Map mapa2 = new Map(camadas, itens);
 			mapa2.setActivated(false);
 
 			ArrayList<Map> maps = new ArrayList<Map>();
