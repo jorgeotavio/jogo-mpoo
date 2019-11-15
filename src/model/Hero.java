@@ -14,7 +14,6 @@ public class Hero {
 
 	public Hero(Sprite sprite) {
 		this.sprite = sprite;
-
 	}
 
 	public void parar() {
