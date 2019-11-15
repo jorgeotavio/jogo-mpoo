@@ -1,17 +1,7 @@
 package view;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 
-import model.Camada;
-import model.Enemy;
-import model.Item;
-import model.Map;
-import model.Player;
 
 @SuppressWarnings("serial")
 public class ViewGame extends AbstractView{
