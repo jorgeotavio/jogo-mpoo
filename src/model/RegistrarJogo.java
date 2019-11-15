@@ -3,13 +3,14 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import view.GamePanel;
 import view.ViewGame;
 
 public class RegistrarJogo {
 	
 	private ViewGame viewGame;
-
-	public RegistrarJogo( ViewGame viewGame ) {
+	
+	public RegistrarJogo( ViewGame viewGame) {
 		this.viewGame = viewGame;
 	}
 	
@@ -24,7 +25,6 @@ public class RegistrarJogo {
 			Camada mapa1_camada3 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_teste/mapa01_camada03_colisao.txt");
 			Camada mapa1_camada4 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_teste/mapa01_camada04_itens.txt");
 			
-			mapa1_camada3.colisoes();
 			mapa1_camada3.setCamadaColisao(true);
 			
 			ArrayList<Camada> camadas = new ArrayList<Camada>();
@@ -37,6 +37,7 @@ public class RegistrarJogo {
 			Item item1 = new Item("porção", 10, "img/acessorios/flecha.png");
 			
 			ArrayList<Item> itens = new ArrayList<Item>();
+			itens.add(item1);
 			
 			Map mapa = new Map(camadas, itens);
 			mapa.setActivated(true);
@@ -48,8 +49,9 @@ public class RegistrarJogo {
 			maps.add(mapa);
 			maps.add(mapa2);
 			
-			this.viewGame.setMaps(maps);
-			this.viewGame.getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 480)));
+			
+			this.viewGame.getGamePanel().setMaps(maps);
+			this.viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 380)));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -81,7 +83,7 @@ public class RegistrarJogo {
 //		xml.salvar(player);
 //		xml.salvar(player2);
 		
-		viewGame.setPlayers(players);
+		this.viewGame.getGamePanel().setPlayers(players);
 		
 	}
 

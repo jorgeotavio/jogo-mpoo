@@ -21,7 +21,7 @@ public class ControllerGame implements Runnable {
 
 		controllersHero = new ArrayList<ControllerHero>();
 
-		ArrayList<Player> players = this.viewGame.getPlayers();
+		ArrayList<Player> players = this.viewGame.getGamePanel().getPlayers();
 
 		for (Player player: players) {
 			ControllerHero ch = new ControllerHero(player.getHero(), players.indexOf(player));
@@ -66,13 +66,13 @@ public class ControllerGame implements Runnable {
 	public void run() {
 		while ( true ) {
 
-			checarColisoes(viewGame.getMaps(), viewGame.getPlayers());
+			checarColisoes(viewGame.getGamePanel().getMaps(), viewGame.getGamePanel().getPlayers());
 
 			for(ControllerHero ch: controllersHero) {
 				ch.atualizaHero();
 			}
 
-			this.viewGame.repaint();	
+			this.viewGame.getGamePanel().repaint();	
 
 			try {
 				Thread.sleep(50);

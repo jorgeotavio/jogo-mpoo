@@ -99,6 +99,7 @@ public class Camada{
 	}
 
 	public void setCamadaColisao(boolean camadaColisao) {
+		if(camadaColisao) colisoes();
 		this.camadaColisao = camadaColisao;
 	}
 
