@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 public class ViewGame extends AbstractView{
 	
 	private GamePanel gamePanel;
+	private JLabel pontos;
 	
 	public ViewGame(GamePanel gamePanel) {
 		
@@ -14,9 +15,11 @@ public class ViewGame extends AbstractView{
 		
 		this.gamePanel.setBounds(0, 0, 680, 380);
 		
-		JLabel label = new JLabel("teste");
-		label.setBounds(100, 400, 100, 100);
-		add(label);
+		pontos = new JLabel("Pontos: ");
+		
+		pontos.setBounds(100, 400, 100, 100);
+		
+		add(pontos);
 		add(gamePanel);
 		
 		setVisible(false);
@@ -28,6 +31,14 @@ public class ViewGame extends AbstractView{
 
 	public void setGamePanel(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
+	}
+
+	public JLabel getPontos() {
+		return pontos;
+	}
+
+	public void setPontuacao(int pontos) {
+		this.pontos.setText(Integer.toString(pontos));;
 	}
 
 }
