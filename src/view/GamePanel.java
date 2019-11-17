@@ -47,7 +47,6 @@ public class GamePanel extends JPanel{
 					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this);
 		}
 		g2d.dispose();
-		
 	}
 	
 	public ArrayList<Map> getMaps() {

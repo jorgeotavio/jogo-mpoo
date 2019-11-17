@@ -72,7 +72,7 @@ public class ControllerGame implements Runnable {
 				ch.atualizaHero();
 			}
 
-			this.viewGame.getGamePanel().repaint();	
+			this.viewGame.getGamePanel().repaint();
 
 			try {
 				Thread.sleep(50);
