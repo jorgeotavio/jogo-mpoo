@@ -37,12 +37,10 @@ public class ControllerMenu implements ActionListener{
 			
 			this.viewMenu.setVisible(false);
 			
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					new ControllerGame(viewGame).run();
-				}
-			}).start();
+			new Thread(
+					new ControllerGame(viewGame)
+				
+			).start();
 		}
 		
 		if(e.getSource() == viewMenu.getStartDuoButton()) {
