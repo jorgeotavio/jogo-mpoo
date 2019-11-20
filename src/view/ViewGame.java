@@ -10,11 +10,10 @@ public class ViewGame extends AbstractView{
 	private JLabel pontos;
 	
 	public ViewGame(GamePanel gamePanel) {
-		
+
 		this.gamePanel = gamePanel;
 		
 		this.gamePanel.setBounds(0, 0, 680, 380);
-		
 		
 		pontos = new JLabel("Pontos: ");
 		pontos.setBounds(100, 400, 100, 100);

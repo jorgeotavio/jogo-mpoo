@@ -20,10 +20,9 @@ public class RegistrarJogo {
 		try {
 			//Camada mapa1_camada1 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png", "img/mapa/mapa01_camada01.txt");
 			//Camada mapa1_camada2 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png",  "img/mapa/mapa01_camada_colisao.txt");
-			Camada mapa1_camada1 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_teste/mapa01_camada01.txt");
-			Camada mapa1_camada2 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_teste/mapa01_camada02.txt");
-			Camada mapa1_camada3 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_teste/mapa01_camada03_colisao.txt");
-			Camada mapa1_camada4 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_teste/mapa01_camada04_itens.txt");
+			Camada mapa1_camada1 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_01.txt");
+			Camada mapa1_camada2 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_novo/camada_02.txt");
+			Camada mapa1_camada3 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_03.txt");
 			
 			mapa1_camada3.setCamadaColisao(true);
 			
@@ -32,7 +31,6 @@ public class RegistrarJogo {
 			camadas.add(mapa1_camada1);
 			camadas.add(mapa1_camada2);
 			camadas.add(mapa1_camada3);
-			camadas.add(mapa1_camada4);
 			
 			Item item1 = new Item("porção", 10, "img/acessorios/flecha.png");
 			
@@ -66,8 +64,8 @@ public class RegistrarJogo {
 		Player player2 = new Player("Maria");
 		
 		
-		Sprite sprite = new Sprite("img/sprites/heroina.png", 5, 6, 4, 30, 480);
-		Sprite sprite2 = new Sprite("img/sprites/heroi3.png", 5, 6, 4, 20, 470);
+		Sprite sprite = new Sprite("img/sprites/heroina.png", 5, 6, 4, 30, 250);
+		Sprite sprite2 = new Sprite("img/sprites/heroi3.png", 5, 6, 4, 50, 250);
 		
 		Hero hero = new Hero(sprite);
 		Hero hero2 = new Hero(sprite2);
