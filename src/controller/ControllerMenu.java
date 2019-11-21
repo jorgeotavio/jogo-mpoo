@@ -29,12 +29,12 @@ public class ControllerMenu implements ActionListener{
 				new ControllerGame(this.viewGame)
 			).start();
 		});
-		
+
 		viewMenu.getAboutButton().addActionListener((e) -> {
 			viewAbout.setVisible(true);
 			viewMenu.setVisible(false);
 		});
-		
+
 		viewMenu.getLeaveButton().addActionListener((e) -> {
 			System.exit(0);
 		});
@@ -43,7 +43,6 @@ public class ControllerMenu implements ActionListener{
 			viewAbout.setVisible(false);
 			viewMenu.setVisible(true);
 		});
-		
 	}
 	
 	@Override
