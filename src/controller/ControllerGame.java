@@ -27,36 +27,31 @@ public class ControllerGame implements Runnable, KeyListener {
 
 		ArrayList<Player> players = this.viewGame.getGamePanel().getPlayers();
 
-		for (Player player: players) {
+		players.forEach((player) -> {
 			ControllerHero ch = new ControllerHero(player.getHero(), players.indexOf(player));
 			controllersHero.add(ch);
 			viewGame.addKeyListener(ch);
-		}
-
+		});
 	}
 
 	public void checarColisoes(ArrayList<Map> maps, ArrayList<Player> players) {
+		maps.forEach((map)-> {
 
-		for(Map map: maps) {
+			map.getCamadas().forEach((camada) -> {
 
-			if(!map.isActivated())
-				continue;
+				if(!camada.isCamadaColisao())
+					return;
 
-			for(Camada camada: map.getCamadas()) {
+				camada.getRectsColisao().forEach((rectangle) ->{
 
-				if(!camada.isCamadaColisao()) 
-					continue;
+					players.forEach((player)->{
 
-				for (Rectangle rectangle : camada.getRectsColisao()) {
-					for(Player player: players) {
-						if(rectangle.intersects(player.getHero().getRetangulo())) {
+						if(rectangle.intersects(player.getHero().getRetangulo()))
 							player.getHero().parar();
-						}
-					}
-				}
-
-			}
-		}
+					});
+				});
+			});
+		});
 	}
 
 	public ArrayList<Rectangle> getRetangulosColisao() {
@@ -83,9 +78,10 @@ public class ControllerGame implements Runnable, KeyListener {
 
 				checarColisoes(viewGame.getGamePanel().getMaps(), viewGame.getGamePanel().getPlayers());
 
-				for(ControllerHero ch: controllersHero) {
+				controllersHero.forEach((ch)-> {
 					ch.atualizaHero();
-				}
+				});
+				
 				this.viewGame.getGamePanel().repaint();
 			}
 
@@ -103,7 +99,7 @@ public class ControllerGame implements Runnable, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
 			this.pausado = !pausado;
-		
+
 	}
 
 	@Override

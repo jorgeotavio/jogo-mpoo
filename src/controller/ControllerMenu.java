@@ -22,45 +22,33 @@ public class ControllerMenu implements ActionListener{
 	}
 	
 	public void controll() {
-		viewMenu.getStartSoloButton().addActionListener(this);
-		viewMenu.getStartDuoButton().addActionListener(this);
-		viewMenu.getAboutButton().addActionListener(this);
-		viewMenu.getLeaveButton().addActionListener(this);
 		
-		viewAbout.getBackButton().addActionListener(this);
+		viewMenu.getStartSoloButton().addActionListener((e)-> {
+			this.viewMenu.setVisible(false);
+			new Thread(
+				new ControllerGame(this.viewGame)
+			).start();
+		});
+		
+		viewMenu.getAboutButton().addActionListener((e) -> {
+			viewAbout.setVisible(true);
+			viewMenu.setVisible(false);
+		});
+		
+		viewMenu.getLeaveButton().addActionListener((e) -> {
+			System.exit(0);
+		});
+
+		viewAbout.getBackButton().addActionListener((e)->{
+			viewAbout.setVisible(false);
+			viewMenu.setVisible(true);
+		});
 		
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == viewMenu.getStartSoloButton()) {
-			
-			this.viewMenu.setVisible(false);
-			
-			new Thread(
-					new ControllerGame(viewGame)
-				
-			).start();
-		}
-		
-		if(e.getSource() == viewMenu.getStartDuoButton()) {
-			//
-		}
-		
-		if(e.getSource() == viewMenu.getAboutButton()) {
-			viewAbout.setVisible(true);
-			viewMenu.setVisible(false);
-		}
-		
-		if(e.getSource() == viewAbout.getBackButton()) {
-			viewAbout.setVisible(false);
-			viewMenu.setVisible(true);
-		}
-		
-		if(e.getSource() == viewMenu.getLeaveButton()) {
-			System.exit(0);
-		}
-		
+		//
 	}
 	
 }

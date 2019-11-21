@@ -2,6 +2,9 @@ package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.sun.glass.events.KeyEvent;
 
 import view.GamePanel;
 import view.ViewGame;
@@ -67,8 +70,20 @@ public class RegistrarJogo {
 		Sprite sprite = new Sprite("img/sprites/heroina.png", 5, 6, 4, 30, 250);
 		Sprite sprite2 = new Sprite("img/sprites/heroi3.png", 5, 6, 4, 50, 250);
 		
-		Hero hero = new Hero(sprite);
-		Hero hero2 = new Hero(sprite2);
+		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
+		comandos1.put("UP", KeyEvent.VK_UP);
+		comandos1.put("DOWN", KeyEvent.VK_DOWN);
+		comandos1.put("LEFT", KeyEvent.VK_LEFT);
+		comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
+		
+		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
+		comandos2.put("UP", KeyEvent.VK_W);
+		comandos2.put("DOWN", KeyEvent.VK_S);
+		comandos2.put("LEFT", KeyEvent.VK_A);
+		comandos2.put("RIGHT", KeyEvent.VK_D);
+		
+		Hero hero = new Hero(sprite, comandos1);
+		Hero hero2 = new Hero(sprite2, comandos2);
 		
 		player.setHero(hero);
 		player2.setHero(hero2);

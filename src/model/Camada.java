@@ -81,8 +81,8 @@ public class Camada{
 		}
 	}
 	
-	public void colisoes() {
-		ArrayList<Rectangle> rectsColisao=new ArrayList<>();
+	public ArrayList<Rectangle> colisoes() {
+		ArrayList<Rectangle> rectsColisao = new ArrayList<>();
 		for (int i = 0; i < mapaWidth; i++) {
 			for (int j = 0; j < mapaHeight; j++) {
 				if(mapa[i][j] > 0) {
@@ -90,7 +90,7 @@ public class Camada{
 				}
 			}
 		}
-		this.rectsColisao = rectsColisao;
+		return rectsColisao;
 	}
 
 	public boolean isCamadaColisao() {
@@ -98,7 +98,7 @@ public class Camada{
 	}
 
 	public void setCamadaColisao(boolean camadaColisao) {
-		if(camadaColisao) colisoes();
+		this.rectsColisao = camadaColisao ? colisoes() : null;
 		this.camadaColisao = camadaColisao;
 	}
 

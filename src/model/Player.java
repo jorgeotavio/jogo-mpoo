@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashMap;
+
 public class Player {
 	
 	private String name;

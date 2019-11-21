@@ -3,6 +3,7 @@ package model;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Hero {
@@ -11,9 +12,11 @@ public class Hero {
 	private Sprite sprite;
 	private final int VELOCIDADE = 2;
 	private String direcao;
+	private HashMap<String, Integer> comandos;
 
-	public Hero(Sprite sprite) {
+	public Hero(Sprite sprite, HashMap<String, Integer> comandos) {
 		this.sprite = sprite;
+		this.comandos = comandos;
 	}
 
 	public void parar() {
@@ -84,5 +87,15 @@ public class Hero {
 	public void setDirecao(String direcao) {
 		this.direcao = direcao;
 	}
+
+	public HashMap<String, Integer> getComandos() {
+		return comandos;
+	}
+
+	public void setComandos(HashMap<String, Integer> comandos) {
+		this.comandos = comandos;
+	}
+	
+	
 
 }
