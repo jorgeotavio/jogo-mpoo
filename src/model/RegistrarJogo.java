@@ -18,8 +18,6 @@ public class RegistrarJogo {
 	}
 	
 	public void registerMap() {
-		
-		
 		try {
 			Camada mapa1_camada1 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_01.txt");
 			Camada mapa1_camada2 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_novo/camada_02.txt");
@@ -33,10 +31,18 @@ public class RegistrarJogo {
 			camadas.add(mapa1_camada2);
 			camadas.add(mapa1_camada3);
 			
-			Item item1 = new Item("porção", "img/itens/maca_item.png", 200, 200);
+			Item item1 = new Item("maca", "img/itens/maca_item.png", 200, 200);
+			Item item2 = new Item("banana", "img/itens/banana_item.png", 300, 200);
+			Item item3 = new Item("melancia", "img/itens/melancia_item.png", 350, 100);
+			Item item4 = new Item("maca", "img/itens/maca_item.png", 500, 140);
+			Item item5 = new Item("melancia", "img/itens/melancia_item.png", 130, 250);
 			
 			ArrayList<Item> itens = new ArrayList<Item>();
 			itens.add(item1);
+			itens.add(item2);
+			itens.add(item3);
+			itens.add(item4);
+			itens.add(item5);
 			
 			Map mapa = new Map(camadas, itens);
 			mapa.setActivated(true);
@@ -62,7 +68,6 @@ public class RegistrarJogo {
 		
 		Player player = new Player("Joao");
 		Player player2 = new Player("Maria");
-		
 		
 		Sprite sprite = new Sprite("img/sprites/heroina.png", 5, 6, 4, 30, 250);
 		Sprite sprite2 = new Sprite("img/sprites/heroi3.png", 5, 6, 4, 50, 250);

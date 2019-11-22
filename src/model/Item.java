@@ -9,11 +9,13 @@ public class Item {
 	private String name;
 	private BufferedImage imagem;
 	private int posX, posY;
+	private boolean capturado;
 	
 	public Item(String name, String file, int posX, int posY) {
 		this.name = name;
 		this.posX = posX;
 		this.posY = posY;
+		this.capturado = false;
 		
 		try {
 			this.imagem = ImageIO.read(new File(file));
@@ -53,6 +55,13 @@ public class Item {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	
+
+	public boolean isCapturado() {
+		return capturado;
+	}
+
+	public void setCapturado(boolean capturado) {
+		this.capturado = capturado;
+	}
 	
 }

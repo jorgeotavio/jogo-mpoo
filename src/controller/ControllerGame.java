@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import model.Item;
 import model.Map;
 import model.Player;
 import view.ViewGame;
@@ -34,31 +35,32 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void checarColisoes(ArrayList<Map> maps, ArrayList<Player> players) {
 
-		maps.forEach((map)-> {
-			map.getItens().forEach((item)->{
-				players.forEach((player) -> {
+		for(Map map :maps){
+			for(Item item: map.getItens()){
+				for(Player player: players ){
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
 						player.getInventary().getItems().add(item);
-						player.setPoints(10);
+						player.setPoints(player.getPoints()+10);
+						item.setCapturado(true);
 					}
-				});
-			});
-			
-			map.getCamadas().forEach((camada) -> {
+				}
+				if(item.isCapturado()) {
+					map.getItens().remove(item);
+					break;
+				}
+			}
 
+			map.getCamadas().forEach((camada) -> {
 				if(!camada.isCamadaColisao())
 					return;
-
 				camada.getRectsColisao().forEach((rectangle) ->{
-
 					players.forEach((player)->{
-
 						if(rectangle.intersects(player.getHero().getRetangulo()))
 							player.getHero().parar();
 					});
 				});
 			});
-		});
+		};
 	}
 
 	public ArrayList<Rectangle> getRetangulosColisao() {
@@ -84,11 +86,11 @@ public class ControllerGame implements Runnable, KeyListener {
 			if (!pausado) {
 
 				checarColisoes(viewGame.getGamePanel().getMaps(), viewGame.getGamePanel().getPlayers());
-				
+
 				controllersHero.forEach((ch)-> {
 					ch.atualizaHero();
 				});
-				
+
 				this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getPlayers());
 				this.viewGame.getGamePanel().repaint();
 			}
