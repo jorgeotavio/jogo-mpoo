@@ -6,8 +6,8 @@ public class Inventary {
 	
 	private ArrayList<Item> items;
 	
-	public Inventary(ArrayList<Item> items) {
-		this.items = items;
+	public Inventary() {
+		this.items = new ArrayList<Item>();
 	}
 
 	public ArrayList<Item> getItems() {

@@ -21,8 +21,6 @@ public class RegistrarJogo {
 		
 		
 		try {
-			//Camada mapa1_camada1 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png", "img/mapa/mapa01_camada01.txt");
-			//Camada mapa1_camada2 = new Camada(15, 20, 32, 32, "img/mapa/tileset.png",  "img/mapa/mapa01_camada_colisao.txt");
 			Camada mapa1_camada1 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_01.txt");
 			Camada mapa1_camada2 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_novo/camada_02.txt");
 			Camada mapa1_camada3 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_03.txt");
@@ -35,7 +33,7 @@ public class RegistrarJogo {
 			camadas.add(mapa1_camada2);
 			camadas.add(mapa1_camada3);
 			
-			Item item1 = new Item("porção", 10, "img/acessorios/flecha.png");
+			Item item1 = new Item("porção", "img/itens/maca_item.png", 200, 200);
 			
 			ArrayList<Item> itens = new ArrayList<Item>();
 			itens.add(item1);
@@ -49,7 +47,6 @@ public class RegistrarJogo {
 			ArrayList<Map> maps = new ArrayList<Map>();
 			maps.add(mapa);
 			maps.add(mapa2);
-			
 			
 			this.viewGame.getGamePanel().setMaps(maps);
 			this.viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 380)));

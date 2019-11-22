@@ -15,9 +15,6 @@ import model.Player;
 
 public class GamePanel extends JPanel{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3027613679265920713L;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Player> players;
@@ -25,27 +22,30 @@ public class GamePanel extends JPanel{
 	private BufferedImage tela;
 	
 	@Override
-	public void paintComponent(Graphics g) {	
+	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
 		
-		for (Map map: maps) {
+		maps.forEach((map)->{
 			
-			if (!map.isActivated()) continue;
+			if (!map.isActivated()) return;
 			
-			for (Camada camada: map.getCamadas()) {
+			map.getCamadas().forEach((camada)->{
 				g2d.drawImage(camada.getCamada(), 0, 0, this);
-			}
+			});
 			
-			for (Item item: map.getItens()) {
-				g2d.drawImage(item.getImagem(), 50, 50, this);
-			}
-		}
+			map.getItens().forEach((item)->{
+				g2d.drawImage(item.getImagem(), item.getPosX(), item.getPosY(), this);
+			});
+		});
 		
-		for(Player player: this.players) {
+		this.players.forEach((player)->{
+			
 			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
+			
 			g2d.drawImage(sprites[player.getHero().getSprite().getAparencia()], 
 					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this);
-		}
+		});
+		
 		g2d.dispose();
 	}
 	

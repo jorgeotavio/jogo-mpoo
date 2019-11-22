@@ -1,12 +1,10 @@
 package controller;
 
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-import model.Camada;
 import model.Map;
 import model.Player;
 import view.ViewGame;
@@ -35,8 +33,17 @@ public class ControllerGame implements Runnable, KeyListener {
 	}
 
 	public void checarColisoes(ArrayList<Map> maps, ArrayList<Player> players) {
-		maps.forEach((map)-> {
 
+		maps.forEach((map)-> {
+			map.getItens().forEach((item)->{
+				players.forEach((player) -> {
+					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
+						player.getInventary().getItems().add(item);
+						player.setPoints(10);
+					}
+				});
+			});
+			
 			map.getCamadas().forEach((camada) -> {
 
 				if(!camada.isCamadaColisao())
@@ -77,11 +84,12 @@ public class ControllerGame implements Runnable, KeyListener {
 			if (!pausado) {
 
 				checarColisoes(viewGame.getGamePanel().getMaps(), viewGame.getGamePanel().getPlayers());
-
+				
 				controllersHero.forEach((ch)-> {
 					ch.atualizaHero();
 				});
 				
+				this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getPlayers());
 				this.viewGame.getGamePanel().repaint();
 			}
 
