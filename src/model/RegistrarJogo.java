@@ -65,34 +65,31 @@ public class RegistrarJogo {
 	public void registerPlayer() {
 
 //		Xml xml = new Xml();
-		
+
 		Player player = new Player("Joao");
-		Player player2 = new Player("Maria");
-		
-		Sprite sprite = new Sprite("img/sprites/heroina.png", 5, 6, 4, 30, 250);
-		Sprite sprite2 = new Sprite("img/sprites/heroi3.png", 5, 6, 4, 50, 250);
-		
+		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 5, 6, 4, 30, 250);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
 		comandos1.put("UP", KeyEvent.VK_UP);
 		comandos1.put("DOWN", KeyEvent.VK_DOWN);
 		comandos1.put("LEFT", KeyEvent.VK_LEFT);
 		comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
+		Hero hero = new Hero(sprite, comandos1);
+		player.setHero(hero);
 		
+		Player player2 = new Player("Maria");
+		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 5, 6, 4, 50, 250);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
 		comandos2.put("DOWN", KeyEvent.VK_S);
 		comandos2.put("LEFT", KeyEvent.VK_A);
 		comandos2.put("RIGHT", KeyEvent.VK_D);
-		
-		Hero hero = new Hero(sprite, comandos1);
 		Hero hero2 = new Hero(sprite2, comandos2);
-		
-		player.setHero(hero);
 		player2.setHero(hero2);
 		
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player);
 		players.add(player2);
+		
 //		ArrayList<Player> players = xml.ler();
 		
 //		xml.salvar(player);
