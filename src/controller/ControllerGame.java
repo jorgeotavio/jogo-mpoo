@@ -36,6 +36,10 @@ public class ControllerGame implements Runnable, KeyListener {
 	public void checarColisoes(ArrayList<Map> maps, ArrayList<Player> players) {
 
 		for(Map map :maps){
+
+			if(!map.isActivated())
+				break;
+
 			for(Item item: map.getItens()){
 				for(Player player: players ){
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
@@ -49,10 +53,12 @@ public class ControllerGame implements Runnable, KeyListener {
 					break;
 				}
 			}
-
+			
 			map.getCamadas().forEach((camada) -> {
+
 				if(!camada.isCamadaColisao())
 					return;
+
 				camada.getRectsColisao().forEach((rectangle) ->{
 					players.forEach((player)->{
 						if(rectangle.intersects(player.getHero().getRetangulo()))
