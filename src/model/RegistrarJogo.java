@@ -64,8 +64,6 @@ public class RegistrarJogo {
 	
 	public void registerPlayer() {
 
-//		Xml xml = new Xml();
-
 		Player player = new Player("Joao");
 		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 5, 6, 4, 30, 250);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
@@ -86,36 +84,14 @@ public class RegistrarJogo {
 		Hero hero2 = new Hero(sprite2, comandos2);
 		player2.setHero(hero2);
 		
-		Player player3 = new Player("Joao");
-		Sprite sprite3 = new Sprite("img/sprites/heroina_2.png", 5, 6, 4, 30, 250);
-		HashMap<String, Integer> comandos3 = new HashMap<String, Integer>();
-		comandos3.put("UP", KeyEvent.VK_T);
-		comandos3.put("DOWN", KeyEvent.VK_G);
-		comandos3.put("LEFT", KeyEvent.VK_F);
-		comandos3.put("RIGHT", KeyEvent.VK_H);
-		Hero hero3 = new Hero(sprite3, comandos3);
-		player3.setHero(hero3);
-		
-		Player player4 = new Player("José");
-		Sprite sprite4 = new Sprite("img/sprites/heroina_2.png", 5, 6, 4, 30, 250);
-		HashMap<String, Integer> comandos4 = new HashMap<String, Integer>();
-		comandos4.put("UP", KeyEvent.VK_I);
-		comandos4.put("DOWN", KeyEvent.VK_K);
-		comandos4.put("LEFT", KeyEvent.VK_J);
-		comandos4.put("RIGHT", KeyEvent.VK_L);
-		Hero hero4 = new Hero(sprite4, comandos4);
-		player4.setHero(hero4);
-		
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player);
 		players.add(player2);
-		players.add(player3);
-		players.add(player4);
 		
-//		ArrayList<Player> players = xml.ler();
-		
+//		Xml xml = new Xml();		
 //		xml.salvar(player);
 //		xml.salvar(player2);
+//		ArrayList<Player> players = xml.ler();
 		
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().cadastrarLabels(players);
