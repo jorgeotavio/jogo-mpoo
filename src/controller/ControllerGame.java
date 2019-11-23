@@ -44,10 +44,11 @@ public class ControllerGame implements Runnable, KeyListener {
 				for(Player player: players ){
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
 						player.getInventary().getItems().add(item);
-						player.setPoints(player.getPoints()+10);
+						player.setPoints(10);
 						item.setCapturado(true);
 					}
 				}
+
 				if(item.isCapturado()) {
 					map.getItens().remove(item);
 					break;

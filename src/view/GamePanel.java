@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 import model.Camada;
 import model.Enemy;
@@ -42,11 +43,16 @@ public class GamePanel extends JPanel{
 			
 			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
 			
+			g2d.drawRect(player.getHero().getSprite().getPosX()-10, player.getHero().getSprite().getPosY()-5, 50, 5);
+			
+			g2d.fillRect(player.getHero().getSprite().getPosX()-10, player.getHero().getSprite().getPosY()-5, player.getPoints(), 5);			
+			
 			g2d.drawImage(sprites[player.getHero().getSprite().getAparencia()], 
 					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this);
+			sprites = null;
+			System.gc();
 		});
-		
-		g2d.dispose();
+		g2d.dispose();		
 	}
 	
 	public ArrayList<Map> getMaps() {

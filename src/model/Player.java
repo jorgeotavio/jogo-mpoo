@@ -32,8 +32,9 @@ public class Player {
 		return points;
 	}
 
-	public void setPoints(int points) {
-		this.points = points;
+	public void setPoints(int point) {
+		point = (point*50)/100;
+		this.points += point;
 	}
 
 	public Inventary getInventary() {
