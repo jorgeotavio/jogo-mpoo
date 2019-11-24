@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Hero {
 
 	private Sprite sprite;
-	private final int VELOCIDADE = 2;
+	private int velocidade = 2;
 	private String direcao;
 	private HashMap<String, Integer> comandos;
 	private int vida = 100;
@@ -19,40 +19,40 @@ public class Hero {
 	public void parar() {
 		switch(direcao) {
 		
-		case"up":
-			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
+		case "UP":
+			this.sprite.setPosY(sprite.getPosY()+velocidade);
 			break;
 		
-		case "down":
-			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
+		case "DOWN":
+			this.sprite.setPosY(sprite.getPosY()-velocidade);
 			break;
 		
-		case "left":
-			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
+		case "LEFT":
+			this.sprite.setPosX(sprite.getPosX()+velocidade);
 			break;
 		
-		case "right":
-			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
+		case "RIGHT":
+			this.sprite.setPosX(sprite.getPosX()-velocidade);
 			break;
 
-		case "upRight":
-			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
-			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
+		case "UPRIGHT":
+			this.sprite.setPosX(sprite.getPosX()-velocidade);
+			this.sprite.setPosY(sprite.getPosY()+velocidade);
 			break;
 			
-		case "upLeft":
-			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
-			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
+		case "UPLEFT":
+			this.sprite.setPosX(sprite.getPosX()+velocidade);
+			this.sprite.setPosY(sprite.getPosY()+velocidade);
 			break;
 
-		case "downRight": 
-			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
-			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
+		case "DOWNRIGHT": 
+			this.sprite.setPosX(sprite.getPosX()-velocidade);
+			this.sprite.setPosY(sprite.getPosY()-velocidade);
 			break;
 
-		case "downLeft": 
-			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
-			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
+		case "DOWNLEFT": 
+			this.sprite.setPosX(sprite.getPosX()+velocidade);
+			this.sprite.setPosY(sprite.getPosY()-velocidade);
 			break;
 			
 		}
@@ -67,8 +67,8 @@ public class Hero {
 				this.sprite.getLargura()/2, this.sprite.getAltura()/6);
 	}
 
-	public int getVELOCIDADE() {
-		return VELOCIDADE;
+	public int getVelocidade() {
+		return velocidade;
 	}
 
 	public String getDirecao() {
