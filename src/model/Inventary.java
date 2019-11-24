@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Inventary {
 	
-	private ArrayList<Item> items;
+	private ArrayList<Objeto> items;
 	
 	public Inventary() {
-		this.items = new ArrayList<Item>();
+		this.items = new ArrayList<Objeto>();
 	}
 
-	public ArrayList<Item> getItems() {
+	public ArrayList<Objeto> getItems() {
 		return items;
 	}
 
-	public void setItems(ArrayList<Item> items) {
+	public void setItems(ArrayList<Objeto> items) {
 		this.items = items;
 	}
 	

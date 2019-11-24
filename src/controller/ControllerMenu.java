@@ -14,12 +14,11 @@ public class ControllerMenu implements ActionListener, MouseListener{
 	
 	private ViewMenu viewMenu;
 	private ViewAbout viewAbout;
-	private ViewGame viewGame;
+	private Thread gameThread;
 	
 	public ControllerMenu(ViewMenu telaMenu, ViewGame viewGame) {
 		this.viewMenu = telaMenu;
 		this.viewMenu.setVisible(true);
-		this.viewGame = viewGame;
 		viewAbout = new ViewAbout();
 		controll();
 	}
@@ -28,9 +27,11 @@ public class ControllerMenu implements ActionListener, MouseListener{
 		
 		viewMenu.getStartSoloButton().addActionListener((e)-> {
 			this.viewMenu.setVisible(false);
-			new Thread(
-				new ControllerGame(this.viewGame)
-			).start();
+			
+			gameThread = new Thread(
+				new ControllerGame()
+			);
+			gameThread.start();
 		});
 
 		viewMenu.getAboutButton().addActionListener((e) -> {
@@ -81,6 +82,30 @@ public class ControllerMenu implements ActionListener, MouseListener{
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ViewMenu getViewMenu() {
+		return viewMenu;
+	}
+
+	public void setViewMenu(ViewMenu viewMenu) {
+		this.viewMenu = viewMenu;
+	}
+
+	public ViewAbout getViewAbout() {
+		return viewAbout;
+	}
+
+	public void setViewAbout(ViewAbout viewAbout) {
+		this.viewAbout = viewAbout;
+	}
+
+	public Thread getGameThread() {
+		return gameThread;
+	}
+
+	public void setGameThread(Thread gameThread) {
+		this.gameThread = gameThread;
 	}
 	
 }

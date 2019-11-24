@@ -11,13 +11,9 @@ import view.ViewGame;
 
 public class RegistrarJogo {
 	
-	private ViewGame viewGame;
+	private static ViewGame viewGame = new ViewGame();
 	
-	public RegistrarJogo( ViewGame viewGame) {
-		this.viewGame = viewGame;
-	}
-	
-	public void registerMap() {
+	public static void registerMap() {
 		try {
 			Camada mapa1_camada1 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_01.txt");
 			Camada mapa1_camada2 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_novo/camada_02.txt");
@@ -31,18 +27,18 @@ public class RegistrarJogo {
 			camadas.add(mapa1_camada2);
 			camadas.add(mapa1_camada3);
 			
-			Item item1 = new Item("maca", "img/itens/maca_item.png", 200, 200);
-			Item item2 = new Item("banana", "img/itens/banana_item.png", 300, 200);
-			Item item3 = new Item("melancia", "img/itens/melancia_item.png", 350, 100);
-			Item item4 = new Item("maca", "img/itens/maca_item.png", 500, 140);
-			Item item5 = new Item("melancia", "img/itens/melancia_item.png", 130, 250);
+			Objeto objeto1 = new Objeto("maca", "img/itens/maca_item.png", 200, 200);
+			Objeto objeto2 = new Objeto("banana", "img/itens/banana_item.png", 300, 200);
+			Objeto objeto3 = new Objeto("melancia", "img/itens/melancia_item.png", 350, 100);
+			Objeto objeto4 = new Objeto("maca", "img/itens/maca_item.png", 500, 140);
+			Objeto objeto5 = new Objeto("melancia", "img/itens/melancia_item.png", 130, 250);
 			
-			ArrayList<Item> itens = new ArrayList<Item>();
-			itens.add(item1);
-			itens.add(item2);
-			itens.add(item3);
-			itens.add(item4);
-			itens.add(item5);
+			ArrayList<Objeto> itens = new ArrayList<Objeto>();
+			itens.add(objeto1);
+			itens.add(objeto2);
+			itens.add(objeto3);
+			itens.add(objeto4);
+			itens.add(objeto5);
 			
 			Map mapa = new Map(camadas, itens);
 			mapa.setActivated(true);
@@ -54,18 +50,18 @@ public class RegistrarJogo {
 			maps.add(mapa);
 			maps.add(mapa2);
 			
-			this.viewGame.getGamePanel().setMaps(maps);
-			this.viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 380)));
+			RegistrarJogo.viewGame.getGamePanel().setMaps(maps);
+			RegistrarJogo.viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 380)));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void registerPlayer() {
+	public static void registerPlayer() {
 
 		Player player = new Player("Joao");
-		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 5, 6, 4, 30, 250);
+		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 26, 250);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
 		comandos1.put("UP", KeyEvent.VK_UP);
 		comandos1.put("DOWN", KeyEvent.VK_DOWN);
@@ -75,7 +71,7 @@ public class RegistrarJogo {
 		player.setHero(hero);
 		
 		Player player2 = new Player("Maria");
-		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 5, 6, 4, 50, 200);
+		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 2, 6, 4, 24, 200);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
 		comandos2.put("DOWN", KeyEvent.VK_S);
@@ -93,16 +89,11 @@ public class RegistrarJogo {
 //		xml.salvar(player2);
 //		ArrayList<Player> players = xml.ler();
 		
-		this.viewGame.getGamePanel().setPlayers(players);
-		this.viewGame.getInfoPanel().cadastrarLabels(players);
+		viewGame.getGamePanel().setPlayers(players);
+		viewGame.getInfoPanel().cadastrarLabels(players);
 	}
 
-	public ViewGame getViewGame() {
+	public static ViewGame getViewGame() {
 		return viewGame;
 	}
-
-	public void setViewGame(ViewGame viewGame) {
-		this.viewGame = viewGame;
-	}
-
 }

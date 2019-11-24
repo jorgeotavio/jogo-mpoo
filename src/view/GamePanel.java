@@ -10,7 +10,7 @@ import javax.swing.JProgressBar;
 
 import model.Camada;
 import model.Enemy;
-import model.Item;
+import model.Objeto;
 import model.Map;
 import model.Player;
 

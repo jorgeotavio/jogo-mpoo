@@ -12,14 +12,10 @@ public class Main {
 	public static void main(String[] args) {
 
 		ViewGame viewGame = new ViewGame();
-
-		RegistrarJogo registrarJogo = new RegistrarJogo(viewGame);
-		registrarJogo.registerMap();
-		registrarJogo.registerPlayer();
 		
 		ViewMenu viewMenu = new ViewMenu();
 
-		ControllerMenu cm = new ControllerMenu(viewMenu ,registrarJogo.getViewGame());
+		ControllerMenu cm = new ControllerMenu(viewMenu, viewGame);
 		
 	}
 

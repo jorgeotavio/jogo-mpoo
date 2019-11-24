@@ -18,7 +18,7 @@ public class Xml {
 	public Xml() {
 		
 		xStream = new XStream(new Dom4JDriver());
-		xStream.alias("Player", Item.class);
+		xStream.alias("Player", Objeto.class);
 		
 		file = new File("res/dados.xml");
 		players = new ArrayList<>();
