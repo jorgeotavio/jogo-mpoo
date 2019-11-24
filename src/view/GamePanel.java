@@ -20,7 +20,6 @@ public class GamePanel extends JPanel{
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Player> players;
 	private ArrayList<Map> maps;
-	private BufferedImage tela;
 	
 	@Override
 	public void paintComponent(Graphics g) {
@@ -63,10 +62,6 @@ public class GamePanel extends JPanel{
 
 	public void setMaps(ArrayList<Map> maps) {
 		this.maps = maps;
-	}
-
-	public BufferedImage getTela() {
-		return tela;
 	}
 
 	public ArrayList<Enemy> getEnemies() {
