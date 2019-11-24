@@ -15,14 +15,10 @@ import model.Player;
 public class InfoPanel extends JPanel {
 
 	private ArrayList<JLabel> pontuacoes;
-	private JLabel gif;
 	public InfoPanel() throws IOException {
 		
 		setLayout(null);
 		pontuacoes = new ArrayList<JLabel>();
-		gif = new JLabel();
-		gif.setIcon(new ImageIcon("img/sistema/gif.gif"));
-		gif.setBounds(0, 0, 638, 110);	
 	}
 
 	public void atualizarPontuacao(ArrayList<Player> players) {
@@ -42,7 +38,6 @@ public class InfoPanel extends JPanel {
 			pontuacao.setForeground(new Color(255,255,255));
 			add(pontuacao);
 		});
-		add(this.gif);
 	}
 
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Hero {
 
-	private List<Projectile> projectiles;
 	private Sprite sprite;
 	private final int VELOCIDADE = 2;
 	private String direcao;
@@ -57,14 +56,6 @@ public class Hero {
 			break;
 
 		}
-	}
-
-	public List<Projectile> getProjectiles() {
-		return projectiles;
-	}
-
-	public void setProjectiles(List<Projectile> projectiles) {
-		this.projectiles = projectiles;
 	}
 
 	public Sprite getSprite() {
