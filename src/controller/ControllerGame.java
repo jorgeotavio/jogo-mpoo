@@ -14,7 +14,7 @@ import model.Player;
 import model.RegistrarJogo;
 import view.ViewGame;
 
-public class ControllerGame implements Runnable, KeyListener, ActionListener {
+public class ControllerGame implements Runnable, KeyListener {
 
 	private ViewGame viewGame;
 	private boolean pausado = false;
@@ -25,17 +25,18 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 	public ControllerGame() {
 		this.viewGame = RegistrarJogo.getViewGame();
-		RegistrarJogo.getViewGame().setVisible(true);
+		this.viewGame.addKeyListener(this);
+		this.viewGame.setVisible(true);
 		novoJogo();
 	}
 
 	public void novoJogo() {
+		
 		RegistrarJogo.registerMap();
 		RegistrarJogo.registerPlayer();
-		RegistrarJogo.getViewGame().addKeyListener(this);
-
+		
 		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
-
+		
 		players.forEach((player) -> {
 			ControllerHero ch = new ControllerHero(player.getHero());
 			viewGame.addKeyListener(ch);
@@ -44,13 +45,16 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		registrarTempo();
 	}
 
-
 	public void registrarTempo() {
 		tempo = 0;
+		
 		timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
+				viewGame.getGamePanel().getPlayers().forEach((player)->{
+					player.getHero().setVida(player.getHero().getVida()-1);
+				});
 				tempo += 1;
 				viewGame.getInfoPanel().setTempo(tempo);
 				if(tempo > 30) gameOver = true;
@@ -92,10 +96,11 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 			for(Objeto item: map.getItens()){
 				for(Player player: players){
+					
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
 						player.getInventary().getItems().add(item);
 						player.setPoints(10);
-						player.getHero().setVida(player.getHero().getVida());
+						player.getHero().setVida(player.getHero().getVida()+10);
 						item.setCapturado(true);
 					}
 				}
@@ -122,11 +127,13 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		while ( true ) {
 
 			if (gameWin) {
-				System.out.println("venceu");
+				timer.cancel();
+				gameWin = false;
+				novoJogo();
 			}
 
 			if (gameOver) {
-				System.out.println("perdeu");				
+								
 			}
 
 			if (!pausado) {
@@ -156,25 +163,17 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-			pausado = true;
+			pausado = !pausado;
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-			pausado = false;
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
 	}
