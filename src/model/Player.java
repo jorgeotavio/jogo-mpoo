@@ -6,6 +6,7 @@ public class Player {
 	private Hero hero;
 	private int points;
 	private Inventary inventary;
+	private boolean venceu = false;
 	
 	public Player(String name) {
 		this.name = name;
@@ -43,6 +44,14 @@ public class Player {
 
 	public void setInventary(Inventary inventary) {
 		this.inventary = inventary;
+	}
+
+	public boolean isVenceu() {
+		return venceu;
+	}
+
+	public void setVenceu(boolean venceu) {
+		this.venceu = venceu;
 	}
 	
 }

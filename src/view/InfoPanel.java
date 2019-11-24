@@ -15,9 +15,15 @@ public class InfoPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<JLabel> pontuacoes;
-	public InfoPanel() throws IOException {
-		
+	private JLabel tempoLabel;
+	
+	public InfoPanel() throws IOException {	
 		setLayout(null);
+		tempoLabel = new JLabel();
+		tempoLabel.setBounds(10, -10, 100, 100);
+		
+		add(tempoLabel);
+		
 		pontuacoes = new ArrayList<JLabel>();
 	}
 
@@ -40,4 +46,7 @@ public class InfoPanel extends JPanel {
 		});
 	}
 
+	public void setTempo(int tempo) {
+		this.tempoLabel.setText(Integer.toString(tempo));
+	}
 }

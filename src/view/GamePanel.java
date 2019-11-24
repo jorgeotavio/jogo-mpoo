@@ -43,9 +43,11 @@ public class GamePanel extends JPanel{
 			
 			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
 			
-			g2d.drawRect(player.getHero().getSprite().getPosX()-10, player.getHero().getSprite().getPosY()-5, 50, 5);
+			g2d.drawString(player.getName(), player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY()-8);
 			
-			g2d.fillRect(player.getHero().getSprite().getPosX()-10, player.getHero().getSprite().getPosY()-5, player.getPoints(), 5);			
+			g2d.drawRect(player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY()-5, 25, 5);
+			
+			g2d.fillRect(player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY()-5, player.getHero().getVida()/4, 5);			
 			
 			g2d.drawImage(sprites[player.getHero().getSprite().getAparencia()], 
 					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this);

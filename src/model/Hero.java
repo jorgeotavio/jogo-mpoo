@@ -12,6 +12,7 @@ public class Hero {
 	private final int VELOCIDADE = 2;
 	private String direcao;
 	private HashMap<String, Integer> comandos;
+	private int vida = 100;
 
 	public Hero(Sprite sprite, HashMap<String, Integer> comandos) {
 		this.sprite = sprite;
@@ -86,7 +87,13 @@ public class Hero {
 	public void setComandos(HashMap<String, Integer> comandos) {
 		this.comandos = comandos;
 	}
-	
-	
+
+	public int getVida() {
+		return vida;
+	}
+
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
 
 }
