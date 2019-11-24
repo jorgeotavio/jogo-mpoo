@@ -92,7 +92,8 @@ public class Hero {
 	}
 
 	public void setVida(int vida) {
-		this.vida = vida;
+		if(this.vida<100)
+			this.vida = vida;
 	}
 
 }
