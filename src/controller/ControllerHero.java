@@ -21,54 +21,54 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 	}
 
 	public void atualizaHero() {
-		if (keyPool.get(comandos.get("UP")) != null && keyPool.get(comandos.get("RIGHT")) != null) {
-			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
-			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
-			hero.setDirecao("upRight");
-			atualizarAparencia("upRight");
+		if (keyPool.get(comandos.get(UP)) != null && keyPool.get(comandos.get(RIGHT)) != null) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVelocidade());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVelocidade());
+			hero.setDirecao(UPRIGHT);
+			atualizarAparencia(UPRIGHT);
 			
-		}else if (keyPool.get(comandos.get("UP")) != null && keyPool.get(comandos.get("LEFT")) != null) {
-			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
-			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
-			hero.setDirecao("upLeft");
-			atualizarAparencia("upLeft");
+		}else if (keyPool.get(comandos.get(UP)) != null && keyPool.get(comandos.get(LEFT)) != null) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVelocidade());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVelocidade());
+			hero.setDirecao(UPLEFT);
+			atualizarAparencia(UPLEFT);
 		
-		}else if (keyPool.get(comandos.get("DOWN")) != null && keyPool.get(comandos.get("RIGHT")) != null) {
-			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
-			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
-			hero.setDirecao("downRight");
-			atualizarAparencia("downRight");
+		}else if (keyPool.get(comandos.get(DOWN)) != null && keyPool.get(comandos.get(RIGHT)) != null) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVelocidade());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVelocidade());
+			hero.setDirecao(DOWNRIGHT);
+			atualizarAparencia(DOWNRIGHT);
 		
-		}else if (keyPool.get(comandos.get("DOWN")) != null && keyPool.get(comandos.get("LEFT")) != null) {
-			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
-			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
-			hero.setDirecao("downLeft");
-			atualizarAparencia("downLeft");
+		}else if (keyPool.get(comandos.get(DOWN)) != null && keyPool.get(comandos.get(LEFT)) != null) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVelocidade());
+			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVelocidade());
+			hero.setDirecao(DOWNLEFT);
+			atualizarAparencia(DOWNLEFT);
 		
-		}else if (keyPool.get(comandos.get("UP")) != null) {
-			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVELOCIDADE());
-			hero.setDirecao("up");
-			atualizarAparencia("up");
+		}else if (keyPool.get(comandos.get(UP)) != null) {
+			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVelocidade());
+			hero.setDirecao(UP);
+			atualizarAparencia(UP);
 		
-		}else if (keyPool.get(comandos.get("DOWN")) != null) {
-			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVELOCIDADE());
-			hero.setDirecao("down");
-			atualizarAparencia("down");
+		}else if (keyPool.get(comandos.get(DOWN)) != null) {
+			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVelocidade());
+			hero.setDirecao(DOWN);
+			atualizarAparencia(DOWN);
 		
-		}else if (keyPool.get(comandos.get("LEFT")) != null) {
-			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVELOCIDADE());
-			hero.setDirecao("left");
-			atualizarAparencia("left");
+		}else if (keyPool.get(comandos.get(LEFT)) != null) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVelocidade());
+			hero.setDirecao(LEFT);
+			atualizarAparencia(LEFT);
 		
-		}else if (keyPool.get(comandos.get("RIGHT")) != null) {
-			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVELOCIDADE());
-			hero.setDirecao("right");
-			atualizarAparencia("right");
+		}else if (keyPool.get(comandos.get(RIGHT)) != null) {
+			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVelocidade());
+			hero.setDirecao(RIGHT);
+			atualizarAparencia(RIGHT);
 		}
 	}
 
 	public void atualizarAparencia(String direcao) {
-		if (direcao == "up") {
+		if (direcao == UP) {
 			switch (up) {
 			case 0:
 				hero.getSprite().setAparencia(3);
@@ -84,7 +84,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else up++;
 		}
 
-		if(direcao == "down") {
+		if(direcao == DOWN) {
 			switch (down) {
 			case 0:
 				hero.getSprite().setAparencia(0);
@@ -102,24 +102,8 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else down++;
 		}
 
-		if ( direcao == "right") {
+		if ( direcao == LEFT) {
 			switch (left) {
-			case 0:
-				hero.getSprite().setAparencia(2);
-				break;
-			case 1:
-				hero.getSprite().setAparencia(6);
-				break;
-			case 2:
-				hero.getSprite().setAparencia(10);
-				break;
-			}
-			if (left==2) left=0;
-			else left++;
-		}
-
-		if (direcao == "left") {
-			switch (right) {
 			case 0:
 				hero.getSprite().setAparencia(1);
 				break;
@@ -130,11 +114,28 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 				hero.getSprite().setAparencia(9);
 				break;
 			}
+			if (left==2) left=0;
+			else left++;
+		}
+
+		if (direcao == RIGHT) {
+			switch (right) {
+			case 0:
+				hero.getSprite().setAparencia(2);
+				break;
+			case 1:
+				hero.getSprite().setAparencia(6);
+				break;
+			case 2:
+				hero.getSprite().setAparencia(10);
+				break;
+			}
+			
 			if (right==2) right=0;
 			else right++;
 		}
 
-		if (direcao == "upRight") {
+		if (direcao == UPRIGHT) {
 			switch (upRight) {
 			case 0:
 				hero.getSprite().setAparencia(15);
@@ -150,7 +151,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else upRight++;
 		}
 
-		if (direcao == "upLeft") {
+		if (direcao == UPLEFT) {
 			switch (upLeft) {
 			case 0:
 				hero.getSprite().setAparencia(13);
@@ -166,7 +167,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else upLeft++;
 		}
 
-		if (direcao == "downRight") {
+		if (direcao == DOWNRIGHT) {
 			switch (downRight) {
 			case 0:
 				hero.getSprite().setAparencia(14);
@@ -182,7 +183,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 			else downRight++;
 		}
 
-		if (direcao == "downLeft") {
+		if (direcao == DOWNLEFT) {
 			switch (downLeft) {
 			case 0:
 				hero.getSprite().setAparencia(12);
