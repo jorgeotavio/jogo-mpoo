@@ -1,10 +1,7 @@
 package model;
 
 import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Hero {
 
@@ -55,7 +52,7 @@ public class Hero {
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()-VELOCIDADE);
 			break;
-
+			
 		}
 	}
 
