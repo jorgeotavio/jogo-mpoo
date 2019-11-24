@@ -4,6 +4,10 @@ import javax.swing.JLabel;
 
 public class ViewWin extends AbstractView {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel mensagem;
 	
 	public ViewWin() {

@@ -7,7 +7,6 @@ import java.util.Random;
 
 import com.sun.glass.events.KeyEvent;
 
-import view.GamePanel;
 import view.ViewGame;
 
 public class RegistrarJogo {

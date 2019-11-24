@@ -15,7 +15,7 @@ public class Main {
 		
 		ViewMenu viewMenu = new ViewMenu();
 
-		ControllerMenu cm = new ControllerMenu(viewMenu, viewGame);
+		new ControllerMenu(viewMenu, viewGame);
 		
 	}
 

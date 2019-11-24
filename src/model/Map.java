@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import view.ViewGame;
-
 public class Map {
 	
 	private boolean activated;

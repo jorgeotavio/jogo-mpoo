@@ -38,6 +38,7 @@ public class Camada{
 	public int[][] carregaMatriz(int[][] matz, String arquivo) throws IOException {
 		ArrayList<String> linhasMatrizCamada = new ArrayList<String>();
 		InputStream is = new FileInputStream(new File(arquivo));
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader (new InputStreamReader (is));
 		String linha="";
 

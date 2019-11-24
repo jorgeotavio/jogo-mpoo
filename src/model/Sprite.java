@@ -1,16 +1,11 @@
 package model;
 
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
-
-import controller.ControllerGame;
 
 public class Sprite {
 	
