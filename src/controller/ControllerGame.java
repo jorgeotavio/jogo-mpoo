@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import model.Map;
 import model.Player;
 import view.ViewGame;
 
-public class ControllerGame implements Runnable, KeyListener {
+public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 	private ViewGame viewGame;
 	private ArrayList<Rectangle> retangulosColisao;
@@ -42,7 +44,7 @@ public class ControllerGame implements Runnable, KeyListener {
 		ArrayList<Player> players = this.viewGame.getGamePanel().getPlayers();
 
 		players.forEach((player) -> {
-			ControllerHero ch = new ControllerHero(player.getHero(), players.indexOf(player));
+			ControllerHero ch = new ControllerHero(player.getHero());
 			controllersHero.add(ch);
 			viewGame.addKeyListener(ch);
 		});
@@ -118,8 +120,10 @@ public class ControllerGame implements Runnable, KeyListener {
 	public void run() {
 		while ( true ) {
 
-			if (gameWin)
+			if (gameWin) {
 				break;
+			}
+				
 			
 			if (gameOver)
 				break;
@@ -164,6 +168,12 @@ public class ControllerGame implements Runnable, KeyListener {
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
