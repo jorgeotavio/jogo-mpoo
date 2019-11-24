@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -17,8 +16,6 @@ import view.ViewGame;
 public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 	private ViewGame viewGame;
-	private ArrayList<Rectangle> retangulosColisao;
-	private ArrayList<ControllerHero> controllersHero;
 	private boolean pausado = false;
 	private boolean gameOver = false;
 	private boolean gameWin = false;
@@ -39,13 +36,11 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		this.viewGame = viewGame;
 		this.viewGame.setVisible(true);
 		this.viewGame.addKeyListener(this);
-		controllersHero = new ArrayList<ControllerHero>();
 
 		ArrayList<Player> players = this.viewGame.getGamePanel().getPlayers();
 
 		players.forEach((player) -> {
 			ControllerHero ch = new ControllerHero(player.getHero());
-			controllersHero.add(ch);
 			viewGame.addKeyListener(ch);
 		});
 		
@@ -100,14 +95,6 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		};
 	}
 
-	public ArrayList<Rectangle> getRetangulosColisao() {
-		return retangulosColisao;
-	}
-
-	public void setRetangulosColisao(ArrayList<Rectangle> retangulosColisao) {
-		this.retangulosColisao = retangulosColisao;
-	}
-
 	public boolean isPausado() {
 		return pausado;
 	}
@@ -131,11 +118,12 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			if (!pausado) {
 				checarColisoes(viewGame.getGamePanel().getMaps(), viewGame.getGamePanel().getPlayers());
 				checarObjetivos(viewGame.getGamePanel().getMaps(), viewGame.getGamePanel().getPlayers());
-				
-				controllersHero.forEach((ch)-> {
-//					if(ch.getHero().get()) break;
-					ch.atualizaHero();
-				});
+
+				for (KeyListener kl: viewGame.getKeyListeners()) {
+					if(kl instanceof ControllerHero) {
+						((ControllerHero) kl).atualizaHero();
+					}
+				}
 
 				this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getPlayers());
 				this.viewGame.getGamePanel().repaint();
