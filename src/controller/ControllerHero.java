@@ -11,11 +11,9 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 	private Hero hero;
 	private HashMap<Integer, Boolean> keyPool;
 	private HashMap<String, Integer> comandos;
-	private int tipoPlayer;
 
-	public ControllerHero(Hero hero, int tipoPlayer) {
+	public ControllerHero(Hero hero) {
 		this.hero = hero;
-		this.tipoPlayer = tipoPlayer;
 		keyPool = new HashMap<Integer, Boolean>();
 		comandos =  this.hero.getComandos();
 	}
