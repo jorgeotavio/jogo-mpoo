@@ -75,7 +75,7 @@ public class RegistrarJogo {
 		player.setHero(hero);
 		
 		Player player2 = new Player("Maria");
-		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 5, 6, 4, 50, 250);
+		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 5, 6, 4, 50, 200);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
 		comandos2.put("DOWN", KeyEvent.VK_S);
