@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,12 +17,17 @@ public class InfoPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<JLabel> pontuacoes;
 	private JLabel tempoLabel;
+	private Font font;
 	
 	public InfoPanel() throws IOException {	
-		setLayout(null);
-		tempoLabel = new JLabel();
-		tempoLabel.setBounds(10, -10, 100, 100);
 		
+		setLayout(null);
+		
+		font = new Font("Impact", Font.PLAIN, 20);
+		
+		tempoLabel = new JLabel();
+		tempoLabel.setBounds(320, 50, 100, 20);
+		tempoLabel.setFont(font);
 		add(tempoLabel);
 		
 		pontuacoes = new ArrayList<JLabel>();
@@ -29,14 +35,16 @@ public class InfoPanel extends JPanel {
 
 	public void atualizarPontuacao(ArrayList<Player> players) {
 		players.forEach((player) -> {
-			this.pontuacoes.get(players.indexOf(player)).setText(Integer.toString(player.getPoints()));
+			this.pontuacoes.get(players.indexOf(player)).setText(player.getName()+": "+Integer.toString(player.getPoints()));
 		});
 	}
 
 	public void cadastrarLabels(ArrayList<Player> players) {
+		
 		for (int i = 0; i < players.size();i++) {
 			JLabel pontosLabel = new JLabel();
-			pontosLabel.setBounds(10, i*10, 100, 100);
+			pontosLabel.setBounds(195*(i+1), 10, 100, 20);
+			pontosLabel.setFont(font);
 			pontuacoes.add(pontosLabel);
 		}
 
