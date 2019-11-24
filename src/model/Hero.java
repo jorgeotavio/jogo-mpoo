@@ -18,6 +18,7 @@ public class Hero {
 
 	public void parar() {
 		switch(direcao) {
+		
 		case"up":
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
 			break;
@@ -38,6 +39,7 @@ public class Hero {
 			this.sprite.setPosX(sprite.getPosX()-VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
 			break;
+			
 		case "upLeft":
 			this.sprite.setPosX(sprite.getPosX()+VELOCIDADE);
 			this.sprite.setPosY(sprite.getPosY()+VELOCIDADE);
