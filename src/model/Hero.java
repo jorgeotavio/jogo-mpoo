@@ -10,6 +10,7 @@ public class Hero {
 	private String direcao;
 	private HashMap<String, Integer> comandos;
 	private int vida = 100;
+	private Rectangle retangulo;
 
 	public Hero(Sprite sprite, HashMap<String, Integer> comandos) {
 		this.sprite = sprite;
@@ -18,23 +19,22 @@ public class Hero {
 
 	public void parar() {
 		switch(direcao) {
-		
 		case "UP":
 			this.sprite.setPosY(sprite.getPosY()+velocidade);
 			break;
-		
+			
 		case "DOWN":
 			this.sprite.setPosY(sprite.getPosY()-velocidade);
 			break;
-		
+			
 		case "LEFT":
 			this.sprite.setPosX(sprite.getPosX()+velocidade);
 			break;
-		
+			
 		case "RIGHT":
 			this.sprite.setPosX(sprite.getPosX()-velocidade);
 			break;
-
+			
 		case "UPRIGHT":
 			this.sprite.setPosX(sprite.getPosX()-velocidade);
 			this.sprite.setPosY(sprite.getPosY()+velocidade);
@@ -44,12 +44,12 @@ public class Hero {
 			this.sprite.setPosX(sprite.getPosX()+velocidade);
 			this.sprite.setPosY(sprite.getPosY()+velocidade);
 			break;
-
+			
 		case "DOWNRIGHT": 
 			this.sprite.setPosX(sprite.getPosX()-velocidade);
 			this.sprite.setPosY(sprite.getPosY()-velocidade);
 			break;
-
+			
 		case "DOWNLEFT": 
 			this.sprite.setPosX(sprite.getPosX()+velocidade);
 			this.sprite.setPosY(sprite.getPosY()-velocidade);
@@ -63,8 +63,9 @@ public class Hero {
 	}
 
 	public Rectangle getRetangulo() {
-		return new Rectangle(this.sprite.getPosX()+5, this.sprite.getPosY()+25, 
-				this.sprite.getLargura()/2, this.sprite.getAltura()/6);
+		this.retangulo = new Rectangle(this.sprite.getPosX()+5, this.sprite.getPosY()+25, 
+										this.sprite.getLargura()/2, this.sprite.getAltura()/6);
+		return retangulo;
 	}
 
 	public int getVelocidade() {
@@ -92,7 +93,7 @@ public class Hero {
 	}
 
 	public void setVida(int vida) {
-		if(this.vida<100)
+		if(vida <= 100 && vida >= 0)
 			this.vida = vida;
 	}
 
