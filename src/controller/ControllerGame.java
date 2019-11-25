@@ -51,7 +51,7 @@ public class ControllerGame implements Runnable, KeyListener {
 			@Override
 			public void run() {
 				viewGame.getGamePanel().getPlayers().forEach((player)->{
-					player.getHero().setVida(player.getHero().getVida()-1);
+					player.getHero().setVida(player.getHero().getVida()-5);
 				});
 				tempo += 1;
 				viewGame.getInfoPanel().setTempo(tempo);
