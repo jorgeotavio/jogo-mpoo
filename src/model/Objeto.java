@@ -5,7 +5,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Objeto {
-
+	
 	private String name;
 	private BufferedImage imagem;
 	private int posX, posY;
