@@ -10,6 +10,7 @@ public class Objeto {
 	private BufferedImage imagem;
 	private int posX, posY;
 	private boolean capturado;
+	private Rectangle retangulo;
 	
 	public Objeto(String name, String file, int posX, int posY) {
 		this.name = name;
@@ -37,7 +38,8 @@ public class Objeto {
 	}
 
 	public Rectangle getRetangulo() {
-		return new Rectangle(this.posX, this.posY, this.imagem.getWidth(), this.imagem.getHeight());
+		this.retangulo = new Rectangle(this.posX, this.posY, this.imagem.getWidth(), this.imagem.getHeight());
+		return retangulo;
 	}
 
 	public int getPosX() {
