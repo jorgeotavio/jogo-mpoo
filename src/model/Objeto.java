@@ -2,27 +2,49 @@ package model;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.imageio.ImageIO;
 
 public class Objeto {
-	
+
 	private String name;
 	private BufferedImage imagem;
 	private int posX, posY;
 	private boolean capturado;
 	private Rectangle retangulo;
-	
+	private Timer timer;
+
 	public Objeto(String name, String file, int posX, int posY) {
 		this.name = name;
 		this.posX = posX;
 		this.posY = posY;
 		this.capturado = false;
-		
+
 		try {
 			this.imagem = ImageIO.read(new File(file));
 		}catch(Exception e ) {
 			e.printStackTrace();
 		}
+		registrarTempo();
+	}
+
+	public void registrarTempo() {
+		timer = new Timer();
+		TimerTask timerTask = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					imagem = ImageIO.read(new File("img/itens/maca_item.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		};
+		timer.scheduleAtFixedRate(timerTask, 5000, 10000);
 	}
 
 	public String getNome() {
@@ -32,7 +54,7 @@ public class Objeto {
 	public void setNome(String name) {
 		this.name = name;
 	}
-	
+
 	public BufferedImage getImagem() {
 		return imagem;
 	}
@@ -65,5 +87,5 @@ public class Objeto {
 	public void setCapturado(boolean capturado) {
 		this.capturado = capturado;
 	}
-	
+
 }
