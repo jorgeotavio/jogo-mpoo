@@ -1,9 +1,6 @@
 package main;
 
 import controller.ControllerMenu;
-import model.RegistrarJogo;
-import model.Xml;
-import view.GamePanel;
 import view.ViewGame;
 import view.ViewMenu;
 

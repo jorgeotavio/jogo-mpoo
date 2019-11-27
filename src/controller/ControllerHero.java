@@ -10,55 +10,53 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 
 	private Hero hero;
 	private HashMap<Integer, Boolean> keyPool;
-	private HashMap<String, Integer> comandos;
 
 	public ControllerHero(Hero hero) {
 		this.hero = hero;
 		keyPool = new HashMap<Integer, Boolean>();
-		comandos =  this.hero.getComandos();
 	}
 
 	public void atualizaHero() {
-		if (keyPool.get(comandos.get(UP)) != null && keyPool.get(comandos.get(RIGHT)) != null) {
+		if (keyPool.get(hero.getComandos().get(UP)) != null && keyPool.get(hero.getComandos().get(RIGHT)) != null) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVelocidade());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVelocidade());
 			hero.setDirecao(UPRIGHT);
 			atualizarAparencia(UPRIGHT);
 			
-		}else if (keyPool.get(comandos.get(UP)) != null && keyPool.get(comandos.get(LEFT)) != null) {
+		}else if (keyPool.get(hero.getComandos().get(UP)) != null && keyPool.get(hero.getComandos().get(LEFT)) != null) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVelocidade());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVelocidade());
 			hero.setDirecao(UPLEFT);
 			atualizarAparencia(UPLEFT);
 		
-		}else if (keyPool.get(comandos.get(DOWN)) != null && keyPool.get(comandos.get(RIGHT)) != null) {
+		}else if (keyPool.get(hero.getComandos().get(DOWN)) != null && keyPool.get(hero.getComandos().get(RIGHT)) != null) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVelocidade());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVelocidade());
 			hero.setDirecao(DOWNRIGHT);
 			atualizarAparencia(DOWNRIGHT);
 		
-		}else if (keyPool.get(comandos.get(DOWN)) != null && keyPool.get(comandos.get(LEFT)) != null) {
+		}else if (keyPool.get(hero.getComandos().get(DOWN)) != null && keyPool.get(hero.getComandos().get(LEFT)) != null) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVelocidade());
 			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVelocidade());
 			hero.setDirecao(DOWNLEFT);
 			atualizarAparencia(DOWNLEFT);
 		
-		}else if (keyPool.get(comandos.get(UP)) != null) {
+		}else if (keyPool.get(hero.getComandos().get(UP)) != null) {
 			hero.getSprite().setPosY(hero.getSprite().getPosY()-hero.getVelocidade());
 			hero.setDirecao(UP);
 			atualizarAparencia(UP);
 		
-		}else if (keyPool.get(comandos.get(DOWN)) != null) {
+		}else if (keyPool.get(hero.getComandos().get(DOWN)) != null) {
 			hero.getSprite().setPosY(hero.getSprite().getPosY()+hero.getVelocidade());
 			hero.setDirecao(DOWN);
 			atualizarAparencia(DOWN);
 		
-		}else if (keyPool.get(comandos.get(LEFT)) != null) {
+		}else if (keyPool.get(hero.getComandos().get(LEFT)) != null) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()-hero.getVelocidade());
 			hero.setDirecao(LEFT);
 			atualizarAparencia(LEFT);
 		
-		}else if (keyPool.get(comandos.get(RIGHT)) != null) {
+		}else if (keyPool.get(hero.getComandos().get(RIGHT)) != null) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVelocidade());
 			hero.setDirecao(RIGHT);
 			atualizarAparencia(RIGHT);

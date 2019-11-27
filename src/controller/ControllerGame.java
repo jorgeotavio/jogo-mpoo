@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import model.Objeto;
+import model.BaseDados;
 import model.Map;
 import model.Player;
 import model.RegistrarJogo;
@@ -22,7 +23,7 @@ public class ControllerGame implements Runnable, KeyListener {
 	private Timer timer;
 
 	public ControllerGame() {
-		this.viewGame = RegistrarJogo.getViewGame();
+		this.viewGame = new ViewGame();
 		this.viewGame.addKeyListener(this);
 		this.viewGame.setVisible(true);
 		novoJogo();
@@ -30,8 +31,8 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void novoJogo() {
 		
-		RegistrarJogo.registerMap();
-		RegistrarJogo.registerPlayer();
+		RegistrarJogo.registerMap(this.viewGame);
+		RegistrarJogo.registerPlayer(this.viewGame);
 		
 		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
 		
@@ -90,11 +91,14 @@ public class ControllerGame implements Runnable, KeyListener {
 
 			if(!map.isActivated()) break;
 
-			if (map.getItens().size() == 0) gameWin = true;
+			if (map.getItens().size() == 0) {
+				players.forEach((player)->BaseDados.atualizar(player)); 
+				gameWin = true;
+			} 
+				
 
 			for(Objeto item: map.getItens()){
 				for(Player player: players){
-					
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
 						player.getInventary().getItems().add(item);
 						player.setPoints(10);

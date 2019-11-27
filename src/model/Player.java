@@ -34,7 +34,6 @@ public class Player {
 	}
 
 	public void setPoints(int point) {
-		point = (point*50)/100;
 		this.points += point;
 	}
 

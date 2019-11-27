@@ -11,9 +11,7 @@ import view.ViewGame;
 
 public class RegistrarJogo {
 
-	private static ViewGame viewGame = new ViewGame();
-
-	public static void registerMap() {
+	public static void registerMap( ViewGame viewGame) {
 		try {
 			Camada mapa1_camada1 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_01.txt");
 			Camada mapa1_camada2 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_novo/camada_02.txt");
@@ -58,15 +56,15 @@ public class RegistrarJogo {
 			maps.add(mapa);
 			maps.add(mapa2);
 
-			RegistrarJogo.viewGame.getGamePanel().setMaps(maps);
-			RegistrarJogo.viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 380)));
+			viewGame.getGamePanel().setMaps(maps);
+			viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 380)));
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void registerPlayer() {
+	public static void registerPlayer(ViewGame viewGame) {
 
 		Player player = new Player("Joao");
 		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 26, 250);
@@ -92,16 +90,13 @@ public class RegistrarJogo {
 		players.add(player2);
 		players.add(player);
 
-		//		Xml xml = new Xml();		
-		//		xml.salvar(player);
-		//		xml.salvar(player2);
-		//		ArrayList<Player> players = xml.ler();
+		//Xml xml = new Xml();		
+		//xml.salvar(player);
+		//xml.salvar(player2);
+		//ArrayList<Player> players = xml.ler();
 
 		viewGame.getGamePanel().setPlayers(players);
 		viewGame.getInfoPanel().cadastrarLabels(players);
 	}
 
-	public static ViewGame getViewGame() {
-		return viewGame;
-	}
 }
