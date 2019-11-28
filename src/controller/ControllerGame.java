@@ -10,7 +10,7 @@ import model.Objeto;
 import model.BaseDados;
 import model.Map;
 import model.Player;
-import model.RegistrarJogo;
+import model.RegistrarNoJogo;
 import view.ViewGame;
 
 public class ControllerGame implements Runnable, KeyListener {
@@ -22,8 +22,8 @@ public class ControllerGame implements Runnable, KeyListener {
 	private int tempo = 0;
 	private Timer timer;
 
-	public ControllerGame() {
-		this.viewGame = new ViewGame();
+	public ControllerGame(ViewGame viewGame) {
+		this.viewGame = viewGame;
 		this.viewGame.addKeyListener(this);
 		this.viewGame.setVisible(true);
 		novoJogo();
@@ -31,9 +31,12 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void novoJogo() {
 		
-		RegistrarJogo.registerMap(this.viewGame);
-		RegistrarJogo.registerPlayer(this.viewGame);
+		//RegistrarJogo.registerPlayer(this.viewGame);
 		
+		this.viewGame.getGamePanel().setPlayers(null);
+		System.gc();
+		this.viewGame.getGamePanel().setPlayers(BaseDados.getPlayers());
+		this.viewGame.getInfoPanel().cadastrarLabels(BaseDados.getPlayers());
 		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
 		
 		players.forEach((player) -> {
@@ -44,7 +47,7 @@ public class ControllerGame implements Runnable, KeyListener {
 		registrarTempo();
 	}
 
-	public void registrarTempo() {
+	public void registrarTempo() {	
 		tempo = 0;
 		
 		timer = new Timer();
@@ -92,16 +95,16 @@ public class ControllerGame implements Runnable, KeyListener {
 			if(!map.isActivated()) break;
 
 			if (map.getItens().size() == 0) {
-				players.forEach((player)->BaseDados.atualizar(player)); 
+				players.forEach((player)->BaseDados.atualizar(player)); 				
 				gameWin = true;
-			} 
-				
+			}
+			
 
 			for(Objeto item: map.getItens()){
 				for(Player player: players){
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
 						player.getInventary().getItems().add(item);
-						player.setPoints(10);
+						player.setPoints(player.getPoints()+10);
 						player.getHero().setVida(player.getHero().getVida()+10);
 						item.setCapturado(true);
 					}
