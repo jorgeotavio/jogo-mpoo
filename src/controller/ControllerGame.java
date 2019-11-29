@@ -3,14 +3,17 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import model.Objeto;
 import model.BaseDados;
+import model.Hero;
 import model.Map;
 import model.Player;
 import model.RegistrarNoJogo;
+import model.Sprite;
 import view.ViewGame;
 
 public class ControllerGame implements Runnable, KeyListener {
@@ -31,9 +34,9 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void novoJogo() {
 		
-		ArrayList<Player> players = BaseDados.lerArquivo();
+		ArrayList<Player> players = BaseDados.getPlayers();
 		
-		//RegistrarNoJogo.registerPlayer(viewGame);
+//		RegistrarNoJogo.registerPlayer(viewGame);
 		
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().cadastrarLabels(BaseDados.getPontuacoes());
@@ -55,8 +58,21 @@ public class ControllerGame implements Runnable, KeyListener {
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				viewGame.getGamePanel().getPlayers().forEach((player)->{
-					player.getHero().setVida(player.getHero().getVida()-5);
+				
+				Player player = new Player("Mario");
+				Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 26, 150);
+				HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
+				comandos1.put("UP", KeyEvent.VK_UP);
+				comandos1.put("DOWN", KeyEvent.VK_DOWN);
+				comandos1.put("LEFT", KeyEvent.VK_LEFT);
+				comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
+				Hero hero = new Hero(sprite, comandos1);
+				player.setHero(hero);
+				
+				BaseDados.salvarPlayer(player);
+				
+				viewGame.getGamePanel().getPlayers().forEach((p)->{
+					p.getHero().setVida(p.getHero().getVida()-5);
 				});
 				tempo += 1;
 				viewGame.getInfoPanel().setTempo(tempo);
@@ -64,7 +80,7 @@ public class ControllerGame implements Runnable, KeyListener {
 			}
 		};
 
-		timer.scheduleAtFixedRate(timerTask, 0, 1000);
+		timer.scheduleAtFixedRate(timerTask, 10, 1000);
 	}
 
 

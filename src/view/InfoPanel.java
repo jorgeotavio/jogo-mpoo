@@ -48,9 +48,9 @@ public class InfoPanel extends JPanel {
 	}
 
 	public void atualizarPontuacao(ArrayList<Player> players) {
-		players.forEach((player) -> {
-			this.pontosTempoReal.get(players.indexOf(player)).setText(player.getName()+": "+Integer.toString(player.getPoints()));
-		});
+		for(int i=0; i < pontosTempoReal.size(); i++) {
+			this.pontosTempoReal.get(i).setText(players.get(i).getName()+": "+Integer.toString(players.get(i).getPoints()));
+		}
 	}
 
 	public void cadastrarLabels(ArrayList<String[]> pontuacoes) {
@@ -66,7 +66,7 @@ public class InfoPanel extends JPanel {
 	
 	public void carregarPontuacoes(ArrayList<Player> pontuacoes) {
 		pontuacoes.forEach((pontuacao) -> {
-
+			
 		});
 	}
 

@@ -27,21 +27,23 @@ public class BaseDados {
 	private static ArrayList<String[]> pontuacoes = BaseDados.getPontuacoes();
 
 	public static boolean salvarPlayer(Player player) {
-
+		players = new ArrayList<Player>();
 		xStream.alias("Player", Objeto.class);
 		try {
-			ArrayList<Player> playersArquivo = BaseDados.lerArquivo();
+			ArrayList<Player> playersArquivo = BaseDados.getPlayers();
 
-			boolean existe = false;
+			boolean gravou = false;
 
 			for(Player p: playersArquivo) {
 				if(p.getName().equalsIgnoreCase(player.getName())) {
-					p.setPoints(player.getPoints());					
-					existe = true;
+					p.setPoints(player.getPoints());
+					gravou = true;
+				}else {
+					players.add(p);
 				}
 			}
 
-			if(!existe) players.add(player);
+			if(!gravou) players.add(player);
 
 			OutputStream stream = new FileOutputStream(dadosFile);
 			xStream.toXML(players, stream);
@@ -50,24 +52,6 @@ public class BaseDados {
 
 		} catch (IOException e) {
 			return false;
-		}
-	}
-
-	public static void salvarPlayers(ArrayList<Player> players) {
-
-		ArrayList<Player> playersArquivo = BaseDados.lerArquivo();
-
-		for(Player p1: playersArquivo) {
-			for(Player p2: players) {
-				if(p1.getName().equalsIgnoreCase(p2.getName())) {
-					System.out.println(p1.getPoints());
-					p1.setPoints(p2.getPoints());
-					System.out.println(p1.getPoints());
-					p1.getInventary().setItems(p2.getInventary().getItems());
-					System.out.println(p2.getInventary().getItems().size());
-					salvarPlayer(p1);
-				}
-			}
 		}
 	}
 
@@ -148,7 +132,7 @@ public class BaseDados {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Player> lerArquivo() {
+	public static ArrayList<Player> getPlayers() {
 		if (dadosFile.exists()) {
 			try {
 				InputStream stream = new FileInputStream(dadosFile);
