@@ -50,7 +50,7 @@ public class GamePanel extends JPanel{
 			sprites = null;
 			System.gc();
 		});
-		g2d.dispose();		
+		g2d.dispose();
 	}
 	
 	public ArrayList<Map> getMaps() {

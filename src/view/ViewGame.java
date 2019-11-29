@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.io.IOException;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
@@ -13,6 +14,7 @@ public class ViewGame extends AbstractView{
 	private InfoPanel infoPanel;
 	
 	public ViewGame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		this.gamePanel = new GamePanel();
 		this.gamePanel.setBounds(0, 0, 640, 380);

@@ -3,14 +3,17 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import model.Objeto;
 import model.BaseDados;
+import model.Hero;
 import model.Map;
 import model.Player;
-import model.RegistrarJogo;
+import model.RegistrarNoJogo;
+import model.Sprite;
 import view.ViewGame;
 
 public class ControllerGame implements Runnable, KeyListener {
@@ -22,8 +25,8 @@ public class ControllerGame implements Runnable, KeyListener {
 	private int tempo = 0;
 	private Timer timer;
 
-	public ControllerGame() {
-		this.viewGame = new ViewGame();
+	public ControllerGame(ViewGame viewGame) {
+		this.viewGame = viewGame;
 		this.viewGame.addKeyListener(this);
 		this.viewGame.setVisible(true);
 		novoJogo();
@@ -31,12 +34,14 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void novoJogo() {
 		
-		RegistrarJogo.registerMap(this.viewGame);
-		RegistrarJogo.registerPlayer(this.viewGame);
+		ArrayList<Player> players = BaseDados.getPlayers();
 		
-		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
+		this.viewGame.getGamePanel().setPlayers(players);
+		this.viewGame.getInfoPanel().cadastrarLabels(BaseDados.getPontuacoes());
 		
-		players.forEach((player) -> {
+		RegistrarNoJogo.registerMap(viewGame);
+		
+		this.viewGame.getGamePanel().getPlayers().forEach((player) -> {
 			ControllerHero ch = new ControllerHero(player.getHero());
 			viewGame.addKeyListener(ch);
 		});
@@ -44,15 +49,16 @@ public class ControllerGame implements Runnable, KeyListener {
 		registrarTempo();
 	}
 
-	public void registrarTempo() {
+	public void registrarTempo() {	
 		tempo = 0;
-		
+
 		timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				viewGame.getGamePanel().getPlayers().forEach((player)->{
-					player.getHero().setVida(player.getHero().getVida()-5);
+				
+				viewGame.getGamePanel().getPlayers().forEach((p)->{
+					p.getHero().setVida(p.getHero().getVida()-5);
 				});
 				tempo += 1;
 				viewGame.getInfoPanel().setTempo(tempo);
@@ -60,7 +66,7 @@ public class ControllerGame implements Runnable, KeyListener {
 			}
 		};
 
-		timer.scheduleAtFixedRate(timerTask, 0, 1000);
+		timer.scheduleAtFixedRate(timerTask, 10, 1000);
 	}
 
 
@@ -92,16 +98,15 @@ public class ControllerGame implements Runnable, KeyListener {
 			if(!map.isActivated()) break;
 
 			if (map.getItens().size() == 0) {
-				players.forEach((player)->BaseDados.atualizar(player)); 
+				players.forEach(player -> BaseDados.gravarPontuacao(player));
 				gameWin = true;
-			} 
-				
+			}
 
 			for(Objeto item: map.getItens()){
 				for(Player player: players){
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
 						player.getInventary().getItems().add(item);
-						player.setPoints(10);
+						player.setPoints(player.getPoints()+10);
 						player.getHero().setVida(player.getHero().getVida()+10);
 						item.setCapturado(true);
 					}
@@ -135,7 +140,7 @@ public class ControllerGame implements Runnable, KeyListener {
 			}
 
 			if (gameOver) {
-								
+
 			}
 
 			if (!pausado) {

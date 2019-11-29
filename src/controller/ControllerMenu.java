@@ -12,10 +12,12 @@ public class ControllerMenu implements ActionListener{
 	private ViewMenu viewMenu;
 	private ViewAbout viewAbout;
 	private Thread gameThread;
+	private ViewGame viewGame;
 	
 	public ControllerMenu(ViewMenu telaMenu, ViewGame viewGame) {
 		this.viewMenu = telaMenu;
 		this.viewMenu.setVisible(true);
+		this.viewGame = viewGame;
 		viewAbout = new ViewAbout();
 		controll();
 	}
@@ -26,7 +28,7 @@ public class ControllerMenu implements ActionListener{
 			this.viewMenu.setVisible(false);
 			
 			gameThread = new Thread(
-				new ControllerGame()
+				new ControllerGame(this.viewGame)
 			);
 			gameThread.start();
 		});

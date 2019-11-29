@@ -1,6 +1,6 @@
 package model;
 
-public class Player {
+public class Player implements Cloneable {
 	
 	private String name;
 	private Hero hero;
@@ -13,6 +13,11 @@ public class Player {
 		inventary = new Inventary();
 	}
 
+	@Override
+    public Player clone() throws CloneNotSupportedException {
+        return (Player) super.clone();
+    }
+	
 	public String getName() {
 		return name;
 	}
@@ -34,7 +39,7 @@ public class Player {
 	}
 
 	public void setPoints(int point) {
-		this.points += point;
+		this.points = point;
 	}
 
 	public Inventary getInventary() {
