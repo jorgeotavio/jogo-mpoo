@@ -72,6 +72,7 @@ public class BaseDados {
 	}
 
 	public static ArrayList<String[]> getPontuacoes() {
+		
 		ArrayList<String[]> pontuacoes = new ArrayList<String[]>();
 		ArrayList<String> linhasArquivo = new ArrayList<String>();
 
@@ -79,17 +80,14 @@ public class BaseDados {
 		try {
 			is = new FileInputStream(pontuacoesFile);
 
-
 			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader (new InputStreamReader (is));
 			String linha="";
 
 			try {
-				while ((linha = br.readLine()) != null){
-					linhasArquivo.add(linha);
-				}
+				while ((linha = br.readLine()) != null)
+					linhasArquivo.add(linha);				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -98,13 +96,13 @@ public class BaseDados {
 				StringTokenizer token = new StringTokenizer(linhasArquivo.get(i), ",");
 
 				String[] dados = new String[3];
+				
 				int j=0;
-
+				
 				while(token.hasMoreElements()) {
 					dados[j] = token.nextToken();
 					j++;
 				}
-
 				pontuacoes.add(dados);
 			}
 			return pontuacoes;
@@ -115,11 +113,9 @@ public class BaseDados {
 	}
 
 	public static void gravarPontuacao(Player player) {
-
-		String[] pontuacaoPlayer = new String[3];
-		pontuacaoPlayer[0] = player.getName();
-		pontuacaoPlayer[1] = Integer.toString(player.getPoints());
-		pontuacaoPlayer[2] = "1";
+		
+		pontuacoes = BaseDados.getPontuacoes();
+	
 		boolean gravou = false;
 		
 		try {
@@ -129,22 +125,22 @@ public class BaseDados {
 			
 			for(String[] p: pontuacoes) {
 
-				if(p[0].equalsIgnoreCase(pontuacaoPlayer[0])) {
-					if(Integer.parseInt(p[1]) > player.getPoints()) {
-						gravarArq.write(p[0]+","+pontuacaoPlayer[1]+","+pontuacaoPlayer[2]);	
-						System.out.println(p[1]);						
+				if(p[0].equalsIgnoreCase(player.getName())) {
+					
+					if(Integer.parseInt(p[1]) < player.getPoints()) {
+						gravarArq.write(player.getName()+","+Integer.toString(player.getPoints())+",1");
+					}else {
+						gravarArq.write(player.getName()+","+p[1]+",1");
 					}
 					gravou=true;
-					break;
-				}
-				else {
+				} else 
 					gravarArq.write(p[0]+","+p[1]+","+p[2]);
-				}
 				gravarArq.newLine();
 			}
 
 			if (!gravou) {
-				gravarArq.write(pontuacaoPlayer[0]+","+pontuacaoPlayer[1]+","+pontuacaoPlayer[2]);
+				gravarArq.write(player.getName()+","+Integer.toString(player.getPoints())+",1");
+				gravarArq.newLine();
 			}
 			gravarArq.close();
 			pontuacoes = BaseDados.getPontuacoes();
