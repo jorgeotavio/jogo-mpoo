@@ -5672,7 +5672,7 @@ AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///w==</data>
       </comandos>
       <vida>100</vida>
     </hero>
-    <points>100</points>
+    <points>0</points>
     <inventary>
       <items/></inventary>
     <venceu>false</venceu>
