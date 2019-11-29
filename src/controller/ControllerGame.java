@@ -31,14 +31,14 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void novoJogo() {
 		
-		//RegistrarJogo.registerPlayer(this.viewGame);
+		ArrayList<Player> players = BaseDados.getPlayers();
 		
-		this.viewGame.getGamePanel().setPlayers(null);
-		System.gc();
-		this.viewGame.getGamePanel().setPlayers(BaseDados.getPlayers());
-		this.viewGame.getInfoPanel().cadastrarLabels(BaseDados.getPlayers());
-		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
+		//RegistrarNoJogo.registerPlayer(viewGame);
 		
+		this.viewGame.getGamePanel().setPlayers(players);
+		this.viewGame.getInfoPanel().cadastrarLabels(players);
+		
+		RegistrarNoJogo.registerMap(viewGame);
 		players.forEach((player) -> {
 			ControllerHero ch = new ControllerHero(player.getHero());
 			viewGame.addKeyListener(ch);
@@ -95,7 +95,7 @@ public class ControllerGame implements Runnable, KeyListener {
 			if(!map.isActivated()) break;
 
 			if (map.getItens().size() == 0) {
-				players.forEach((player)->BaseDados.atualizar(player)); 				
+				BaseDados.salvarPlayers(players);
 				gameWin = true;
 			}
 			

@@ -89,8 +89,8 @@ public class RegistrarNoJogo {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player2);
 		players.add(player);
-		BaseDados.salvar(player);
-		BaseDados.salvar(player2);
+		BaseDados.salvarPlayer(player);
+		BaseDados.salvarPlayer(player2);
 
 		viewGame.getGamePanel().setPlayers(players);
 		viewGame.getInfoPanel().cadastrarLabels(players);
