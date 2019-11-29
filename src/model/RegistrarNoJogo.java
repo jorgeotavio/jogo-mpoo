@@ -93,7 +93,7 @@ public class RegistrarNoJogo {
 		BaseDados.salvarPlayer(player2);
 
 		viewGame.getGamePanel().setPlayers(players);
-		viewGame.getInfoPanel().cadastrarLabels(players);
+//		viewGame.getInfoPanel().cadastrarLabels(players);
 	}
 
 }

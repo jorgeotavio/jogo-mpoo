@@ -30,22 +30,21 @@ public class ControllerGame implements Runnable, KeyListener {
 	}
 
 	public void novoJogo() {
-
+		
 		ArrayList<Player> players = BaseDados.lerArquivo();
-
+		
 		//RegistrarNoJogo.registerPlayer(viewGame);
 		
 		this.viewGame.getGamePanel().setPlayers(players);
-		this.viewGame.getInfoPanel().cadastrarLabels(players);
-
+		this.viewGame.getInfoPanel().cadastrarLabels(BaseDados.getPontuacoes());
+		
 		RegistrarNoJogo.registerMap(viewGame);
-
+		
 		this.viewGame.getGamePanel().getPlayers().forEach((player) -> {
-			BaseDados.salvarPlayer(player);
 			ControllerHero ch = new ControllerHero(player.getHero());
 			viewGame.addKeyListener(ch);
 		});
-
+		
 		registrarTempo();
 	}
 

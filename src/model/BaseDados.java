@@ -1,21 +1,28 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 
 public class BaseDados {
 
 	private static XStream xStream = new XStream(new Dom4JDriver());
-	private static File file = new File("res/dados.xml");
+	private static File dadosFile = new File("res/dados.xml");
 	private static ArrayList<Player> players = new ArrayList<Player>();
+	private static File pontuacoesFile = new File("res/pontuacoes.txt");
 
 	public static boolean salvarPlayer(Player player) {
 
@@ -34,7 +41,7 @@ public class BaseDados {
 
 			if(!existe) players.add(player);
 
-			OutputStream stream = new FileOutputStream(file);
+			OutputStream stream = new FileOutputStream(dadosFile);
 			xStream.toXML(players, stream);
 			stream.close();
 			return true;
@@ -60,15 +67,67 @@ public class BaseDados {
 				}
 			}
 		}
-		//System.out.println(playersArquivo.size());
+	}
 
+	public static ArrayList<String[]> getPontuacoes() {
+		ArrayList<String[]> pontuacoes = new ArrayList<String[]>();
+		ArrayList<String> linhasArquivo = new ArrayList<String>();
+
+		InputStream is;
+		try {
+			is = new FileInputStream(pontuacoesFile);
+		
+
+		@SuppressWarnings("resource")
+		BufferedReader br = new BufferedReader (new InputStreamReader (is));
+		String linha="";
+
+		try {
+			while ((linha = br.readLine()) != null){
+				linhasArquivo.add(linha);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (int i=0; i < linhasArquivo.size(); i++) {
+			
+			StringTokenizer token = new StringTokenizer(linhasArquivo.get(i), ",");
+
+			String[] dados = new String[3];
+			int j=0;
+			
+			while(token.hasMoreElements()) {
+				dados[j] = token.nextToken();
+				j++;
+			}
+			
+			pontuacoes.add(dados);
+		}
+		return pontuacoes;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
+	
+	public static void gravarPontuacao(String pontuacao) {
+		try {
+			FileWriter arq = new FileWriter(pontuacoesFile);
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println(pontuacao);
+			gravarArq.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Player> lerArquivo() {
-		if (file.exists()) {
+		if (dadosFile.exists()) {
 			try {
-				InputStream stream = new FileInputStream(file);
+				InputStream stream = new FileInputStream(dadosFile);
 				ArrayList<Player> playersArquivo = (ArrayList<Player>) xStream.fromXML(stream);
 				try {
 					stream.close();
