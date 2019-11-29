@@ -80,7 +80,6 @@ public class BaseDados {
 		try {
 			is = new FileInputStream(pontuacoesFile);
 
-			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader (new InputStreamReader (is));
 			String linha="";
 
@@ -107,7 +106,6 @@ public class BaseDados {
 			}
 			return pontuacoes;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			return null;
 		}
 	}
