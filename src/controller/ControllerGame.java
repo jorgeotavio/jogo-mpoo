@@ -96,6 +96,7 @@ public class ControllerGame implements Runnable, KeyListener {
 			if(!map.isActivated()) break;
 
 			if (map.getItens().size() == 0) {
+				players.forEach(player -> BaseDados.gravarPontuacao(player));
 				gameWin = true;
 			}
 

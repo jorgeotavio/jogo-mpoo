@@ -1,6 +1,7 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,6 +24,7 @@ public class BaseDados {
 	private static File dadosFile = new File("res/dados.xml");
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	private static File pontuacoesFile = new File("res/pontuacoes.txt");
+	private static ArrayList<String[]> pontuacoes = BaseDados.getPontuacoes();
 
 	public static boolean salvarPlayer(Player player) {
 
@@ -76,48 +78,76 @@ public class BaseDados {
 		InputStream is;
 		try {
 			is = new FileInputStream(pontuacoesFile);
-		
 
-		@SuppressWarnings("resource")
-		BufferedReader br = new BufferedReader (new InputStreamReader (is));
-		String linha="";
 
-		try {
-			while ((linha = br.readLine()) != null){
-				linhasArquivo.add(linha);
+			@SuppressWarnings("resource")
+			BufferedReader br = new BufferedReader (new InputStreamReader (is));
+			String linha="";
+
+			try {
+				while ((linha = br.readLine()) != null){
+					linhasArquivo.add(linha);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		for (int i=0; i < linhasArquivo.size(); i++) {
-			
-			StringTokenizer token = new StringTokenizer(linhasArquivo.get(i), ",");
+			for (int i=0; i < linhasArquivo.size(); i++) {
 
-			String[] dados = new String[3];
-			int j=0;
-			
-			while(token.hasMoreElements()) {
-				dados[j] = token.nextToken();
-				j++;
+				StringTokenizer token = new StringTokenizer(linhasArquivo.get(i), ",");
+
+				String[] dados = new String[3];
+				int j=0;
+
+				while(token.hasMoreElements()) {
+					dados[j] = token.nextToken();
+					j++;
+				}
+
+				pontuacoes.add(dados);
 			}
-			
-			pontuacoes.add(dados);
-		}
-		return pontuacoes;
+			return pontuacoes;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			return null;
 		}
 	}
-	
-	public static void gravarPontuacao(String pontuacao) {
+
+	public static void gravarPontuacao(Player player) {
+
+		String[] pontuacaoPlayer = new String[3];
+		pontuacaoPlayer[0] = player.getName();
+		pontuacaoPlayer[1] = Integer.toString(player.getPoints());
+		pontuacaoPlayer[2] = "1";
+		boolean gravou = false;
+		
 		try {
+
 			FileWriter arq = new FileWriter(pontuacoesFile);
-			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.println(pontuacao);
+			BufferedWriter gravarArq = new BufferedWriter(arq);
+			
+			for(String[] p: pontuacoes) {
+
+				if(p[0].equalsIgnoreCase(pontuacaoPlayer[0])) {
+					if(Integer.parseInt(p[1]) > player.getPoints()) {
+						gravarArq.write(p[0]+","+pontuacaoPlayer[1]+","+pontuacaoPlayer[2]);	
+						System.out.println(p[1]);						
+					}
+					gravou=true;
+					break;
+				}
+				else {
+					gravarArq.write(p[0]+","+p[1]+","+p[2]);
+				}
+				gravarArq.newLine();
+			}
+
+			if (!gravou) {
+				gravarArq.write(pontuacaoPlayer[0]+","+pontuacaoPlayer[1]+","+pontuacaoPlayer[2]);
+			}
 			gravarArq.close();
+			pontuacoes = BaseDados.getPontuacoes();
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
