@@ -36,8 +36,6 @@ public class ControllerGame implements Runnable, KeyListener {
 		
 		ArrayList<Player> players = BaseDados.getPlayers();
 		
-//		RegistrarNoJogo.registerPlayer(viewGame);
-		
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().cadastrarLabels(BaseDados.getPontuacoes());
 		
@@ -58,18 +56,6 @@ public class ControllerGame implements Runnable, KeyListener {
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				
-				Player player = new Player("Mario");
-				Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 26, 150);
-				HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
-				comandos1.put("UP", KeyEvent.VK_UP);
-				comandos1.put("DOWN", KeyEvent.VK_DOWN);
-				comandos1.put("LEFT", KeyEvent.VK_LEFT);
-				comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
-				Hero hero = new Hero(sprite, comandos1);
-				player.setHero(hero);
-				
-				BaseDados.salvarPlayer(player);
 				
 				viewGame.getGamePanel().getPlayers().forEach((p)->{
 					p.getHero().setVida(p.getHero().getVida()-5);

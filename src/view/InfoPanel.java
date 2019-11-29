@@ -18,11 +18,16 @@ public class InfoPanel extends JPanel {
 	private ArrayList<JLabel> pontosTempoReal;
 	private JLabel tempoLabel;
 	private Font font;
+	private JLabel pontosLabel;
 
 	public InfoPanel() throws IOException {
-		
 		setLayout(null);
 		font = new Font("Impact", Font.PLAIN, 20);		
+		
+		pontosLabel = new JLabel();
+		pontosLabel.setBounds(10, 0, 200, 100);
+		pontosLabel.setForeground(new Color(255,255,255));
+		pontosLabel.setFont(new Font("Impact", Font.PLAIN, 15));
 		
 		pontosTempoReal = new ArrayList<JLabel>();
 		
@@ -41,8 +46,9 @@ public class InfoPanel extends JPanel {
 		tempoLabel = new JLabel();
 		tempoLabel.setBounds(320, 50, 100, 20);
 		tempoLabel.setFont(font);
+		
+		add(pontosLabel);
 		add(tempoLabel);
-
 		add(player1Label);
 		add(player2Label);
 	}
@@ -54,20 +60,13 @@ public class InfoPanel extends JPanel {
 	}
 
 	public void cadastrarLabels(ArrayList<String[]> pontuacoes) {
-
+		
+		String pontos = "<html>";
 		for (String[] p: pontuacoes) {
-			JLabel pontosLabel = new JLabel();
-			pontosLabel.setText("Jogador: " +p[0] + " Pontos "+p[1]);
-			pontosLabel.setBounds(10, 10*(pontuacoes.indexOf(p)+1), 200, 100);
-			pontosLabel.setFont(new Font("Impact", Font.PLAIN, 10));
-			add(pontosLabel);
+			pontos += "Jogador: " +p[0] + "-> Pontos: "+p[1]+"<br/>";
 		}
-	}
+		pontosLabel.setText(pontos);
 	
-	public void carregarPontuacoes(ArrayList<Player> pontuacoes) {
-		pontuacoes.forEach((pontuacao) -> {
-			
-		});
 	}
 
 	public void setTempo(int tempo) {
