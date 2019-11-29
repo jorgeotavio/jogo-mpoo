@@ -30,26 +30,28 @@ public class ControllerGame implements Runnable, KeyListener {
 	}
 
 	public void novoJogo() {
-		
-		ArrayList<Player> players = BaseDados.getPlayers();
-		
+
+		ArrayList<Player> players = BaseDados.lerArquivo();
+
 		//RegistrarNoJogo.registerPlayer(viewGame);
 		
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().cadastrarLabels(players);
-		
+
 		RegistrarNoJogo.registerMap(viewGame);
-		players.forEach((player) -> {
+
+		this.viewGame.getGamePanel().getPlayers().forEach((player) -> {
+			BaseDados.salvarPlayer(player);
 			ControllerHero ch = new ControllerHero(player.getHero());
 			viewGame.addKeyListener(ch);
 		});
-		
+
 		registrarTempo();
 	}
 
 	public void registrarTempo() {	
 		tempo = 0;
-		
+
 		timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
@@ -95,10 +97,8 @@ public class ControllerGame implements Runnable, KeyListener {
 			if(!map.isActivated()) break;
 
 			if (map.getItens().size() == 0) {
-				BaseDados.salvarPlayers(players);
 				gameWin = true;
 			}
-			
 
 			for(Objeto item: map.getItens()){
 				for(Player player: players){
@@ -138,7 +138,7 @@ public class ControllerGame implements Runnable, KeyListener {
 			}
 
 			if (gameOver) {
-								
+
 			}
 
 			if (!pausado) {

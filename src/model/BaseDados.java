@@ -12,50 +12,42 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 
 public class BaseDados {
-	
+
 	private static XStream xStream = new XStream(new Dom4JDriver());
 	private static File file = new File("res/dados.xml");
-	private static ArrayList<Player> players = BaseDados.lerArquivo();
-	
-	public static boolean atualizar(Player player) {
-		
-		for(Player p: players){
-			if(p.getName().equalsIgnoreCase((player.getName()))) {
-				p.setPoints(player.getPoints());
-				return true;
-			}
-		}
+	private static ArrayList<Player> players = new ArrayList<Player>();
 
-		return false;
-	}
+	public static boolean salvarPlayer(Player player) {
 
-	public static void salvarPlayer(Player player) {
-		
-		ArrayList<Player> novosPlayers = BaseDados.lerArquivo();
-		
 		xStream.alias("Player", Objeto.class);
-
 		try {
-			
-			if (file.exists()) file.delete();
-			
-			file.createNewFile();
-			
-			novosPlayers.add(player);
+			ArrayList<Player> playersArquivo = BaseDados.lerArquivo();
+
+			boolean existe = false;
+
+			for(Player p: playersArquivo) {
+				if(p.getName().equalsIgnoreCase(player.getName())) {
+					p.setPoints(player.getPoints());					
+					existe = true;
+				}
+			}
+
+			if(!existe) players.add(player);
 
 			OutputStream stream = new FileOutputStream(file);
-			xStream.toXML(novosPlayers, stream);
+			xStream.toXML(players, stream);
 			stream.close();
+			return true;
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			return false;
 		}
 	}
-	
+
 	public static void salvarPlayers(ArrayList<Player> players) {
-		
+
 		ArrayList<Player> playersArquivo = BaseDados.lerArquivo();
-		
+
 		for(Player p1: playersArquivo) {
 			for(Player p2: players) {
 				if(p1.getName().equalsIgnoreCase(p2.getName())) {
@@ -69,7 +61,7 @@ public class BaseDados {
 			}
 		}
 		//System.out.println(playersArquivo.size());
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -90,8 +82,5 @@ public class BaseDados {
 		}
 		return new ArrayList<Player>();
 	}
-	
-	public static ArrayList<Player> getPlayers() {
-		return players;
-	}	
+
 }
