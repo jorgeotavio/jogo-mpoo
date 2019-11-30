@@ -35,7 +35,7 @@ public class InfoPanel extends JPanel {
 		Font pixellariFont = null;
 		
 		try {
-			pixellariFont = Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/Fipps.otf"));
+			pixellariFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("Fontes/Fipps.otf"));
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
