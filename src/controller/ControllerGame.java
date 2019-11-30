@@ -141,7 +141,14 @@ public class ControllerGame implements Runnable, KeyListener {
 			
 			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
 			
-			if (pausado) continue;
+			if (pausado) {
+				for (KeyListener kl: viewGame.getKeyListeners()) {
+					if(kl instanceof ControllerHero) {
+						((ControllerHero) kl).getKeyPool().clear();
+					}
+				}
+				continue;
+			}
 			
 			if (gameWin) {
 				timer.cancel();

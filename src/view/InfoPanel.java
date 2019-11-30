@@ -26,22 +26,13 @@ public class InfoPanel extends JPanel {
 	public InfoPanel() throws IOException {
 		setLayout(null);
 
-
 		font = new Font("Impact", Font.PLAIN, 20);		
 
 		pontosLabel = new JLabel();
 		pontosLabel.setBounds(10, 0, 200, 100);
 		pontosLabel.setForeground(new Color(255,255,255));
-		Font pixellariFont = null;
+		pontosLabel.setFont(font.deriveFont(Font.PLAIN, 12));
 		
-		try {
-			pixellariFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("Fontes/Fipps.otf"));
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		pontosLabel.setFont(pixellariFont.deriveFont(Font.PLAIN, 12));
-
 		pontosTempoReal = new ArrayList<JLabel>();
 
 		JLabel player1Label = new JLabel();

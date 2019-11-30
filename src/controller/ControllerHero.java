@@ -222,4 +222,11 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 		this.hero = hero;
 	}
 
+	public HashMap<Integer, Boolean> getKeyPool() {
+		return keyPool;
+	}
+
+	public void setKeyPool(HashMap<Integer, Boolean> keyPool) {
+		this.keyPool = keyPool;
+	}
 }
