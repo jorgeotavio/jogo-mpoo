@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -21,6 +22,7 @@ public class GamePanel extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setFont(new Font("Impact", Font.PLAIN, 12));
 		
 		maps.forEach((map)->{
 			
@@ -31,6 +33,7 @@ public class GamePanel extends JPanel{
 			});
 			
 			map.getItens().forEach((item)->{
+				g2d.drawString("+"+item.getPontos(), item.getPosX()-5, item.getPosY()-5);
 				g2d.drawImage(item.getImagem(), item.getPosX(), item.getPosY(), this);
 			});
 		});
