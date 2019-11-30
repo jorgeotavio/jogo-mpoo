@@ -28,23 +28,6 @@ public class Objeto {
 		}catch(Exception e ) {
 			e.printStackTrace();
 		}
-		registrarTempo();
-	}
-
-	public void registrarTempo() {
-		timer = new Timer();
-		TimerTask timerTask = new TimerTask() {
-			@Override
-			public void run() {
-				try {
-					imagem = ImageIO.read(new File("img/itens/maca_item.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		};
-		timer.scheduleAtFixedRate(timerTask, 5000, 10000);
 	}
 
 	public String getNome() {

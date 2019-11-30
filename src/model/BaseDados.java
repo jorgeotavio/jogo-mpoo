@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 
+import sun.security.krb5.internal.crypto.Des;
+
 public class BaseDados {
 
 	private static XStream xStream = new XStream(new Dom4JDriver());
@@ -74,8 +76,8 @@ public class BaseDados {
 			OutputStream stream = new FileOutputStream(dadosFile);
 			xStream.toXML(players, stream);
 			stream.close();
+			Destrutor.destroyer(player);
 			return true;
-
 		} catch (IOException e) {
 			return false;
 		}
@@ -91,6 +93,7 @@ public class BaseDados {
 				InputStream stream = new FileInputStream(dadosFile);
 				ArrayList<Player> playersArquivo = (ArrayList<Player>) xStream.fromXML(stream);
 				stream.close();
+				Destrutor.destroyer(stream);
 				return playersArquivo;
 			} catch (Exception e) {
 				return new ArrayList<Player>(); 
@@ -111,7 +114,8 @@ public class BaseDados {
 
 			for(Pontuacao p: pontuacoesArquivo) {
 				if(p.getNomePlayer().equalsIgnoreCase(player.getName())) {
-					p.setPontos(player.getPoints());
+					if(p.getPontos() < player.getPoints())
+						p.setPontos(player.getPoints());
 					gravou = true;
 				}
 				pontuacoes.add(p);
@@ -122,7 +126,8 @@ public class BaseDados {
 			OutputStream stream = new FileOutputStream(pontuacoesFile);
 			xStream.toXML(pontuacoes, stream);
 			stream.close();
-
+			Destrutor.destroyer(pontuacoesArquivo);
+			Destrutor.destroyer(pontuacoes);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -138,6 +143,7 @@ public class BaseDados {
 				InputStream stream = new FileInputStream(pontuacoesFile);
 				ArrayList<Pontuacao> pontuacaoArquivo = (ArrayList<Pontuacao>) xStream.fromXML(stream);
 				stream.close();
+				Destrutor.destroyer(stream);
 				return pontuacaoArquivo;
 			} catch (Exception e) {
 				return new ArrayList<Pontuacao>(); 

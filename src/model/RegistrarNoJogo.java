@@ -33,9 +33,11 @@ public class RegistrarNoJogo {
 			frutas[1] = "img/itens/melancia_item.png";
 			frutas[2] = "img/itens/banana_item.png";
 			
-			int[][] coordenadas = new int[20][2];
-
-			for (int i = 0; i<20; i++) {
+			int totalItems = 30;
+			
+			int[][] coordenadas = new int[totalItems][2];
+			
+			for (int i = 0; i<totalItems; i++) {
 				for (int j = 0 ;j <= 1 ; j++) {
 					if (j == 0)
 						coordenadas[i][j] = random.nextInt(450)+100;
