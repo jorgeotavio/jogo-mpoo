@@ -94,7 +94,7 @@ public class RegistrarNoJogo {
 		BaseDados.salvarPlayer(player);
 		BaseDados.salvarPlayer(player2);
 
-		viewGame.getGamePanel().setPlayers(players);
+		//viewGame.getGamePanel().setPlayers(players);
 //		viewGame.getInfoPanel().setRecordes(players);
 //		viewGame.getInfoPanel().(players);
 	}
