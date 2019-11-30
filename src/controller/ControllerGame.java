@@ -3,22 +3,21 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import model.Objeto;
 import model.BaseDados;
-import model.Hero;
 import model.Map;
 import model.Player;
 import model.RegistrarNoJogo;
-import model.Sprite;
 import view.ViewGame;
+import view.ViewPause;
 
 public class ControllerGame implements Runnable, KeyListener {
 
 	private ViewGame viewGame;
+	private ViewPause viewPause;
 	private boolean pausado = false;
 	private boolean gameOver = false;
 	private boolean gameWin = false;
@@ -29,23 +28,25 @@ public class ControllerGame implements Runnable, KeyListener {
 		this.viewGame = viewGame;
 		this.viewGame.addKeyListener(this);
 		this.viewGame.setVisible(true);
+		this.viewPause = new ViewPause();
+		viewPause.addKeyListener(this);
 		novoJogo();
 	}
 
 	public void novoJogo() {
-		
+
 		ArrayList<Player> players = BaseDados.getPlayers();
-		
+
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().setRecordes(players);
-		
+
 		RegistrarNoJogo.registerMap(viewGame);
-		
+
 		this.viewGame.getGamePanel().getPlayers().forEach((player) -> {
 			ControllerHero ch = new ControllerHero(player.getHero());
 			viewGame.addKeyListener(ch);
 		});
-		
+
 		registrarTempo();
 	}
 
@@ -56,7 +57,7 @@ public class ControllerGame implements Runnable, KeyListener {
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				
+
 				viewGame.getGamePanel().getPlayers().forEach((p)->{
 					p.getHero().setVida(p.getHero().getVida()-5);
 				});
@@ -70,8 +71,9 @@ public class ControllerGame implements Runnable, KeyListener {
 	}
 
 
-	public void checarColisoes(ArrayList<Map> maps, ArrayList<Player> players) {
-
+	public void checarColisoes() {
+		ArrayList<Map> maps = viewGame.getGamePanel().getMaps();
+		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
 		for(Map map :maps){
 
 			if(!map.isActivated())
@@ -92,7 +94,10 @@ public class ControllerGame implements Runnable, KeyListener {
 		};
 	}
 
-	public void checarObjetivos(ArrayList<Map> maps, ArrayList<Player> players) {
+	public void checarObjetivos() {
+		ArrayList<Map> maps = viewGame.getGamePanel().getMaps();
+		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
+		
 		for(Map map :maps){
 
 			if(!map.isActivated()) break;
@@ -132,45 +137,43 @@ public class ControllerGame implements Runnable, KeyListener {
 	@Override
 	public void run() {
 		while ( true ) {
-
+			
+			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
+			
+			if (pausado) continue;
+			
 			if (gameWin) {
 				timer.cancel();
+				timer.purge();
 				gameWin = false;
 				novoJogo();
 			}
 
 			if (gameOver) {
-
+				
 			}
+			
+			checarColisoes();
+			checarObjetivos();
 
-			if (!pausado) {
-				checarColisoes(viewGame.getGamePanel().getMaps(), viewGame.getGamePanel().getPlayers());
-				checarObjetivos(viewGame.getGamePanel().getMaps(), viewGame.getGamePanel().getPlayers());
-
-				for (KeyListener kl: viewGame.getKeyListeners()) {
-					if(kl instanceof ControllerHero) {
-						((ControllerHero) kl).atualizaHero();
-					}
+			for (KeyListener kl: viewGame.getKeyListeners()) {
+				if(kl instanceof ControllerHero) {
+					((ControllerHero) kl).atualizaHero();
 				}
-
-				this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getPlayers());
-				this.viewGame.getGamePanel().repaint();
 			}
 
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
+			this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getPlayers());
+			this.viewGame.getGamePanel().repaint();
 		}
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			pausado = !pausado;
+			viewPause.setVisible(pausado);
+		}
 
 	}
 

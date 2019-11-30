@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <list>
-  <model.Player>
+  <Player>
     <name>Joao</name>
     <hero>
       <sprite>
@@ -2838,12 +2838,12 @@ AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///w==</data>
       </comandos>
       <vida>100</vida>
     </hero>
-    <points>0</points>
+    <points>1910</points>
     <inventary>
       <items/></inventary>
     <venceu>false</venceu>
-  </model.Player>
-  <model.Player>
+  </Player>
+  <Player>
     <name>Maria</name>
     <hero>
       <sprite>
@@ -2889,7 +2889,7 @@ AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///w==</data>
                     <float>0.0</float>
                     <float>0.0</float>
                   </minVal>
-                  <thisProfile class="java.awt.color.ICC_ProfileRGB" reference="../../../../../../../../../model.Player/hero/sprite/spriteSheet/colorModel/colorSpace/java.awt.color.ICC__ColorSpace/default/thisProfile"/>
+                  <thisProfile class="java.awt.color.ICC_ProfileRGB" reference="../../../../../../../../../Player/hero/sprite/spriteSheet/colorModel/colorSpace/java.awt.color.ICC__ColorSpace/default/thisProfile"/>
                 </default>
               </java.awt.color.ICC__ColorSpace>
             </colorSpace>
@@ -5672,9 +5672,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</data>
       </comandos>
       <vida>100</vida>
     </hero>
-    <points>0</points>
+    <points>1690</points>
     <inventary>
       <items/></inventary>
     <venceu>false</venceu>
-  </model.Player>
+  </Player>
 </list>

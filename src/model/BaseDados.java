@@ -1,18 +1,13 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.Dom4JDriver;
@@ -20,13 +15,13 @@ import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 public class BaseDados {
 
 	private static XStream xStream = new XStream(new Dom4JDriver());
-	private static File dadosFile = new File("res/dados.xml");
+	private static File dadosFile = new File("res/players.xml");
 	private static ArrayList<Player> players = new ArrayList<Player>();
-	private static ArrayList<String[]> pontuacoes;
-
+	
 	public static boolean salvarPlayer(Player player) {
+		
 		players = new ArrayList<Player>();
-		xStream.alias("Player", Objeto.class);
+		xStream.alias("Player", Player.class);
 		try {
 			ArrayList<Player> playersArquivo = BaseDados.getPlayers();
 
@@ -45,6 +40,7 @@ public class BaseDados {
 
 			OutputStream stream = new FileOutputStream(dadosFile);
 			xStream.toXML(players, stream);
+			xStream.toXML(playersArquivo, stream);
 			stream.close();
 			return true;
 
@@ -57,7 +53,7 @@ public class BaseDados {
 		
 		players = new ArrayList<Player>();
 		
-		xStream.alias("Player", Objeto.class);
+		xStream.alias("Player", Player.class);
 		try {
 			ArrayList<Player> playersArquivo = BaseDados.getPlayers();
 
