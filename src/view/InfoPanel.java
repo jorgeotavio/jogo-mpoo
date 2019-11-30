@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Player;
+import model.Pontuacao;
 
 public class InfoPanel extends JPanel {
 
@@ -27,7 +28,7 @@ public class InfoPanel extends JPanel {
 		pontosLabel = new JLabel();
 		pontosLabel.setBounds(10, 0, 200, 100);
 		pontosLabel.setForeground(new Color(255,255,255));
-		pontosLabel.setFont(new Font("Impact", Font.PLAIN, 15));
+		pontosLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		pontosTempoReal = new ArrayList<JLabel>();
 		
@@ -59,11 +60,11 @@ public class InfoPanel extends JPanel {
 		}
 	}
 
-	public void setRecordes(ArrayList<Player> players) {
+	public void setRecordes(ArrayList<Pontuacao> pontuacoes) {
 		
 		String pontos = "<html>";
-		for (Player p: players) {
-			pontos += "Jogador: " +p.getName() + "-> Pontos: "+p.getPoints()+"<br/>";
+		for (Pontuacao p: pontuacoes) {
+			pontos += "Jogador: " +p.getNomePlayer() + "-> Pontos: "+p.getPontos()+" ->No Mapa: "+p.getIdMap()+"<br/>";
 		}
 		pontosLabel.setText(pontos);
 	

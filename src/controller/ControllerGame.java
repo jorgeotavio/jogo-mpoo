@@ -40,7 +40,7 @@ public class ControllerGame implements Runnable, KeyListener {
 //		RegistrarNoJogo.registerPlayer(viewGame);
 		
 		this.viewGame.getGamePanel().setPlayers(players);
-		this.viewGame.getInfoPanel().setRecordes(players);
+		this.viewGame.getInfoPanel().setRecordes(BaseDados.getPontuacoes());
 		
 		RegistrarNoJogo.registerMap(viewGame);
 		
@@ -104,7 +104,7 @@ public class ControllerGame implements Runnable, KeyListener {
 			if(!map.isActivated()) break;
 
 			if (map.getItens().size() == 0) {
-				players.forEach(player -> BaseDados.atualizarPlayer(player));
+				players.forEach(player -> BaseDados.atualizarPontuacao(player, 1));
 				gameWin = true;
 			}
 

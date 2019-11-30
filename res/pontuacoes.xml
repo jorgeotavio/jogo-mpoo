@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <Pontuacao>
+    <nomePlayer>Joao</nomePlayer>
+    <pontos>140</pontos>
+    <idMap>1</idMap>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Maria</nomePlayer>
+    <pontos>60</pontos>
+    <idMap>1</idMap>
+  </Pontuacao>
+</list>
