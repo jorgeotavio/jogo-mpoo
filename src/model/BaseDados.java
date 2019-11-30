@@ -22,8 +22,7 @@ public class BaseDados {
 	private static XStream xStream = new XStream(new Dom4JDriver());
 	private static File dadosFile = new File("res/dados.xml");
 	private static ArrayList<Player> players = new ArrayList<Player>();
-	private static File pontuacoesFile = new File("res/pontuacoes.txt");
-	private static ArrayList<String[]> pontuacoes = BaseDados.getPontuacoes();
+	private static ArrayList<String[]> pontuacoes;
 
 	public static boolean salvarPlayer(Player player) {
 		players = new ArrayList<Player>();
@@ -53,83 +52,37 @@ public class BaseDados {
 			return false;
 		}
 	}
-
-	public static ArrayList<String[]> getPontuacoes() {
-		
-		ArrayList<String[]> pontuacoes = new ArrayList<String[]>();
-		ArrayList<String> linhasArquivo = new ArrayList<String>();
-
-		InputStream is;
-		try {
-			is = new FileInputStream(pontuacoesFile);
-
-			BufferedReader br = new BufferedReader (new InputStreamReader (is));
-			String linha="";
-
-			try {
-				while ((linha = br.readLine()) != null)
-					linhasArquivo.add(linha);				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			for (int i=0; i < linhasArquivo.size(); i++) {
-
-				StringTokenizer token = new StringTokenizer(linhasArquivo.get(i), ",");
-
-				String[] dados = new String[3];
-				
-				int j=0;
-				
-				while(token.hasMoreElements()) {
-					dados[j] = token.nextToken();
-					j++;
-				}
-				pontuacoes.add(dados);
-			}
-			return pontuacoes;
-		} catch (FileNotFoundException e) {
-			return null;
-		}
-	}
-
-	public static void gravarPontuacao(Player player) {
-		
-		pontuacoes = BaseDados.getPontuacoes();
 	
-		boolean gravou = false;
+	public static boolean atualizarPlayer(Player player) {
 		
+		players = new ArrayList<Player>();
+		
+		xStream.alias("Player", Objeto.class);
 		try {
+			ArrayList<Player> playersArquivo = BaseDados.getPlayers();
 
-			FileWriter arq = new FileWriter(pontuacoesFile);
-			BufferedWriter gravarArq = new BufferedWriter(arq);
-			
-			for(String[] p: pontuacoes) {
+			boolean gravou = false;
 
-				if(p[0].equalsIgnoreCase(player.getName())) {
-					
-					if(Integer.parseInt(p[1]) < player.getPoints()) {
-						gravarArq.write(player.getName()+","+Integer.toString(player.getPoints())+",1");
-					}else {
-						gravarArq.write(player.getName()+","+p[1]+",1");
-					}
-					gravou=true;
-				} else 
-					gravarArq.write(p[0]+","+p[1]+","+p[2]);
-				gravarArq.newLine();
+			for(Player p: playersArquivo) {
+				if(p.getName().equalsIgnoreCase(player.getName())) {
+					p.setPoints(player.getPoints());
+					gravou = true;
+				}
+				players.add(p);
 			}
 
-			if (!gravou) {
-				gravarArq.write(player.getName()+","+Integer.toString(player.getPoints())+",1");
-				gravarArq.newLine();
-			}
-			gravarArq.close();
-			pontuacoes = BaseDados.getPontuacoes();
-		}catch(IOException e) {
-			e.printStackTrace();
+			if(!gravou) players.add(player);
+
+			OutputStream stream = new FileOutputStream(dadosFile);
+			xStream.toXML(players, stream);
+			stream.close();
+			return true;
+
+		} catch (IOException e) {
+			return false;
 		}
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Player> getPlayers() {
 		if (dadosFile.exists()) {

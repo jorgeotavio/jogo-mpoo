@@ -59,11 +59,11 @@ public class InfoPanel extends JPanel {
 		}
 	}
 
-	public void cadastrarLabels(ArrayList<String[]> pontuacoes) {
+	public void setRecordes(ArrayList<Player> players) {
 		
 		String pontos = "<html>";
-		for (String[] p: pontuacoes) {
-			pontos += "Jogador: " +p[0] + "-> Pontos: "+p[1]+"<br/>";
+		for (Player p: players) {
+			pontos += "Jogador: " +p.getName() + "-> Pontos: "+p.getPoints()+"<br/>";
 		}
 		pontosLabel.setText(pontos);
 	
