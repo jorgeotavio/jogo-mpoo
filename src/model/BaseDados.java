@@ -15,44 +15,45 @@ import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 public class BaseDados {
 
 	private static XStream xStream = new XStream(new Dom4JDriver());
-	private static File dadosFile = new File("res/players.xml");
-	private static ArrayList<Player> players = new ArrayList<Player>();
-	
+	private static File dadosFile = new File( "res/players.xml");
+
 	public static boolean salvarPlayer(Player player) {
-		
-		players = new ArrayList<Player>();
-		xStream.alias("Player", Player.class);
-		try {
-			ArrayList<Player> playersArquivo = BaseDados.getPlayers();
 
-			boolean gravou = false;
+		ArrayList<Player> players = new ArrayList<Player>();
+		ArrayList<Player> playersArquivo = BaseDados.getPlayers();
 
-			for(Player p: playersArquivo) {
-				if(p.getName().equalsIgnoreCase(player.getName())) {
-					p.setPoints(player.getPoints());
-					gravou = true;
-				}else {
-					players.add(p);
-				}
+		boolean gravou = false;
+
+		for(Player p: playersArquivo) {
+			if(p.getName().equalsIgnoreCase(player.getName())) {
+				p.setPoints(player.getPoints());
+				gravou = true;
 			}
+			else players.add(p);
+		}
 
-			if(!gravou) players.add(player);
+		if(!gravou) players.add(player);
+
+		try {
 
 			OutputStream stream = new FileOutputStream(dadosFile);
 			xStream.toXML(players, stream);
-			xStream.toXML(playersArquivo, stream);
 			stream.close();
+
+			Destrutor.destroyer(players);
+			Destrutor.destroyer(playersArquivo);
+
 			return true;
 
 		} catch (IOException e) {
 			return false;
 		}
 	}
-	
+
 	public static boolean atualizarPlayer(Player player) {
-		
-		players = new ArrayList<Player>();
-		
+
+		ArrayList<Player> players = new ArrayList<Player>();;
+
 		xStream.alias("Player", Player.class);
 		try {
 			ArrayList<Player> playersArquivo = BaseDados.getPlayers();
@@ -78,21 +79,20 @@ public class BaseDados {
 			return false;
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Player> getPlayers() {
+
+		xStream.alias("Player", Player.class);
+
 		if (dadosFile.exists()) {
 			try {
 				InputStream stream = new FileInputStream(dadosFile);
 				ArrayList<Player> playersArquivo = (ArrayList<Player>) xStream.fromXML(stream);
-				try {
-					stream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				stream.close();
 				return playersArquivo;
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				return new ArrayList<Player>(); 
 			}
 		}
 		return new ArrayList<Player>();

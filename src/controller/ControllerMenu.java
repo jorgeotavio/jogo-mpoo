@@ -68,13 +68,4 @@ public class ControllerMenu implements ActionListener{
 	public void setViewAbout(ViewAbout viewAbout) {
 		this.viewAbout = viewAbout;
 	}
-
-	public Thread getGameThread() {
-		return gameThread;
-	}
-
-	public void setGameThread(Thread gameThread) {
-		this.gameThread = gameThread;
-	}
-	
 }
