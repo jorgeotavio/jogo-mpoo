@@ -1,7 +1,6 @@
 package main;
 
 import controller.ControllerMenu;
-import model.BaseDados;
 import model.RegistrarNoJogo;
 import view.ViewGame;
 import view.ViewMenu;
@@ -18,5 +17,4 @@ public class Main {
 		new ControllerMenu(viewMenu, viewGame);
 		
 	}
-
 }
