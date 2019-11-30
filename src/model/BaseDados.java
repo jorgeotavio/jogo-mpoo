@@ -102,6 +102,26 @@ public class BaseDados {
 		return new ArrayList<Player>();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static Player[] getPlayersSelecionados() {
+
+		xStream.alias("Player", Player.class);
+		Player[] players = new Player[2];
+		if (dadosFile.exists()) {
+			try {
+				InputStream stream = new FileInputStream(dadosFile);
+				ArrayList<Player> playersArquivo = (ArrayList<Player>) xStream.fromXML(stream);
+				stream.close();
+				players[0] = playersArquivo.get(0);
+				players[1] = playersArquivo.get(1);
+				
+				Destrutor.destroyer(stream);
+			} catch (Exception e) {
+			}
+		}
+		return players;
+	}
+	
 	public static void atualizarPontuacao(Player player, int idMap) {
 		
 		ArrayList<Pontuacao> pontuacoes = new ArrayList<Pontuacao>();

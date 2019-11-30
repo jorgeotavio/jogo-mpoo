@@ -15,12 +15,13 @@ public class Objeto {
 	private int posX, posY;
 	private boolean capturado;
 	private Rectangle retangulo;
-	private Timer timer;
+	private int pontos;
 
-	public Objeto(String name, String file, int posX, int posY) {
+	public Objeto(String name, String file, int posX, int posY, int pontos) {
 		this.name = name;
 		this.posX = posX;
 		this.posY = posY;
+		this.pontos = pontos;
 		this.capturado = false;
 
 		try {
@@ -69,6 +70,14 @@ public class Objeto {
 
 	public void setCapturado(boolean capturado) {
 		this.capturado = capturado;
+	}
+
+	public int getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(int pontos) {
+		this.pontos = pontos;
 	}
 
 }

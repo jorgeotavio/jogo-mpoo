@@ -28,10 +28,20 @@ public class RegistrarNoJogo {
 			Random random = new Random();
 			ArrayList<Objeto> itens = new ArrayList<Objeto>();
 			
-			String[] frutas = new String[5];
-			frutas[0] = "img/itens/maca_item.png";
-			frutas[1] = "img/itens/melancia_item.png";
-			frutas[2] = "img/itens/banana_item.png";
+			String[] arquivos = new String[3];
+			arquivos[0] = "img/objetos/frutas/maca_item.png";
+			arquivos[1] = "img/objetos/frutas/melancia_item.png";
+			arquivos[2] = "img/objetos/frutas/banana_item.png";
+			
+			String[] frutas = new String[3];
+			frutas[0] = "Maçã";
+			frutas[1] = "Melancia";
+			frutas[2] = "Banana";
+			
+			int[] pontos = new int[3];
+			pontos[0] = 10;
+			pontos[1] = 30;
+			pontos[2] = 15;
 			
 			int totalItems = 30;
 			
@@ -39,12 +49,13 @@ public class RegistrarNoJogo {
 			
 			for (int i = 0; i<totalItems; i++) {
 				for (int j = 0 ;j <= 1 ; j++) {
-					if (j == 0)
-						coordenadas[i][j] = random.nextInt(450)+100;
-					else
-						coordenadas[i][j] = random.nextInt(200)+50;
+					
+					if (j == 0) coordenadas[i][j] =  random.nextInt(450)+100;
+					else coordenadas[i][j] = random.nextInt(250)+50;
+				
 				}
-				itens.add(new Objeto("maca", frutas[random.nextInt(3)],coordenadas[i][0], coordenadas[i][1]));
+				int index = random.nextInt(3);
+				itens.add(new Objeto(frutas[index], arquivos[index],coordenadas[i][0], coordenadas[i][1], pontos[index]));
 			}
 
 
@@ -94,7 +105,7 @@ public class RegistrarNoJogo {
 		BaseDados.salvarPlayer(player);
 		BaseDados.salvarPlayer(player2);
 
-		viewGame.getGamePanel().setPlayers(players);
+		//viewGame.getGamePanel().setPlayers(players);
 //		viewGame.getInfoPanel().setRecordes(players);
 //		viewGame.getInfoPanel().(players);
 	}

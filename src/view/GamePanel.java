@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -15,12 +16,13 @@ public class GamePanel extends JPanel{
 	
 	private static final long serialVersionUID = 3027613679265920713L;
 	private ArrayList<Enemy> enemies;
-	private ArrayList<Player> players;
+	private Player[] players = new Player[2];
 	private ArrayList<Map> maps;
 	
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setFont(new Font("Impact", Font.PLAIN, 12));
 		
 		maps.forEach((map)->{
 			
@@ -31,25 +33,21 @@ public class GamePanel extends JPanel{
 			});
 			
 			map.getItens().forEach((item)->{
+				g2d.drawString("+"+item.getPontos(), item.getPosX()-5, item.getPosY()-5);
 				g2d.drawImage(item.getImagem(), item.getPosX(), item.getPosY(), this);
 			});
 		});
 		
-		this.players.forEach((player)->{
-			
-			BufferedImage[] sprites = player.getHero().getSprite().getSprites();
-			
-			g2d.drawString(player.getName(), player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY()-8);
-			
-			g2d.drawRect(player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY()-5, 25, 5);
-			
-			g2d.fillRect(player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY()-5, player.getHero().getVida()/4, 5);			
-			
-			g2d.drawImage(sprites[player.getHero().getSprite().getAparencia()], 
-					player.getHero().getSprite().getPosX(), player.getHero().getSprite().getPosY(), this);
+		for (int i = 0; i<players.length; i++) {
+			BufferedImage[] sprites = players[i].getHero().getSprite().getSprites();
+			g2d.drawString(players[i].getName(), players[i].getHero().getSprite().getPosX(), players[i].getHero().getSprite().getPosY()-8);
+			g2d.drawRect(players[i].getHero().getSprite().getPosX(), players[i].getHero().getSprite().getPosY()-5, 25, 5);
+			g2d.fillRect(players[i].getHero().getSprite().getPosX(), players[i].getHero().getSprite().getPosY()-5, players[i].getHero().getVida()/4, 5);
+			g2d.drawImage(sprites[players[i].getHero().getSprite().getAparencia()], 
+					players[i].getHero().getSprite().getPosX(), players[i].getHero().getSprite().getPosY(), this);
 			sprites = null;
 			System.gc();
-		});
+		}
 		g2d.dispose();
 	}
 	
@@ -69,11 +67,11 @@ public class GamePanel extends JPanel{
 		this.enemies = enemies;
 	}
 
-	public ArrayList<Player> getPlayers() {
+	public Player[] getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(ArrayList<Player> players) {
+	public void setPlayers(Player[] players) {
 		this.players = players;
 	}
 	

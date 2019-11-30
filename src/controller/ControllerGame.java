@@ -35,7 +35,7 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void novoJogo() {
 		
-		ArrayList<Player> players = BaseDados.getPlayers();
+		Player[] players = BaseDados.getPlayersSelecionados();
 		
 //		RegistrarNoJogo.registerPlayer(viewGame);
 		
@@ -44,10 +44,11 @@ public class ControllerGame implements Runnable, KeyListener {
 		
 		RegistrarNoJogo.registerMap(viewGame);
 		
-		this.viewGame.getGamePanel().getPlayers().forEach((player) -> {
-			ControllerHero ch = new ControllerHero(player.getHero());
+		
+		for (int i = 0; i< players.length; i++){
+			ControllerHero ch = new ControllerHero(players[i].getHero());
 			viewGame.addKeyListener(ch);
-		});
+		}
 		registrarTempo();
 	}
 
@@ -58,10 +59,6 @@ public class ControllerGame implements Runnable, KeyListener {
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-
-				viewGame.getGamePanel().getPlayers().forEach((p)->{
-					p.getHero().setVida(p.getHero().getVida()-5);
-				});
 				tempo += 1;
 				viewGame.getInfoPanel().setTempo(tempo);
 				if(tempo > 30) gameOver = true;
@@ -74,7 +71,9 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void checarColisoes() {
 		ArrayList<Map> maps = viewGame.getGamePanel().getMaps();
-		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(viewGame.getGamePanel().getPlayers()[0]);
+		players.add(viewGame.getGamePanel().getPlayers()[1]);
 		for(Map map :maps){
 
 			if(!map.isActivated())
@@ -97,7 +96,9 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	public void checarObjetivos() {
 		ArrayList<Map> maps = viewGame.getGamePanel().getMaps();
-		ArrayList<Player> players = viewGame.getGamePanel().getPlayers();
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(viewGame.getGamePanel().getPlayers()[0]);
+		players.add(viewGame.getGamePanel().getPlayers()[1]);
 		
 		for(Map map :maps){
 
@@ -112,7 +113,7 @@ public class ControllerGame implements Runnable, KeyListener {
 				for(Player player: players){
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
 						player.getInventary().getItems().add(item);
-						player.setPoints(player.getPoints()+10);
+						player.setPoints(player.getPoints()+item.getPontos());
 						player.getHero().setVida(player.getHero().getVida()+10);
 						item.setCapturado(true);
 					}
