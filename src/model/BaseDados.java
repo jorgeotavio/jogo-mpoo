@@ -16,7 +16,8 @@ public class BaseDados {
 
 	private static XStream xStream = new XStream(new Dom4JDriver());
 	private static File dadosFile = new File( "res/players.xml");
-
+	private static File pontuacoesFile = new File("res/pontuacoes.xml");
+	
 	public static boolean salvarPlayer(Player player) {
 
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -96,6 +97,53 @@ public class BaseDados {
 			}
 		}
 		return new ArrayList<Player>();
+	}
+	
+	public static void atualizarPontuacao(Player player, int idMap) {
+		
+		ArrayList<Pontuacao> pontuacoes = new ArrayList<Pontuacao>();
+		xStream.alias("Pontuacao", Pontuacao.class);
+		
+		try {
+			ArrayList<Pontuacao> pontuacoesArquivo = BaseDados.getPontuacoes();
+
+			boolean gravou = false;
+
+			for(Pontuacao p: pontuacoesArquivo) {
+				if(p.getNomePlayer().equalsIgnoreCase(player.getName())) {
+					p.setPontos(player.getPoints());
+					gravou = true;
+				}
+				pontuacoes.add(p);
+			}
+
+			if(!gravou) pontuacoes.add(new Pontuacao(player, idMap));
+
+			OutputStream stream = new FileOutputStream(pontuacoesFile);
+			xStream.toXML(pontuacoes, stream);
+			stream.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Pontuacao> getPontuacoes() {
+
+		xStream.alias("Pontuacao", Pontuacao.class);
+
+		if (pontuacoesFile.exists()) {
+			try {
+				InputStream stream = new FileInputStream(pontuacoesFile);
+				ArrayList<Pontuacao> pontuacaoArquivo = (ArrayList<Pontuacao>) xStream.fromXML(stream);
+				stream.close();
+				return pontuacaoArquivo;
+			} catch (Exception e) {
+				return new ArrayList<Pontuacao>(); 
+			}
+		}
+		return new ArrayList<Pontuacao>();
 	}
 
 }

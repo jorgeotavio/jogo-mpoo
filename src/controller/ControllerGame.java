@@ -21,7 +21,7 @@ public class ControllerGame implements Runnable, KeyListener {
 	private boolean pausado = false;
 	private boolean gameOver = false;
 	private boolean gameWin = false;
-	private int tempo = 0;
+	private int tempo;
 	private Timer timer;
 
 	public ControllerGame(ViewGame viewGame) {
@@ -41,13 +41,13 @@ public class ControllerGame implements Runnable, KeyListener {
 		
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().setRecordes(players);
+		
 		RegistrarNoJogo.registerMap(viewGame);
-
+		
 		this.viewGame.getGamePanel().getPlayers().forEach((player) -> {
 			ControllerHero ch = new ControllerHero(player.getHero());
 			viewGame.addKeyListener(ch);
 		});
-
 		registrarTempo();
 	}
 
