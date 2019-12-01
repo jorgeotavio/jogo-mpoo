@@ -59,7 +59,7 @@ public class ControllerGame implements Runnable, KeyListener {
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				tempo += 1;
+				if(!pausado) tempo += 1;
 				viewGame.getInfoPanel().setTempo(tempo);
 				if(tempo > 30) gameOver = true;
 			}

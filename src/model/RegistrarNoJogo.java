@@ -16,7 +16,7 @@ public class RegistrarNoJogo {
 			Camada mapa1_camada1 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_01.txt");
 			Camada mapa1_camada2 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_novo/camada_02.txt");
 			Camada mapa1_camada3 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_03.txt");
-
+			
 			mapa1_camada3.setCamadaColisao(true);
 
 			ArrayList<Camada> camadas = new ArrayList<Camada>();
