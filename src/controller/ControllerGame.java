@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -12,12 +14,12 @@ import model.Map;
 import model.Player;
 import model.RegistrarNoJogo;
 import view.ViewGame;
-import view.ViewPause;
+import view.ViewDialogo;
 
-public class ControllerGame implements Runnable, KeyListener {
+public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 	private ViewGame viewGame;
-	private ViewPause viewPause;
+	private ViewDialogo viewDialogo;
 	private boolean pausado = false;
 	private boolean gameOver = false;
 	private boolean gameWin = false;
@@ -28,23 +30,22 @@ public class ControllerGame implements Runnable, KeyListener {
 		this.viewGame = viewGame;
 		this.viewGame.addKeyListener(this);
 		this.viewGame.setVisible(true);
-		this.viewPause = new ViewPause();
-		viewPause.addKeyListener(this);
+		this.viewDialogo = new ViewDialogo();
+		this.viewDialogo.addKeyListener(this);
+
 		novoJogo();
 	}
 
 	public void novoJogo() {
-		
+
 		Player[] players = BaseDados.getPlayersSelecionados();
-		
-//		RegistrarNoJogo.registerPlayer(viewGame);
-		
+
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().setRecordes(BaseDados.getPontuacoes());
-		
+
 		RegistrarNoJogo.registerMap(viewGame);
-		
-		
+
+
 		for (int i = 0; i< players.length; i++){
 			ControllerHero ch = new ControllerHero(players[i].getHero());
 			viewGame.addKeyListener(ch);
@@ -59,9 +60,17 @@ public class ControllerGame implements Runnable, KeyListener {
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				if(!pausado) tempo += 1;
-				viewGame.getInfoPanel().setTempo(tempo);
-				if(tempo > 30) gameOver = true;
+
+				if(!viewDialogo.isVisible()) {
+					tempo += 1;
+					viewGame.getInfoPanel().setTempo(tempo);
+				}
+
+				if(tempo > 30) {
+					gameOver = true;
+					viewDialogo.setMensagem("<html>O tempo esgotou!<br/> GAME OVER!");
+					viewDialogo.setVisible(true);
+				}
 			}
 		};
 
@@ -99,14 +108,17 @@ public class ControllerGame implements Runnable, KeyListener {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(viewGame.getGamePanel().getPlayers()[0]);
 		players.add(viewGame.getGamePanel().getPlayers()[1]);
-		
+
 		for(Map map :maps){
 
 			if(!map.isActivated()) break;
 
-			if (map.getItens().size() == 0) {
+			if (map.getItens().size() == 0 && !gameWin) {
 				players.forEach(player -> BaseDados.atualizarPontuacao(player, 1));
+				this.viewDialogo.setMensagem("<html>Parabéns!!<br/>Você ganhoouu!!");
+				this.viewDialogo.setVisible(true);
 				gameWin = true;
+				return;
 			}
 
 			for(Objeto item: map.getItens()){
@@ -139,10 +151,10 @@ public class ControllerGame implements Runnable, KeyListener {
 	@Override
 	public void run() {
 		while ( true ) {
-			
+
 			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
-			
-			if (pausado) {
+
+			if (viewDialogo.isVisible()) {
 				for (KeyListener kl: viewGame.getKeyListeners()) {
 					if(kl instanceof ControllerHero) {
 						((ControllerHero) kl).getKeyPool().clear();
@@ -150,18 +162,7 @@ public class ControllerGame implements Runnable, KeyListener {
 				}
 				continue;
 			}
-			
-			if (gameWin) {
-				timer.cancel();
-				timer.purge();
-				gameWin = false;
-				novoJogo();
-			}
 
-			if (gameOver) {
-				
-			}
-			
 			checarColisoes();
 			checarObjetivos();
 
@@ -180,8 +181,27 @@ public class ControllerGame implements Runnable, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			pausado = !pausado;
-			viewPause.setVisible(pausado);
+			if (!gameOver && !gameWin) {
+				pausado = !pausado;
+				viewDialogo.setMensagem("JOGO PAUSADO!");
+				viewDialogo.setVisible(pausado);				
+			}else if(gameOver || gameWin){ 
+				timer.cancel();
+				timer.purge();
+				viewDialogo.setVisible(false);
+				gameOver = false;
+				gameWin = false;
+				novoJogo();
+			}
+		}
+
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			gameOver = false;
+			gameWin = false;
+			timer.cancel();
+			timer.purge();
+			viewDialogo.setVisible(false);
+			novoJogo();
 		}
 
 	}
@@ -193,6 +213,12 @@ public class ControllerGame implements Runnable, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
 	}
