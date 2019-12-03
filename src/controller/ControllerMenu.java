@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import view.ViewAbout;
 import view.ViewGame;
 import view.ViewMenu;
+import view.ViewTutorial;
 
 public class ControllerMenu implements ActionListener{
 	
@@ -13,12 +14,14 @@ public class ControllerMenu implements ActionListener{
 	private ViewAbout viewAbout;
 	private Thread gameThread;
 	private ViewGame viewGame;
+	private ViewTutorial viewTutorial;
 	
 	public ControllerMenu(ViewMenu telaMenu, ViewGame viewGame) {
 		this.viewMenu = telaMenu;
 		this.viewMenu.setVisible(true);
 		this.viewGame = viewGame;
 		viewAbout = new ViewAbout();
+		viewTutorial = new ViewTutorial();
 		controll();
 	}
 	
@@ -40,6 +43,11 @@ public class ControllerMenu implements ActionListener{
 
 		viewMenu.getLeaveButton().addActionListener((e) -> {
 			System.exit(0);
+		});
+		
+		viewMenu.getTutorialButton().addActionListener((e) -> {
+			viewTutorial.setVisible(true);
+			viewMenu.setVisible(false);
 		});
 
 		viewAbout.getBackButton().addActionListener((e)->{
