@@ -54,6 +54,11 @@ public class ControllerMenu implements ActionListener{
 			viewAbout.setVisible(false);
 			viewMenu.setVisible(true);
 		});
+		
+		viewTutorial.getBackButton().addActionListener((e)->{
+			viewTutorial.setVisible(false);
+			viewMenu.setVisible(true);
+		});
 	}
 	
 	@Override
