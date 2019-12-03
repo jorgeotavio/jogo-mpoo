@@ -115,10 +115,10 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 			if (map.getItens().size() == 0 && !gameWin) {
 				players.forEach(player -> BaseDados.atualizarPontuacao(player, 1));
-				this.viewDialogo.setMensagem("<html>Parabéns!!<br/>Você ganhoouu!!");
+				this.viewDialogo.setMensagem("<html>Parabéns!!<br/>Vocês ganharam!!");
 				this.viewDialogo.setVisible(true);
 				gameWin = true;
-				return;
+				break;
 			}
 
 			for(Objeto item: map.getItens()){

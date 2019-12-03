@@ -43,18 +43,6 @@ public class ViewMenu extends AbstractView{
 		
 	}
 
-	public JLabel getTitleLabel() {
-		return titleLabel;
-	}
-
-	public void setTitleLabel(JLabel titleLabel) {
-		this.titleLabel = titleLabel;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public JButton getStartSoloButton() {
 		return startSoloButton;
 	}
