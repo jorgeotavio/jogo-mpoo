@@ -10,17 +10,20 @@ public class ViewTutorial extends AbstractView{
 	public ViewTutorial() {
 		
 		descriptionLabel = new JLabel(
-				"<html><div style='font-size: 16; padding: 10px'>"
+				"<html>"
+				+ "<div style='font-size: 20;'>Tutorial </div><br/> "
 				+ "Nesse jogo você terá que pegar o máximo de <br/>"
 				+ "frutas possível, em um determinado periodo de tempo,<br/>"
 				+ "para controlar as irmâs serão respectivamente.<br/>"
 				+ "<hr/>"
-				+ "Judith -> W-frente <br/> "
+				+ "<div style='font-size: 16;'>Judith: </div><br/> "
+				+ "			 W-frente <br/> "
 				+ "			 S-Trás <br/> "
 				+ "			 F-Direita <br/> "
 				+ "			 A-Esquerda"
 				+ "<hr/>"
-				+ "Joana -> Seta cima-frente <br/>"
+				+ "<div style='font-size: 16;'>Joana: </div><br/>"
+				+ "			Seta cima-frente <br/>"
 				+ "			Seta baixo-Trás <br/> "
 				+ "			Seta direita-Direita<br/>"
 				+ "			Seta esquerda-Esquerda"
