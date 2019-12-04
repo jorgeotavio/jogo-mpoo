@@ -56,7 +56,7 @@ public class ControllerMenu implements ActionListener{
 			viewMenu.setVisible(false);
 		}
 		
-		if(e.getSource() == viewMenu.getTutorialButton()) {
+		if (e.getSource() == viewMenu.getTutorialButton()) {
 			viewTutorial.setVisible(true);
 			viewMenu.setVisible(false);
 		}
