@@ -50,7 +50,6 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			}
 		}
 
-
 		for (int i = 0; i< players.length; i++){
 			ControllerHero ch = new ControllerHero(players[i].getHero());
 			viewGame.addKeyListener(ch);
