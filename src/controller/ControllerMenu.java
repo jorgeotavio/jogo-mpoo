@@ -26,17 +26,11 @@ public class ControllerMenu implements ActionListener{
 	}
 
 	public void controll() {
-
 		viewMenu.getStartSoloButton().addActionListener(this);
-
 		viewMenu.getAboutButton().addActionListener(this);
-
 		viewMenu.getLeaveButton().addActionListener(this);
-
 		viewMenu.getTutorialButton().addActionListener(this);
-
 		viewAbout.getBackButton().addActionListener(this);
-
 		viewTutorial.getBackButton().addActionListener(this);
 	}
 
