@@ -32,7 +32,7 @@ public class GamePanel extends JPanel{
 				g2d.drawImage(camada.getCamada(), 0, 0, this);
 			});
 			
-			map.getItens().forEach((item)->{
+			map.getObjetos().forEach((item)->{
 				g2d.drawString("+"+item.getPontos(), item.getPosX()-5, item.getPosY()-5);
 				g2d.drawImage(item.getImagem(), item.getPosX(), item.getPosY(), this);
 			});

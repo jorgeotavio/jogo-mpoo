@@ -43,7 +43,12 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().setRecordes(BaseDados.getPontuacoes());
 
-		RegistrarNoJogo.registerMap(viewGame);
+		for(Map map: viewGame.getGamePanel().getMaps()) {
+			if(map.isActivated()) {
+				map.setObjetos(RegistrarNoJogo.gerarFrutas());
+				break;
+			}
+		}
 
 
 		for (int i = 0; i< players.length; i++){
@@ -113,7 +118,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 			if(!map.isActivated()) break;
 
-			if (map.getItens().size() == 0 && !gameWin) {
+			if (map.getObjetos().size() == 0 && !gameWin) {
 				players.forEach(player -> BaseDados.atualizarPontuacao(player, 1));
 				this.viewDialogo.setMensagem("<html>Parabéns!!<br/>Vocês ganharam!!");
 				this.viewDialogo.setVisible(true);
@@ -121,7 +126,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 				break;
 			}
 
-			for(Objeto item: map.getItens()){
+			for(Objeto item: map.getObjetos()){
 				for(Player player: players){
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
 						player.getInventary().getItems().add(item);
@@ -132,20 +137,12 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 				}
 
 				if(item.isCapturado()) {
-					map.getItens().remove(item);
+					map.getObjetos().remove(item);
 					break;
 				}
 			}
 
 		};
-	}
-
-	public boolean isPausado() {
-		return pausado;
-	}
-
-	public void setPausado(boolean pausado) {
-		this.pausado = pausado;
 	}
 
 	@Override

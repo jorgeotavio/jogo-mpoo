@@ -6,12 +6,12 @@ public class Map {
 	
 	private boolean activated;
 	private ArrayList<Camada> camadas;
-	private ArrayList<Objeto> itens;
+	private ArrayList<Objeto> objetos;
 
-	public Map(ArrayList<Camada> camadas, ArrayList<Objeto> itens) {
+	public Map(ArrayList<Camada> camadas) {
 		this.activated = false;
 		this.camadas = camadas;
-		this.itens = itens;
+		this.objetos = new ArrayList<Objeto>();;
  	}
 	
 	public boolean isActivated() {
@@ -30,12 +30,12 @@ public class Map {
 		this.camadas = camadas;
 	}
 
-	public ArrayList<Objeto> getItens() {
-		return itens;
+	public ArrayList<Objeto> getObjetos() {
+		return objetos;
 	}
 
-	public void setItens(ArrayList<Objeto> itens) {
-		this.itens = itens;
+	public void setObjetos(ArrayList<Objeto> itens) {
+		this.objetos = itens;
 	}
 	
 }

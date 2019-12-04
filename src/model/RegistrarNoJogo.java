@@ -25,44 +25,10 @@ public class RegistrarNoJogo {
 			camadas.add(mapa1_camada2);
 			camadas.add(mapa1_camada3);
 
-			Random random = new Random();
-			ArrayList<Objeto> itens = new ArrayList<Objeto>();
-			
-			String[] arquivos = new String[3];
-			arquivos[0] = "img/objetos/frutas/maca_item.png";
-			arquivos[1] = "img/objetos/frutas/melancia_item.png";
-			arquivos[2] = "img/objetos/frutas/banana_item.png";
-			
-			String[] frutas = new String[3];
-			frutas[0] = "Maçã";
-			frutas[1] = "Melancia";
-			frutas[2] = "Banana";
-			
-			int[] pontos = new int[3];
-			pontos[0] = 10;
-			pontos[1] = 30;
-			pontos[2] = 15;
-			
-			int totalItems = 30;
-			
-			int[][] coordenadas = new int[totalItems][2];
-			
-			for (int i = 0; i<totalItems; i++) {
-				for (int j = 0 ;j <= 1 ; j++) {
-					
-					if (j == 0) coordenadas[i][j] =  random.nextInt(450)+100;
-					else coordenadas[i][j] = random.nextInt(250)+50;
-				
-				}
-				int index = random.nextInt(3);
-				itens.add(new Objeto(frutas[index], arquivos[index],coordenadas[i][0], coordenadas[i][1], pontos[index]));
-			}
-
-
-			Map mapa = new Map(camadas, itens);
+			Map mapa = new Map(camadas);
 			mapa.setActivated(true);
-
-			Map mapa2 = new Map(camadas, itens);
+			
+			Map mapa2 = new Map(camadas);
 			mapa2.setActivated(false);
 
 			ArrayList<Map> maps = new ArrayList<Map>();
@@ -76,7 +42,44 @@ public class RegistrarNoJogo {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public static ArrayList<Objeto> gerarFrutas() {
+		Random random = new Random();
+		ArrayList<Objeto> itens = new ArrayList<Objeto>();
+		
+		String[] arquivos = new String[3];
+		arquivos[0] = "img/objetos/frutas/maca_item.png";
+		arquivos[1] = "img/objetos/frutas/melancia_item.png";
+		arquivos[2] = "img/objetos/frutas/banana_item.png";
+		
+		String[] frutas = new String[3];
+		frutas[0] = "Maçã";
+		frutas[1] = "Melancia";
+		frutas[2] = "Banana";
+		
+		int[] pontos = new int[3];
+		pontos[0] = 10;
+		pontos[1] = 30;
+		pontos[2] = 15;
+		
+		int totalItems = 30;
+		
+		int[][] coordenadas = new int[totalItems][2];
+		
+		for (int i = 0; i<totalItems; i++) {
+			for (int j = 0 ;j <= 1 ; j++) {
+				
+				if (j == 0) coordenadas[i][j] =  random.nextInt(450)+100;
+				else coordenadas[i][j] = random.nextInt(250)+50;
+			
+			}
+			int index = random.nextInt(3);
+			itens.add(new Objeto(frutas[index], arquivos[index],coordenadas[i][0], coordenadas[i][1], pontos[index]));
+		}
+		
+		return itens;
+	}
+	
 	public static void registerPlayer(ViewGame viewGame) {
 
 		Player player = new Player("Joao");
