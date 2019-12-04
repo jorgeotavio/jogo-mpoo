@@ -9,13 +9,13 @@ import view.ViewMenu;
 import view.ViewTutorial;
 
 public class ControllerMenu implements ActionListener{
-	
+
 	private ViewMenu viewMenu;
 	private ViewAbout viewAbout;
 	private Thread gameThread;
 	private ViewGame viewGame;
 	private ViewTutorial viewTutorial;
-	
+
 	public ControllerMenu(ViewMenu telaMenu, ViewGame viewGame) {
 		this.viewMenu = telaMenu;
 		this.viewMenu.setVisible(true);
@@ -24,61 +24,52 @@ public class ControllerMenu implements ActionListener{
 		viewTutorial = new ViewTutorial();
 		controll();
 	}
-	
+
 	public void controll() {
-		
-		viewMenu.getStartSoloButton().addActionListener((e)-> {
-			this.viewMenu.setVisible(false);
-			
-			gameThread = new Thread(
-				new ControllerGame(this.viewGame)
-			);
-			gameThread.start();
-		});
 
-		viewMenu.getAboutButton().addActionListener((e) -> {
-			viewAbout.setVisible(true);
-			viewMenu.setVisible(false);
-		});
+		viewMenu.getStartSoloButton().addActionListener(this);
 
-		viewMenu.getLeaveButton().addActionListener((e) -> {
-			System.exit(0);
-		});
-		
-		viewMenu.getTutorialButton().addActionListener((e) -> {
-			viewTutorial.setVisible(true);
-			viewMenu.setVisible(false);
-		});
+		viewMenu.getAboutButton().addActionListener(this);
 
-		viewAbout.getBackButton().addActionListener((e)->{
-			viewAbout.setVisible(false);
-			viewMenu.setVisible(true);
-		});
-		
-		viewTutorial.getBackButton().addActionListener((e)->{
-			viewTutorial.setVisible(false);
-			viewMenu.setVisible(true);
-		});
+		viewMenu.getLeaveButton().addActionListener(this);
+
+		viewMenu.getTutorialButton().addActionListener(this);
+
+		viewAbout.getBackButton().addActionListener(this);
+
+		viewTutorial.getBackButton().addActionListener(this);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//
-	}
 
-	public ViewMenu getViewMenu() {
-		return viewMenu;
-	}
+		if (e.getSource() == viewMenu.getLeaveButton()) System.exit(0);
 
-	public void setViewMenu(ViewMenu viewMenu) {
-		this.viewMenu = viewMenu;
-	}
+		if (e.getSource() == viewMenu.getStartSoloButton()) {
+			this.viewMenu.setVisible(false);
+			gameThread = new Thread(new ControllerGame(this.viewGame));
+			gameThread.start();
+		}
 
-	public ViewAbout getViewAbout() {
-		return viewAbout;
-	}
+		if (e.getSource() == viewMenu.getAboutButton()) {
+			viewAbout.setVisible(true);
+			viewMenu.setVisible(false);
+		}
+		
+		if(e.getSource() == viewMenu.getTutorialButton()) {
+			viewTutorial.setVisible(true);
+			viewMenu.setVisible(false);
+		}
+		
+		if (e.getSource() == viewAbout.getBackButton()) {
+			viewAbout.setVisible(false);
+			viewMenu.setVisible(true);
+		}
+		
+		if (e.getSource() == viewTutorial.getBackButton()){
+			viewTutorial.setVisible(false);
+			viewMenu.setVisible(true);
+		}
 
-	public void setViewAbout(ViewAbout viewAbout) {
-		this.viewAbout = viewAbout;
 	}
 }
