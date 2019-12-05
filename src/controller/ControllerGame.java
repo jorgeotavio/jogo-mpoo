@@ -23,7 +23,8 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 	private boolean pausado = false;
 	private boolean gameOver = false;
 	private boolean gameWin = false;
-	private int tempo;
+	private double duracaoObjetivo = 30;
+	private double tempoDecorrido;
 	private Timer timer;
 
 	public ControllerGame(ViewGame viewGame) {
@@ -32,13 +33,13 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		this.viewGame.setVisible(true);
 		this.viewDialogo = new ViewDialogo();
 		this.viewDialogo.addKeyListener(this);
-
+		
 		novoJogo();
 	}
 
 	public void novoJogo() {
-
-		Player[] players = BaseDados.getPlayersSelecionados();
+		
+		Player[] players = RegistrarNoJogo.gerarPlayers();
 
 		this.viewGame.getGamePanel().setPlayers(players);
 		this.viewGame.getInfoPanel().setRecordes(BaseDados.getPontuacoes());
@@ -54,23 +55,24 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			ControllerHero ch = new ControllerHero(players[i].getHero());
 			viewGame.addKeyListener(ch);
 		}
-		registrarTempo();
+		
+		iniciarTimerObjetivo();
 	}
 
-	public void registrarTempo() {	
-		tempo = 0;
-
+	public void iniciarTimerObjetivo() {
+		
+		tempoDecorrido = 0;
+		
 		timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-
-				if(!viewDialogo.isVisible()) {
-					tempo += 1;
-					viewGame.getInfoPanel().setTempo(tempo);
-				}
-
-				if(tempo > 30) {
+				
+				if(viewDialogo.isVisible()) return;
+				
+				tempoDecorrido += 0.1;
+				viewGame.getInfoPanel().setTempo(tempoDecorrido);
+				if(tempoDecorrido >= duracaoObjetivo) {
 					gameOver = true;
 					viewDialogo.setMensagem("<html>O tempo esgotou!<br/> GAME OVER!");
 					viewDialogo.setVisible(true);
@@ -78,7 +80,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			}
 		};
 
-		timer.scheduleAtFixedRate(timerTask, 10, 1000);
+		timer.scheduleAtFixedRate(timerTask, 10, 100);
 	}
 
 
@@ -128,7 +130,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			for(Objeto item: map.getObjetos()){
 				for(Player player: players){
 					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
-						player.getInventary().getItems().add(item);
+						player.getHero().getInventary().getItems().add(item);
 						player.setPoints(player.getPoints()+item.getPontos());
 						player.getHero().setVida(player.getHero().getVida()+10);
 						item.setCapturado(true);

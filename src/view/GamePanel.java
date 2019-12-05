@@ -8,14 +8,12 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import model.Enemy;
 import model.Map;
 import model.Player;
 
 public class GamePanel extends JPanel{
 	
 	private static final long serialVersionUID = 3027613679265920713L;
-	private ArrayList<Enemy> enemies;
 	private Player[] players = new Player[2];
 	private ArrayList<Map> maps;
 	
@@ -57,14 +55,6 @@ public class GamePanel extends JPanel{
 
 	public void setMaps(ArrayList<Map> maps) {
 		this.maps = maps;
-	}
-
-	public ArrayList<Enemy> getEnemies() {
-		return enemies;
-	}
-
-	public void setEnemies(ArrayList<Enemy> enemies) {
-		this.enemies = enemies;
 	}
 
 	public Player[] getPlayers() {

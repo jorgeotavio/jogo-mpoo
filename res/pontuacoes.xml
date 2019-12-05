@@ -3,12 +3,22 @@
 <list>
   <Pontuacao>
     <nomePlayer>Joao</nomePlayer>
-    <pontos>260</pontos>
+    <pontos>0</pontos>
     <idMap>1</idMap>
   </Pontuacao>
   <Pontuacao>
     <nomePlayer>Maria</nomePlayer>
-    <pontos>365</pontos>
+    <pontos>0</pontos>
+    <idMap>1</idMap>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Joana</nomePlayer>
+    <pontos>380</pontos>
+    <idMap>1</idMap>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Judith</nomePlayer>
+    <pontos>205</pontos>
     <idMap>1</idMap>
   </Pontuacao>
 </list>

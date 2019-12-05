@@ -1,22 +1,14 @@
 package model;
 
-public class Player implements Cloneable {
+public class Player {
 	
 	private String name;
 	private Hero hero;
 	private int points;
-	private Inventary inventary;
-	private boolean venceu = false;
 	
 	public Player(String name) {
 		this.name = name;
-		inventary = new Inventary();
 	}
-
-	@Override
-    public Player clone() throws CloneNotSupportedException {
-        return (Player) super.clone();
-    }
 	
 	public String getName() {
 		return name;
@@ -41,21 +33,4 @@ public class Player implements Cloneable {
 	public void setPoints(int point) {
 		this.points = point;
 	}
-
-	public Inventary getInventary() {
-		return inventary;
-	}
-
-	public void setInventary(Inventary inventary) {
-		this.inventary = inventary;
-	}
-
-	public boolean isVenceu() {
-		return venceu;
-	}
-
-	public void setVenceu(boolean venceu) {
-		this.venceu = venceu;
-	}
-	
 }

@@ -80,9 +80,9 @@ public class RegistrarNoJogo {
 		return itens;
 	}
 	
-	public static void registerPlayer(ViewGame viewGame) {
+	public static Player[] gerarPlayers() {
 
-		Player player = new Player("Joao");
+		Player player = new Player("Joana");
 		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 26, 250);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
 		comandos1.put("UP", KeyEvent.VK_UP);
@@ -92,7 +92,7 @@ public class RegistrarNoJogo {
 		Hero hero = new Hero(sprite, comandos1);
 		player.setHero(hero);
 
-		Player player2 = new Player("Maria");
+		Player player2 = new Player("Judith");
 		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 2, 6, 4, 24, 200);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
@@ -102,13 +102,11 @@ public class RegistrarNoJogo {
 		Hero hero2 = new Hero(sprite2, comandos2);
 		player2.setHero(hero2);
 
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player2);
-		players.add(player);
-		BaseDados.salvarPlayer(player);
-		BaseDados.salvarPlayer(player2);
+		Player[] players = new Player[2];
+		players[0] = player;
+		players[1] = player2;
 
-		//viewGame.getGamePanel().setPlayers(players);
+		return players;
 //		viewGame.getInfoPanel().setRecordes(players);
 //		viewGame.getInfoPanel().(players);
 	}

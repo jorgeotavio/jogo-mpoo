@@ -73,7 +73,7 @@ public class InfoPanel extends JPanel {
 
 	}
 
-	public void setTempo(int tempo) {
-		this.tempoLabel.setText(Integer.toString(tempo));
+	public void setTempo(double tempo) {
+		this.tempoLabel.setText(Double.toString(tempo));
 	}
 }

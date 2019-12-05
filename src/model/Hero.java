@@ -10,11 +10,13 @@ public class Hero {
 	private String direcao;
 	private HashMap<String, Integer> comandos;
 	private int vida = 100;
+	private Inventary inventary;
 	private Rectangle retangulo;
 
 	public Hero(Sprite sprite, HashMap<String, Integer> comandos) {
 		this.sprite = sprite;
 		this.comandos = comandos;
+		this.inventary = new Inventary();
 	}
 
 	public void parar() {
@@ -97,4 +99,7 @@ public class Hero {
 			this.vida = vida;
 	}
 
+	public Inventary getInventary() {
+		return inventary;
+	}
 }
