@@ -7,8 +7,8 @@ public class Pontuacao {
 	private int idMap;
 	
 	public Pontuacao(Player player, int idMap) {
-		this.nomePlayer = player.getName();
-		this.pontos = player.getPoints();
+		this.nomePlayer = player.getNome();
+		this.pontos = player.getPontos();
 		this.idMap = idMap;
 	}
 

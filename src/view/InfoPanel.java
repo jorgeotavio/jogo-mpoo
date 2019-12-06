@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import model.Hero;
 import model.Player;
 import model.Pontuacao;
 
@@ -57,9 +59,9 @@ public class InfoPanel extends JPanel {
 		add(player2Label);
 	}
 
-	public void atualizarPontuacao(Player[] players) {
+	public void atualizarPontuacao(Hero[] heros) {
 		for(int i=0; i < pontosTempoReal.size(); i++) {
-			this.pontosTempoReal.get(i).setText(players[i].getName()+": "+Integer.toString(players[i].getPoints()));
+			this.pontosTempoReal.get(i).setText(heros[i].getPlayer().getNome()+": "+Integer.toString(heros[i].getPlayer().getPontos()));
 		}
 	}
 
@@ -73,7 +75,7 @@ public class InfoPanel extends JPanel {
 
 	}
 
-	public void setTempo(double tempo) {
-		this.tempoLabel.setText(Double.toString(tempo));
+	public void setTempo(int tempo) {
+		this.tempoLabel.setText(Integer.toString(tempo));
 	}
 }

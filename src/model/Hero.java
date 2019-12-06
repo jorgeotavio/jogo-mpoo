@@ -1,10 +1,14 @@
 package model;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Rectangle;
 import java.util.HashMap;
 
 public class Hero {
 
+	private Player player;
+	private String nome;
 	private Sprite sprite;
 	private int velocidade = 2;
 	private String direcao;
@@ -12,11 +16,14 @@ public class Hero {
 	private int vida = 100;
 	private Inventary inventary;
 	private Rectangle retangulo;
+	private AudioClip pegarObjeto;
 
-	public Hero(Sprite sprite, HashMap<String, Integer> comandos) {
+	public Hero(String nome, Sprite sprite, HashMap<String, Integer> comandos) {
 		this.sprite = sprite;
 		this.comandos = comandos;
+		this.nome = nome;
 		this.inventary = new Inventary();
+		this.pegarObjeto = Applet.newAudioClip(Som.class.getResource("/sounds/pegar_objeto.wav"));
 	}
 
 	public void parar() {
@@ -59,6 +66,10 @@ public class Hero {
 			
 		}
 	}
+	
+	public void somPegandoObjeto() {
+		this.pegarObjeto.play();
+	}
 
 	public Sprite getSprite() {
 		return this.sprite;
@@ -99,7 +110,19 @@ public class Hero {
 			this.vida = vida;
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	public Inventary getInventary() {
 		return inventary;
+	}
+
+	public String getNome() {
+		return nome;
 	}
 }

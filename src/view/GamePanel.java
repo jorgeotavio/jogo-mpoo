@@ -8,13 +8,16 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import model.Destrutor;
+import model.Hero;
 import model.Map;
+import model.Objeto;
 import model.Player;
 
 public class GamePanel extends JPanel{
 	
 	private static final long serialVersionUID = 3027613679265920713L;
-	private Player[] players = new Player[2];
+	private Hero[] heros = new Hero[2];
 	private ArrayList<Map> maps;
 	
 	@Override
@@ -36,16 +39,25 @@ public class GamePanel extends JPanel{
 			});
 		});
 		
-		for (int i = 0; i<players.length; i++) {
-			BufferedImage[] sprites = players[i].getHero().getSprite().getSprites();
-			g2d.drawString(players[i].getName(), players[i].getHero().getSprite().getPosX(), players[i].getHero().getSprite().getPosY()-8);
-			g2d.drawRect(players[i].getHero().getSprite().getPosX(), players[i].getHero().getSprite().getPosY()-5, 25, 5);
-			g2d.fillRect(players[i].getHero().getSprite().getPosX(), players[i].getHero().getSprite().getPosY()-5, players[i].getHero().getVida()/4, 5);
-			g2d.drawImage(sprites[players[i].getHero().getSprite().getAparencia()], 
-					players[i].getHero().getSprite().getPosX(), players[i].getHero().getSprite().getPosY(), this);
-			sprites = null;
-			System.gc();
+		for (int i = 0; i<heros.length; i++) {
+			BufferedImage[] sprites = heros[i].getSprite().getSprites();
+			
+			g2d.drawString(heros[i].getNome(), heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY()-8);
+			g2d.drawRect(heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY()-5, 25, 5);
+			g2d.fillRect(heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY()-5, heros[i].getVida()/4, 5);
+			g2d.drawImage(sprites[heros[i].getSprite().getAparencia()], 
+					heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY(), this);
+			
+			Destrutor.destroyer(sprites);
 		}
+		
+		for (int i = 0; i<heros.length; i++) {
+			for(Objeto objeto: heros[i].getInventary().getItems()){
+				g2d.drawString(objeto.getNome(), 30, 8);
+				g2d.drawImage(objeto.getImagem(), 40, 30, this);
+			}
+		}
+		
 		g2d.dispose();
 	}
 	
@@ -57,12 +69,11 @@ public class GamePanel extends JPanel{
 		this.maps = maps;
 	}
 
-	public Player[] getPlayers() {
-		return players;
+	public Hero[] getHeros() {
+		return heros;
 	}
 
-	public void setPlayers(Player[] players) {
-		this.players = players;
+	public void setHeros(Hero[] heros) {
+		this.heros = heros;
 	}
-	
 }

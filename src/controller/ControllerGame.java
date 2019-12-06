@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import model.Objeto;
 import model.BaseDados;
+import model.Hero;
 import model.Map;
 import model.Player;
 import model.RegistrarNoJogo;
@@ -23,25 +24,35 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 	private boolean pausado = false;
 	private boolean gameOver = false;
 	private boolean gameWin = false;
-	private double duracaoObjetivo = 30;
-	private double tempoDecorrido;
+	private int duracaoObjetivo = 30;
+	private int tempoDecorrido;
 	private Timer timer;
+	private ArrayList<Map> maps;
+	private ArrayList<Hero> heros;
 
 	public ControllerGame(ViewGame viewGame) {
 		this.viewGame = viewGame;
 		this.viewGame.addKeyListener(this);
 		this.viewGame.setVisible(true);
+		
 		this.viewDialogo = new ViewDialogo();
 		this.viewDialogo.addKeyListener(this);
+
+		this.maps = viewGame.getGamePanel().getMaps();
+		this.heros = new ArrayList<Hero>();
 		
 		novoJogo();
+		
 	}
 
 	public void novoJogo() {
 		
-		Player[] players = RegistrarNoJogo.gerarPlayers();
+		gameOver = false;
+		gameWin = false;
+		
+		Hero[] novosHeros = RegistrarNoJogo.gerarHerois();
 
-		this.viewGame.getGamePanel().setPlayers(players);
+		this.viewGame.getGamePanel().setHeros(novosHeros);
 		this.viewGame.getInfoPanel().setRecordes(BaseDados.getPontuacoes());
 
 		for(Map map: viewGame.getGamePanel().getMaps()) {
@@ -50,9 +61,13 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 				break;
 			}
 		}
-
-		for (int i = 0; i< players.length; i++){
-			ControllerHero ch = new ControllerHero(players[i].getHero());
+		
+		this.heros.clear();
+		this.heros.add(viewGame.getGamePanel().getHeros()[0]);
+		this.heros.add(viewGame.getGamePanel().getHeros()[1]);
+		
+		for (int i = 0; i< novosHeros.length; i++){
+			ControllerHero ch = new ControllerHero(novosHeros[i]);
 			viewGame.addKeyListener(ch);
 		}
 		
@@ -70,25 +85,25 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 				
 				if(viewDialogo.isVisible()) return;
 				
-				tempoDecorrido += 0.1;
+				tempoDecorrido += 1;
 				viewGame.getInfoPanel().setTempo(tempoDecorrido);
 				if(tempoDecorrido >= duracaoObjetivo) {
-					gameOver = true;
 					viewDialogo.setMensagem("<html>O tempo esgotou!<br/> GAME OVER!");
 					viewDialogo.setVisible(true);
 				}
 			}
 		};
 
-		timer.scheduleAtFixedRate(timerTask, 10, 100);
+		timer.scheduleAtFixedRate(timerTask, 10, 1000);
 	}
 
 
 	public void checarColisoes() {
 		ArrayList<Map> maps = viewGame.getGamePanel().getMaps();
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(viewGame.getGamePanel().getPlayers()[0]);
-		players.add(viewGame.getGamePanel().getPlayers()[1]);
+		ArrayList<Hero> heros = new ArrayList<Hero>();
+		heros.add(viewGame.getGamePanel().getHeros()[0]);
+		heros.add(viewGame.getGamePanel().getHeros()[1]);
+		
 		for(Map map :maps){
 
 			if(!map.isActivated())
@@ -100,9 +115,9 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 					return;
 
 				camada.getRectsColisao().forEach((rectangle) ->{
-					players.forEach((player)->{
-						if(rectangle.intersects(player.getHero().getRetangulo()))
-							player.getHero().parar();
+					heros.forEach((hero)->{
+						if(rectangle.intersects(hero.getRetangulo()))
+							hero.parar();
 					});
 				});
 			});
@@ -110,29 +125,26 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 	}
 
 	public void checarObjetivos() {
-		ArrayList<Map> maps = viewGame.getGamePanel().getMaps();
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(viewGame.getGamePanel().getPlayers()[0]);
-		players.add(viewGame.getGamePanel().getPlayers()[1]);
+		
 
 		for(Map map :maps){
 
 			if(!map.isActivated()) break;
 
 			if (map.getObjetos().size() == 0 && !gameWin) {
-				players.forEach(player -> BaseDados.atualizarPontuacao(player, 1));
+				heros.forEach(hero -> BaseDados.atualizarPontuacao(hero.getPlayer(), 1));
 				this.viewDialogo.setMensagem("<html>Parabéns!!<br/>Vocês ganharam!!");
 				this.viewDialogo.setVisible(true);
-				gameWin = true;
 				break;
 			}
 
 			for(Objeto item: map.getObjetos()){
-				for(Player player: players){
-					if(item.getRetangulo().intersects(player.getHero().getRetangulo())) {
-						player.getHero().getInventary().getItems().add(item);
-						player.setPoints(player.getPoints()+item.getPontos());
-						player.getHero().setVida(player.getHero().getVida()+10);
+				for(Hero hero: heros){
+					if(item.getRetangulo().intersects(hero.getRetangulo())) {
+						hero.getInventary().getItems().add(item);
+						hero.somPegandoObjeto();
+						hero.getPlayer().setPoints(hero.getPlayer().getPontos()+item.getPontos());
+						hero.setVida(hero.getVida()+10);
 						item.setCapturado(true);
 					}
 				}
@@ -148,15 +160,14 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 	@Override
 	public void run() {
-		while ( true ) {
+		while (true) {
 
 			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
 
 			if (viewDialogo.isVisible()) {
 				for (KeyListener kl: viewGame.getKeyListeners()) {
-					if(kl instanceof ControllerHero) {
+					if(kl instanceof ControllerHero) 
 						((ControllerHero) kl).getKeyPool().clear();
-					}
 				}
 				continue;
 			}
@@ -170,7 +181,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 				}
 			}
 
-			this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getPlayers());
+			this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getHeros());
 			this.viewGame.getGamePanel().repaint();
 		}
 
@@ -187,15 +198,11 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 				timer.cancel();
 				timer.purge();
 				viewDialogo.setVisible(false);
-				gameOver = false;
-				gameWin = false;
 				novoJogo();
 			}
 		}
 
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-			gameOver = false;
-			gameWin = false;
 			timer.cancel();
 			timer.purge();
 			viewDialogo.setVisible(false);

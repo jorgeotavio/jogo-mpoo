@@ -30,9 +30,9 @@ public class BaseDados {
 			boolean gravou = false;
 
 			for(Pontuacao p: pontuacoesArquivo) {
-				if(p.getNomePlayer().equalsIgnoreCase(player.getName())) {
-					if(p.getPontos() < player.getPoints())
-						p.setPontos(player.getPoints());
+				if(p.getNomePlayer().equalsIgnoreCase(player.getNome())) {
+					if(p.getPontos() < player.getPontos())
+						p.setPontos(player.getPontos());
 					gravou = true;
 				}
 				pontuacoes.add(p);

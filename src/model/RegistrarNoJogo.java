@@ -80,35 +80,33 @@ public class RegistrarNoJogo {
 		return itens;
 	}
 	
-	public static Player[] gerarPlayers() {
+	public static Hero[] gerarHerois() {
 
-		Player player = new Player("Joana");
+		Player player = new Player("NomePlayer1");
 		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 26, 250);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
 		comandos1.put("UP", KeyEvent.VK_UP);
 		comandos1.put("DOWN", KeyEvent.VK_DOWN);
 		comandos1.put("LEFT", KeyEvent.VK_LEFT);
 		comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
-		Hero hero = new Hero(sprite, comandos1);
-		player.setHero(hero);
-
-		Player player2 = new Player("Judith");
+		Hero hero = new Hero("Joana",sprite, comandos1);
+		hero.setPlayer(player);
+		
+		Player player2 = new Player("NomePlayer2");
 		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 2, 6, 4, 24, 200);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
 		comandos2.put("DOWN", KeyEvent.VK_S);
 		comandos2.put("LEFT", KeyEvent.VK_A);
 		comandos2.put("RIGHT", KeyEvent.VK_D);
-		Hero hero2 = new Hero(sprite2, comandos2);
-		player2.setHero(hero2);
+		Hero hero2 = new Hero("Judith", sprite2, comandos2);
+		hero2.setPlayer(player2);;
 
-		Player[] players = new Player[2];
-		players[0] = player;
-		players[1] = player2;
+		Hero[] heros = new Hero[2];
+		heros[0] = hero;
+		heros[1] = hero2;
 
-		return players;
-//		viewGame.getInfoPanel().setRecordes(players);
-//		viewGame.getInfoPanel().(players);
+		return heros;
 	}
 
 }

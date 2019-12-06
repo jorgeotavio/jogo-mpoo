@@ -10,7 +10,7 @@ public class Player {
 		this.name = name;
 	}
 	
-	public String getName() {
+	public String getNome() {
 		return name;
 	}
 
@@ -26,7 +26,7 @@ public class Player {
 		this.hero = hero;
 	}
 
-	public int getPoints() {
+	public int getPontos() {
 		return points;
 	}
 
