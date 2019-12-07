@@ -2,23 +2,13 @@
 
 <list>
   <Pontuacao>
-    <nomePlayer>Joana</nomePlayer>
-    <pontos>400</pontos>
-    <idMap>1</idMap>
-  </Pontuacao>
-  <Pontuacao>
-    <nomePlayer>Judith</nomePlayer>
-    <pontos>305</pontos>
-    <idMap>1</idMap>
-  </Pontuacao>
-  <Pontuacao>
     <nomePlayer>NomePlayer1</nomePlayer>
-    <pontos>325</pontos>
+    <pontos>290</pontos>
     <idMap>1</idMap>
   </Pontuacao>
   <Pontuacao>
     <nomePlayer>NomePlayer2</nomePlayer>
-    <pontos>210</pontos>
+    <pontos>195</pontos>
     <idMap>1</idMap>
   </Pontuacao>
 </list>
