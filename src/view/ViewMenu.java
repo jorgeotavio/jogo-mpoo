@@ -17,19 +17,19 @@ public class ViewMenu extends AbstractView{
 		titleLabel = new JLabel("See The Moon");
 		titleLabel.setBounds(210, 150, 500, 10);
 		
-		startSoloButton = new JButton("Start 1");
+		startSoloButton = new ButtonTeste("Start 1");
 		startSoloButton.setBounds(210, 200, 80, 30);
 		
-		startDuoButton = new JButton("Start 2");
+		startDuoButton = new ButtonTeste("Start 2");
 		startDuoButton.setBounds(210, 250, 80, 30);
 		
-		tutorialButton = new JButton("Tutorial");
+		tutorialButton = new ButtonTeste("Tutorial");
 		tutorialButton.setBounds(210, 300, 80, 30);
 		
-		aboutButton = new JButton("About");
+		aboutButton = new ButtonTeste("About");
 		aboutButton.setBounds(210, 350, 80, 30);
 		
-		leaveButton = new JButton("Leave");
+		leaveButton = new ButtonTeste("Leave");
 		leaveButton.setBounds(210, 400, 80, 30);
 		
 		add(titleLabel);
