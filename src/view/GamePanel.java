@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,7 +26,8 @@ public class GamePanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setFont(new Font("Impact", Font.PLAIN, 12));
-		
+		g2d.setColor (new Color(68, 8, 8));
+
 		for(Map map: maps){
 			if (!map.isActivated()) break;
 			
@@ -33,11 +35,11 @@ public class GamePanel extends JPanel{
 				g2d.drawImage(camada.getCamada(), 0, 0, this);
 			}
 			
-			map.getObjetos().forEach((item)->{
-				g2d.drawString(item.getNome(), item.getPosX(), item.getPosY());
-				g2d.draw(item.getRetangulo());
-			});
-		};
+			for(Objeto objeto: map.getObjetos()){
+				g2d.draw(objeto.getRetangulo());					
+				g2d.drawString(objeto.getNome(), objeto.getPosX()+3, objeto.getPosY()+13);
+			}
+		}
 		
 		for (int i = 0; i<heros.length; i++) {
 			BufferedImage[] sprites = heros[i].getSprite().getSprites();

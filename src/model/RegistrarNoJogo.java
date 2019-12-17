@@ -55,8 +55,9 @@ public class RegistrarNoJogo {
 			
 			int posX = random.nextInt(608)+16;
 			int posY = random.nextInt(448)+16;
+			int numero = random.nextInt(100);
 			
-			Objeto objetoNumero = new Objeto(Integer.toString(random.nextInt(100)), posX, posY, 10);
+			Objeto objetoNumero = new Objeto(Integer.toString(numero), posX, posY, 10, verificarPrimo(numero));
 			
 			boolean intersectou = false;
 			
@@ -67,10 +68,25 @@ public class RegistrarNoJogo {
 				}
 			}
 			
+			for(Objeto obj: objetosNumeros) {				
+				if (objetoNumero.getRetangulo().intersects(obj.getRetangulo())) {
+					intersectou = true;
+					break;
+				}
+			}
+			
 			if(!intersectou) objetosNumeros.add(objetoNumero);
 		}
 
 		return objetosNumeros;
+	}
+	
+	private static boolean verificarPrimo(int numero) {
+	    for (int j = 2; j < numero; j++) {
+	        if (numero % j == 0)
+	            return false;   
+	    }
+	    return true;
 	}
 
 	public static ArrayList<Objeto> gerarFrutas() {
