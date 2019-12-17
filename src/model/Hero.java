@@ -17,6 +17,7 @@ public class Hero {
 	private Inventary inventary;
 	private Rectangle retangulo;
 	private AudioClip pegarObjeto;
+	private boolean congelar = false;
 
 	public Hero(String nome, Sprite sprite, HashMap<String, Integer> comandos) {
 		this.sprite = sprite;
@@ -124,5 +125,13 @@ public class Hero {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public boolean isCongelar() {
+		return congelar;
+	}
+
+	public void setCongelar(boolean congelar) {
+		this.congelar = congelar;
 	}
 }

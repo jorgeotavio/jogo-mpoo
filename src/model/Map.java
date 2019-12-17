@@ -14,6 +14,14 @@ public class Map {
 		this.objetos = new ArrayList<Objeto>();;
  	}
 	
+	public Camada getCamadaColisao() {
+		for(Camada camada: camadas) {
+			if(camada.isCamadaColisao())
+				return camada;
+		}
+		return null;
+	}
+	
 	public boolean isActivated() {
 		return activated;
 	}

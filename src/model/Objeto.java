@@ -23,12 +23,23 @@ public class Objeto {
 		this.posY = posY;
 		this.pontos = pontos;
 		this.capturado = false;
-
+		
+		this.retangulo = new Rectangle(posX, posY, 16, 16);
+		
 		try {
 			this.imagem = ImageIO.read(new File(file));
 		}catch(Exception e ) {
 			e.printStackTrace();
 		}
+	}
+
+	public Objeto(String name, int posX, int posY, int pontos) {
+		this.name = name;
+		this.posX = posX;
+		this.posY = posY;
+		this.pontos = pontos;
+		this.capturado = false;
+		this.retangulo = new Rectangle(posX, posY, 16, 16);
 	}
 
 	public String getNome() {
@@ -44,7 +55,6 @@ public class Objeto {
 	}
 
 	public Rectangle getRetangulo() {
-		this.retangulo = new Rectangle(this.posX, this.posY, this.imagem.getWidth(), this.imagem.getHeight());
 		return retangulo;
 	}
 

@@ -82,13 +82,12 @@ public class Camada{
 		}
 	}
 	
-	public ArrayList<Rectangle> gerarColisoes() {
+	public ArrayList<Rectangle> colisoes() {
 		ArrayList<Rectangle> rectsColisao = new ArrayList<>();
 		for (int i = 0; i < mapaWidth; i++) {
 			for (int j = 0; j < mapaHeight; j++) {
-				if(mapa[i][j] > 1) {
+				if(mapa[i][j] > 0) 
 					rectsColisao.add(new Rectangle( (j * tileWidth), (i * tileWidth), tileWidth, tileWidth));
-				}
 			}
 		}
 		return rectsColisao;
@@ -99,7 +98,7 @@ public class Camada{
 	}
 
 	public void setCamadaColisao(boolean camadaColisao) {
-		this.rectsColisao = camadaColisao ? gerarColisoes() : null;
+		this.rectsColisao = camadaColisao ? colisoes() : null;
 		this.camadaColisao = camadaColisao;
 	}
 
