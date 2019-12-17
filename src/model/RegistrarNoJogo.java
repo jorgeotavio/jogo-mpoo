@@ -13,11 +13,11 @@ public class RegistrarNoJogo {
 
 	public static void registerMap( ViewGame viewGame) {
 		try {
-			Camada mapa1_camada1 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_01.txt");
-			Camada mapa1_camada2 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_novo/camada_02.txt");
-			Camada mapa1_camada3 = new Camada(23, 42, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_novo/camada_03.txt");
+			Camada mapa1_camada1 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_3va/mapa_1_camada_1.txt");
+			Camada mapa1_camada2 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_3va/mapa_1_camada_2.txt");
+			Camada mapa1_camada3 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_3va/mapa_1_camada_3.txt");
 			
-			mapa1_camada3.setCamadaColisao(true);
+			mapa1_camada2.setCamadaColisao(true);
 
 			ArrayList<Camada> camadas = new ArrayList<Camada>();
 
@@ -36,7 +36,7 @@ public class RegistrarNoJogo {
 			maps.add(mapa2);
 
 			viewGame.getGamePanel().setMaps(maps);
-			viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(680, 380)));
+			viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(640, 480)));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public class RegistrarNoJogo {
 	public static Hero[] gerarHerois() {
 
 		Player player = new Player("NomePlayer1");
-		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 26, 250);
+		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 20, 20);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
 		comandos1.put("UP", KeyEvent.VK_UP);
 		comandos1.put("DOWN", KeyEvent.VK_DOWN);
@@ -93,7 +93,7 @@ public class RegistrarNoJogo {
 		hero.setPlayer(player);
 		
 		Player player2 = new Player("NomePlayer2");
-		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 2, 6, 4, 24, 200);
+		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 2, 6, 4, 20, 20);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
 		comandos2.put("DOWN", KeyEvent.VK_S);

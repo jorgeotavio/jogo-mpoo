@@ -72,7 +72,7 @@ public class Camada{
 		
 		for (int i = 0; i < mapaWidth; i++) {
 			for (int j = 0; j < mapaHeight; j++) {
-				tile = (mapa[i][j] > 0) ? (mapa[i][j]) : 0;
+				tile = (mapa[i][j]-1 > 0) ? (mapa[i][j])-1:0;
 				tileRow = (tile / (colunasTileSet)) | 0;
 				tileCol = (tile % (colunasTileSet)) | 0;
 				camada.getGraphics().drawImage(tileSet, (j * tileHeight), (i * tileWidth), (j * tileHeight) + tileHeight,
@@ -82,11 +82,11 @@ public class Camada{
 		}
 	}
 	
-	public ArrayList<Rectangle> colisoes() {
+	public ArrayList<Rectangle> gerarColisoes() {
 		ArrayList<Rectangle> rectsColisao = new ArrayList<>();
 		for (int i = 0; i < mapaWidth; i++) {
 			for (int j = 0; j < mapaHeight; j++) {
-				if(mapa[i][j] > 0) {
+				if(mapa[i][j] > 1) {
 					rectsColisao.add(new Rectangle( (j * tileWidth), (i * tileWidth), tileWidth, tileWidth));
 				}
 			}
@@ -99,7 +99,7 @@ public class Camada{
 	}
 
 	public void setCamadaColisao(boolean camadaColisao) {
-		this.rectsColisao = camadaColisao ? colisoes() : null;
+		this.rectsColisao = camadaColisao ? gerarColisoes() : null;
 		this.camadaColisao = camadaColisao;
 	}
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import model.Camada;
 import model.Destrutor;
 import model.Hero;
 import model.Map;
@@ -25,37 +26,27 @@ public class GamePanel extends JPanel{
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setFont(new Font("Impact", Font.PLAIN, 12));
 		
-		maps.forEach((map)->{
+		for(Map map: maps){
+			if (!map.isActivated()) break;
 			
-			if (!map.isActivated()) return;
-			
-			map.getCamadas().forEach((camada)->{
+			for(Camada camada: map.getCamadas()){
 				g2d.drawImage(camada.getCamada(), 0, 0, this);
-			});
+			}
 			
-			map.getObjetos().forEach((item)->{
-				g2d.drawString("+"+item.getPontos(), item.getPosX()-5, item.getPosY()-5);
-				g2d.drawImage(item.getImagem(), item.getPosX(), item.getPosY(), this);
-			});
-		});
+//			map.getObjetos().forEach((item)->{
+//				g2d.drawString("+"+item.getPontos(), item.getPosX()-5, item.getPosY()-5);
+//				g2d.drawImage(item.getImagem(), item.getPosX(), item.getPosY(), this);
+//			});
+		};
 		
 		for (int i = 0; i<heros.length; i++) {
 			BufferedImage[] sprites = heros[i].getSprite().getSprites();
-			
 			g2d.drawString(heros[i].getNome(), heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY()-8);
 			g2d.drawRect(heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY()-5, 25, 5);
 			g2d.fillRect(heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY()-5, heros[i].getVida()/4, 5);
 			g2d.drawImage(sprites[heros[i].getSprite().getAparencia()], 
 					heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY(), this);
-			
 			Destrutor.destroyer(sprites);
-		}
-		
-		for (int i = 0; i<heros.length; i++) {
-			for(Objeto objeto: heros[i].getInventary().getItems()){
-				g2d.drawString(objeto.getNome(), 30, 8);
-				g2d.drawImage(objeto.getImagem(), 40, 30, this);
-			}
 		}
 		
 		g2d.dispose();

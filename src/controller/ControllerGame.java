@@ -53,14 +53,14 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		Hero[] novosHeros = RegistrarNoJogo.gerarHerois();
 
 		this.viewGame.getGamePanel().setHeros(novosHeros);
-		this.viewGame.getInfoPanel().setRecordes(BaseDados.getPontuacoes());
+//		this.viewGame.getInfoPanel().setRecordes(BaseDados.getPontuacoes());
 
-		for(Map map: viewGame.getGamePanel().getMaps()) {
-			if(map.isActivated()) {
-				map.setObjetos(RegistrarNoJogo.gerarFrutas());
-				break;
-			}
-		}
+//		for(Map map: viewGame.getGamePanel().getMaps()) {
+//			if(map.isActivated()) {
+//				map.setObjetos(RegistrarNoJogo.gerarFrutas());
+//				break;
+//			}
+//		}
 		
 		this.heros.clear();
 		this.heros.add(viewGame.getGamePanel().getHeros()[0]);
@@ -71,7 +71,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			viewGame.addKeyListener(ch);
 		}
 		
-		iniciarTimerObjetivo();
+//		iniciarTimerObjetivo();
 	}
 
 	public void iniciarTimerObjetivo() {
@@ -126,17 +126,16 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 	public void checarObjetivos() {
 		
-
 		for(Map map :maps){
 
 			if(!map.isActivated()) break;
 
-			if (map.getObjetos().size() == 0 && !gameWin) {
-				heros.forEach(hero -> BaseDados.atualizarPontuacao(hero.getPlayer(), 1));
-				this.viewDialogo.setMensagem("<html>Parabéns!!<br/>Vocês ganharam!!");
-				this.viewDialogo.setVisible(true);
-				break;
-			}
+//			if (map.getObjetos().size() == 0 && !gameWin) {
+//				heros.forEach(hero -> BaseDados.atualizarPontuacao(hero.getPlayer(), 1));
+//				this.viewDialogo.setMensagem("<html>Parabéns!!<br/>Vocês ganharam!!");
+//				this.viewDialogo.setVisible(true);
+//				break;
+//			}
 
 			for(Objeto item: map.getObjetos()){
 				for(Hero hero: heros){
@@ -166,7 +165,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 			if (viewDialogo.isVisible()) {
 				for (KeyListener kl: viewGame.getKeyListeners()) {
-					if(kl instanceof ControllerHero) 
+					if(kl instanceof ControllerHero)
 						((ControllerHero) kl).getKeyPool().clear();
 				}
 				continue;
@@ -181,7 +180,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 				}
 			}
 
-			this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getHeros());
+//			this.viewGame.getInfoPanel().atualizarPontuacao(viewGame.getGamePanel().getHeros());
 			this.viewGame.getGamePanel().repaint();
 		}
 
