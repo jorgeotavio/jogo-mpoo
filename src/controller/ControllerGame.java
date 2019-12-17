@@ -142,7 +142,6 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 					if(item.getRetangulo().intersects(hero.getRetangulo())) {
 						hero.getInventary().getItems().add(item);
 						hero.somPegandoObjeto();
-						hero.getPlayer().setPoints(hero.getPlayer().getPontos()+item.getPontos());
 						hero.setVida(hero.getVida()+10);
 						item.setCapturado(true);
 					}
@@ -153,8 +152,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 					break;
 				}
 			}
-
-		};
+		}
 	}
 
 	@Override

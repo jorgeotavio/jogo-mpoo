@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 public class Hero {
 
-	private Player player;
 	private String nome;
 	private Sprite sprite;
 	private int velocidade = 2;
@@ -109,14 +108,6 @@ public class Hero {
 	public void setVida(int vida) {
 		if(vida <= 100 && vida >= 0)
 			this.vida = vida;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 
 	public Inventary getInventary() {

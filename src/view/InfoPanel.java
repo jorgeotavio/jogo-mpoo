@@ -59,12 +59,6 @@ public class InfoPanel extends JPanel {
 		add(player2Label);
 	}
 
-	public void atualizarPontuacao(Hero[] heros) {
-		for(int i=0; i < pontosTempoReal.size(); i++) {
-			this.pontosTempoReal.get(i).setText(heros[i].getPlayer().getNome()+": "+Integer.toString(heros[i].getPlayer().getPontos()));
-		}
-	}
-
 	public void setRecordes(ArrayList<Pontuacao> pontuacoes) {
 
 		String pontos = "<html>";

@@ -42,9 +42,8 @@ public class Camada{
 		BufferedReader br = new BufferedReader (new InputStreamReader (is));
 		String linha="";
 
-			while ((linha = br.readLine()) != null){
+			while ((linha = br.readLine()) != null)
 				linhasMatrizCamada.add(linha);
-			}
 			
 			int j = 0;
 			for (int i = 0; i < linhasMatrizCamada.size(); i++) {

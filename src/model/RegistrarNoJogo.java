@@ -112,25 +112,21 @@ public class RegistrarNoJogo {
 
 	public static Hero[] gerarHerois() {
 
-		Player player = new Player("NomePlayer1");
 		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 40, 20);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
 		comandos1.put("UP", KeyEvent.VK_UP);
 		comandos1.put("DOWN", KeyEvent.VK_DOWN);
 		comandos1.put("LEFT", KeyEvent.VK_LEFT);
 		comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
-		Hero hero = new Hero("Joana",sprite, comandos1);
-		hero.setPlayer(player);
+		Hero hero = new Hero("Player 1",sprite, comandos1);
 
-		Player player2 = new Player("NomePlayer2");
 		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 2, 6, 4, 20, 40);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
 		comandos2.put("DOWN", KeyEvent.VK_S);
 		comandos2.put("LEFT", KeyEvent.VK_A);
 		comandos2.put("RIGHT", KeyEvent.VK_D);
-		Hero hero2 = new Hero("Judith", sprite2, comandos2);
-		hero2.setPlayer(player2);;
+		Hero hero2 = new Hero("Player 2", sprite2, comandos2);
 
 		Hero[] heros = new Hero[2];
 		heros[0] = hero;
