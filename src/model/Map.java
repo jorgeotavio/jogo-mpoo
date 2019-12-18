@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 public class Map {
 	
-	private boolean activated;
+	private boolean activated = false;
 	private ArrayList<Camada> camadas;
 	private ArrayList<Objeto> objetos;
 	private String objetivoMapa;
 
 	public Map(ArrayList<Camada> camadas) {
-		this.activated = false;
 		this.camadas = camadas;
 		this.objetos = new ArrayList<Objeto>();;
  	}

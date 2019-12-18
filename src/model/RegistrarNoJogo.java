@@ -12,10 +12,12 @@ import view.ViewGame;
 
 public class RegistrarNoJogo {
 
-	public static void allMaps( ViewGame viewGame) {
+	public static ArrayList<Map> allMaps() {
 		ArrayList<Map> maps = new ArrayList<Map>();
 		maps.add(criarMapa1());
-		viewGame.getGamePanel().setMaps(maps);
+		maps.add(criarMapa2());
+		
+		return maps;
 	}
 	
 	public static Map criarMapa1() {
@@ -67,8 +69,7 @@ public class RegistrarNoJogo {
 			}
 
 			Map mapa = new Map(camadas);
-			mapa.setActivated(true);
-			mapa.setObjetos(RegistrarNoJogo.gerarNumeros( "pares", camada2));
+			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("pares", camada2));
 			
 			mapa.setObjetivoMapa("Pegar todos os números pares!");
 			
@@ -87,7 +88,7 @@ public class RegistrarNoJogo {
 		Random random = new Random();
 		ArrayList<Objeto> objetosNumeros = new ArrayList<Objeto>();
 
-		while(objetosNumeros.size() < 50) {
+		while(objetosNumeros.size() < 1) {
 
 			int posX = random.nextInt(608)+16;
 			int posY = random.nextInt(448)+16;
@@ -161,6 +162,7 @@ public class RegistrarNoJogo {
 		comandos1.put("DOWN", KeyEvent.VK_DOWN);
 		comandos1.put("LEFT", KeyEvent.VK_LEFT);
 		comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
+		comandos1.put("PEGAR", KeyEvent.VK_SHIFT);
 		Hero hero = new Hero("Player 1",sprite, comandos1);
 
 		Sprite sprite2 = new Sprite("sprites/heroina2.png", 2, 6, 4, 20, 40);
@@ -169,6 +171,7 @@ public class RegistrarNoJogo {
 		comandos2.put("DOWN", KeyEvent.VK_S);
 		comandos2.put("LEFT", KeyEvent.VK_A);
 		comandos2.put("RIGHT", KeyEvent.VK_D);
+		comandos2.put("PEGAR", KeyEvent.VK_SPACE);
 		Hero hero2 = new Hero("Player 2", sprite2, comandos2);
 
 		Hero[] heros = new Hero[2];

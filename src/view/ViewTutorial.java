@@ -31,7 +31,7 @@ public class ViewTutorial extends AbstractView{
 				);
 		descriptionLabel.setBounds(150, 10, 500, 400);
 		
-		backButton = new JButton("Back");
+		backButton = new ButtonCustom("Back");
 		backButton.setBounds(270, 400, 80, 30);
 		
 		add(descriptionLabel);

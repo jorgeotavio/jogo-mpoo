@@ -17,7 +17,7 @@ public class ViewAbout extends AbstractView{
 				+ "Professor: Rico D'Emery</div>");
 		descriptionLabel.setBounds(50, -30, 300, 300);
 		
-		backButton = new JButton("Back");
+		backButton = new ButtonCustom("Back");
 		backButton.setBounds(165, 250, 80, 30);
 		
 		add(descriptionLabel);

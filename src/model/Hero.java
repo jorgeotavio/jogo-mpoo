@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import controller.ControllerHero;
+
 public class Hero {
 
 	private String nome;
@@ -18,6 +20,7 @@ public class Hero {
 	private Rectangle retangulo;
 	private AudioClip pegarObjeto;
 	private boolean congelar = false;
+	private ControllerHero controllerHero;
 
 	public Hero(String nome, Sprite sprite, HashMap<String, Integer> comandos) {
 		this.sprite = sprite;
@@ -125,5 +128,13 @@ public class Hero {
 
 	public void setCongelar(boolean congelar) {
 		this.congelar = congelar;
+	}
+
+	public ControllerHero getControllerHero() {
+		return controllerHero;
+	}
+
+	public void setControllerHero(ControllerHero ch) {
+		this.controllerHero = ch;
 	}
 }

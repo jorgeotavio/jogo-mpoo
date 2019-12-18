@@ -17,30 +17,26 @@ import model.Objeto;
 import model.Player;
 
 public class GamePanel extends JPanel{
-	
+
 	private static final long serialVersionUID = 3027613679265920713L;
 	private Hero[] heros = new Hero[2];
-	private ArrayList<Map> maps;
-	
+	private Map map;
+
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setFont(new Font("Impact", Font.PLAIN, 12));
 		g2d.setColor (new Color(68, 8, 8));
 
-		for(Map map: maps){
-			if (!map.isActivated()) break;
-			
-			for(Camada camada: map.getCamadas()){
-				g2d.drawImage(camada.getCamada(), 0, 0, this);
-			}
-			
-			for(Objeto objeto: map.getObjetos()){
-				g2d.draw(objeto.getRetangulo());					
-				g2d.drawString(objeto.getNome(), objeto.getPosX()+3, objeto.getPosY()+13);
-			}
+		for(Camada camada: map.getCamadas()){
+			g2d.drawImage(camada.getCamada(), 0, 0, this);
 		}
-		
+
+		for(Objeto objeto: map.getObjetos()){
+			g2d.draw(objeto.getRetangulo());					
+			g2d.drawString(objeto.getNome(), objeto.getPosX()+3, objeto.getPosY()+13);
+		}
+
 		for (int i = 0; i<heros.length; i++) {
 			BufferedImage[] sprites = heros[i].getSprite().getSprites();
 			g2d.drawString(heros[i].getNome(), heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY()-8);
@@ -50,16 +46,16 @@ public class GamePanel extends JPanel{
 					heros[i].getSprite().getPosX(), heros[i].getSprite().getPosY(), this);
 			Destrutor.destroyer(sprites);
 		}
-		
+
 		g2d.dispose();
 	}
-	
-	public ArrayList<Map> getMaps() {
-		return maps;
+
+	public Map getMap() {
+		return map;
 	}
 
-	public void setMaps(ArrayList<Map> maps) {
-		this.maps = maps;
+	public void setMap(Map map) {
+		this.map = map;
 	}
 
 	public Hero[] getHeros() {

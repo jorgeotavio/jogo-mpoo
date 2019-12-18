@@ -20,13 +20,13 @@ public class ViewMenu extends AbstractView{
 		startButton.setBounds(210, 200, 80, 30);
 		
 		tutorialButton = new ButtonCustom("Tutorial");
-		tutorialButton.setBounds(210, 300, 80, 30);
+		tutorialButton.setBounds(210, 250, 80, 30);
 		
 		aboutButton = new ButtonCustom("About");
-		aboutButton.setBounds(210, 350, 80, 30);
+		aboutButton.setBounds(210, 300, 80, 30);
 		
 		leaveButton = new ButtonCustom("Leave");
-		leaveButton.setBounds(210, 400, 80, 30);
+		leaveButton.setBounds(210, 350, 80, 30);
 		
 		add(titleLabel);
 		add(startButton);

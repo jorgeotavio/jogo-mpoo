@@ -13,6 +13,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 
 	public ControllerHero(Hero hero) {
 		this.hero = hero;
+		this.hero.setControllerHero(this);
 		keyPool = new HashMap<Integer, Boolean>();
 	}
 
