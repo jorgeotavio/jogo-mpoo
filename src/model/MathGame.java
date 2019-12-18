@@ -11,8 +11,9 @@ public class MathGame {
 	}
 	
 	public static boolean verificarPar(int numero) {
-		if (numero % 2 == 0)
-			return true;
+		if (numero % 2 == 0) 
+			return true; 
+		
 		return false;
 	}
 }

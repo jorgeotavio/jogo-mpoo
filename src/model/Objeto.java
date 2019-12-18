@@ -93,7 +93,7 @@ public class Objeto {
 		this.pontos = pontos;
 	}
 
-	public boolean isPrimo() {
+	public boolean isObjetivo() {
 		return objetivo;
 	}
 }
