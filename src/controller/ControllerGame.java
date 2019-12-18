@@ -10,11 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import model.Objeto;
-import model.BaseDados;
-import model.Camada;
 import model.Hero;
 import model.Map;
-import model.Player;
 import model.RegistrarNoJogo;
 import view.ViewGame;
 import view.ViewDialogo;
@@ -23,50 +20,52 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 	private ViewGame viewGame;
 	private ViewDialogo viewDialogo;
-	private boolean pausado = false;
-	private boolean gameOver = false;
-	private boolean gameWin = false;
 	private int duracaoObjetivo = 30;
 	private int tempoDecorrido;
 	private Timer timer;
 	private ArrayList<Map> maps;
 	private ArrayList<Hero> heros;
+	Hero[] novosHeros;
 
 	public ControllerGame(ViewGame viewGame) {
 		this.viewGame = viewGame;
-		this.viewGame.addKeyListener(this);
 		this.viewGame.setVisible(true);
 
 		this.viewDialogo = new ViewDialogo();
 		this.viewDialogo.addKeyListener(this);
 
-		this.maps = viewGame.getGamePanel().getMaps();
-		this.heros = new ArrayList<Hero>();
-
 		novoJogo();
-
 	}
 
 	public void novoJogo() {
-		
-		gameOver = false;
-		gameWin = false;
+		RegistrarNoJogo.allMaps(this.viewGame);
 
-		Hero[] novosHeros = RegistrarNoJogo.gerarHerois();
-
+		novosHeros = RegistrarNoJogo.gerarHerois();
 		this.viewGame.getGamePanel().setHeros(novosHeros);
 
-		this.heros.clear();
+		this.heros = new ArrayList<Hero>();
 		this.heros.add(novosHeros[0]);
 		this.heros.add(novosHeros[1]);
 
+		this.maps = viewGame.getGamePanel().getMaps();
+		
+		addKeylistersGame();
+		iniciarTimerObjetivo();
+		
+		System.gc();
+	}
+	
+	public void addKeylistersGame() {
+		for (int i = 0; i < viewGame.getKeyListeners().length; i++)
+			viewGame.removeKeyListener(viewGame.getKeyListeners()[i]);
+		
 		for (int i = 0; i< novosHeros.length; i++){
 			ControllerHero ch = new ControllerHero(novosHeros[i]);
 			viewGame.addKeyListener(ch);
-		}
-
-		//		iniciarTimerObjetivo();
-	}
+		}		
+		viewGame.addKeyListener(this);
+	
+	}		
 
 	public void iniciarTimerObjetivo() {
 
@@ -109,13 +108,6 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		for(Map map :maps){
 
 			if(!map.isActivated()) break;
-
-			//			if (map.getObjetos().size() == 0 && !gameWin) {
-			//				heros.forEach(hero -> BaseDados.atualizarPontuacao(hero.getPlayer(), 1));
-			//				this.viewDialogo.setMensagem("<html>Parabéns!!<br/>Vocês ganharam!!");
-			//				this.viewDialogo.setVisible(true);
-			//				break;
-			//			}
 
 			for(Objeto objeto: map.getObjetos()){
 				for(Hero hero: heros){
@@ -160,22 +152,11 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			}
 			this.viewGame.getGamePanel().repaint();
 		}
-
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			if (!gameOver && !gameWin) {
-				pausado = !pausado;
-				viewDialogo.setMensagem("JOGO PAUSADO!");
-				viewDialogo.setVisible(pausado);				
-			}else if(gameOver || gameWin){ 
-				timer.cancel();
-				timer.purge();
-				viewDialogo.setVisible(false);
-				novoJogo();
-			}
 		}
 
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {

@@ -20,17 +20,17 @@ public class RegistrarNoJogo {
 	
 	public static Map criarMapa1() {
 		try {
-			Camada mapa1_camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_1.txt");
-			Camada mapa1_camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_1/camada_2.txt");
-			Camada mapa1_camada3 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_3.txt");
+			Camada camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_1.txt");
+			Camada camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_1/camada_2.txt");
+			Camada camada3 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_3.txt");
 
-			mapa1_camada2.setCamadaColisao(true);
+			camada2.setCamadaColisao(true);
 
 			ArrayList<Camada> camadas = new ArrayList<Camada>();
 
-			camadas.add(mapa1_camada1);
-			camadas.add(mapa1_camada2);
-			camadas.add(mapa1_camada3);
+			camadas.add(camada1);
+			camadas.add(camada2);
+			camadas.add(camada3);
 
 			for (Camada camada: camadas) {
 				camada.montarMapa(640, 480);
@@ -38,7 +38,7 @@ public class RegistrarNoJogo {
 
 			Map mapa = new Map(camadas);
 			mapa.setActivated(true);
-			mapa.setObjetos(RegistrarNoJogo.gerarNumerosMapa1(mapa1_camada2));
+			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("primos", camada2));
 			
 			mapa.setObjetivoMapa("Pegar todos os números Primos!");
 			
@@ -52,17 +52,15 @@ public class RegistrarNoJogo {
 	
 	public static Map criarMapa2() {
 		try {
-			Camada mapa1_camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_1.txt");
-			Camada mapa1_camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_1/camada_2.txt");
-			Camada mapa1_camada3 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_3.txt");
+			Camada camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_2/camada_1.txt");
+			Camada camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_2/camada_2.txt");
 
-			mapa1_camada2.setCamadaColisao(true);
+			camada2.setCamadaColisao(true);
 
 			ArrayList<Camada> camadas = new ArrayList<Camada>();
 
-			camadas.add(mapa1_camada1);
-			camadas.add(mapa1_camada2);
-			camadas.add(mapa1_camada3);
+			camadas.add(camada1);
+			camadas.add(camada2);
 
 			for (Camada camada: camadas) {
 				camada.montarMapa(640, 480);
@@ -70,9 +68,9 @@ public class RegistrarNoJogo {
 
 			Map mapa = new Map(camadas);
 			mapa.setActivated(true);
-			mapa.setObjetos(RegistrarNoJogo.gerarNumerosMapa1(mapa1_camada2));
+			mapa.setObjetos(RegistrarNoJogo.gerarNumeros( "pares", camada2));
 			
-			mapa.setObjetivoMapa("Pegar todos os números Primos!");
+			mapa.setObjetivoMapa("Pegar todos os números pares!");
 			
 			return mapa;
 
@@ -80,11 +78,9 @@ public class RegistrarNoJogo {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}	
 
-	
-
-	public static ArrayList<Objeto> gerarNumerosMapa1(Camada camada){
+	public static ArrayList<Objeto> gerarNumeros(String tipo, Camada camada){
 
 		if (camada == null || !camada.isCamadaColisao()) return new ArrayList<Objeto>();
 
@@ -97,7 +93,7 @@ public class RegistrarNoJogo {
 			int posY = random.nextInt(448)+16;
 			int numero = random.nextInt(100);
 
-			Objeto objetoNumero = new Objeto(Integer.toString(numero), posX, posY, 10, MathGame.verificarPrimo(numero));
+			Objeto objetoNumero = new Objeto(Integer.toString(numero), posX, posY, 10, MathGame.verificarNumero(numero, tipo));
 
 			boolean intersectou = false;
 
