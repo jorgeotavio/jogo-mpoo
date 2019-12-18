@@ -16,7 +16,7 @@ public class Objeto {
 	private boolean capturado;
 	private Rectangle retangulo;
 	private int pontos;
-	private boolean primo;
+	private boolean objetivo;
 
 	public Objeto(String name, String file, int posX, int posY, int pontos) {
 		this.name = name;
@@ -34,11 +34,11 @@ public class Objeto {
 		}
 	}
 
-	public Objeto(String name, int posX, int posY, int pontos, boolean primo) {
+	public Objeto(String name, int posX, int posY, int pontos, boolean objetivo) {
 		this.name = name;
 		this.posX = posX;
 		this.posY = posY;
-		this.primo = primo;
+		this.objetivo = objetivo;
 		this.pontos = pontos;
 		this.capturado = false;
 		this.retangulo = new Rectangle(posX, posY, 16, 16);
@@ -94,6 +94,6 @@ public class Objeto {
 	}
 
 	public boolean isPrimo() {
-		return primo;
+		return objetivo;
 	}
 }

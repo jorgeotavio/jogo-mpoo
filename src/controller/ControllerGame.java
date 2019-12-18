@@ -59,13 +59,6 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		this.heros.clear();
 		this.heros.add(novosHeros[0]);
 		this.heros.add(novosHeros[1]);
-		
-		for(Map map: viewGame.getGamePanel().getMaps()) {
-			if(map.isActivated()) {
-				map.setObjetos(RegistrarNoJogo.gerarNumeros(map.getCamadaColisao()));
-				break;
-			}
-		}
 
 		for (int i = 0; i< novosHeros.length; i++){
 			ControllerHero ch = new ControllerHero(novosHeros[i]);

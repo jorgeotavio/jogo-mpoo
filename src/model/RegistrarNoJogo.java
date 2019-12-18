@@ -12,7 +12,13 @@ import view.ViewGame;
 
 public class RegistrarNoJogo {
 
-	public static void registerMap( ViewGame viewGame) {
+	public static void allMaps( ViewGame viewGame) {
+		ArrayList<Map> maps = new ArrayList<Map>();
+		maps.add(criarMapa1());
+		viewGame.getGamePanel().setMaps(maps);
+	}
+	
+	public static Map criarMapa1() {
 		try {
 			Camada mapa1_camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_1.txt");
 			Camada mapa1_camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_1/camada_2.txt");
@@ -26,66 +32,92 @@ public class RegistrarNoJogo {
 			camadas.add(mapa1_camada2);
 			camadas.add(mapa1_camada3);
 
+			for (Camada camada: camadas) {
+				camada.montarMapa(640, 480);
+			}
+
 			Map mapa = new Map(camadas);
 			mapa.setActivated(true);
-
-			Map mapa2 = new Map(camadas);
-			mapa2.setActivated(false);
-
-			ArrayList<Map> maps = new ArrayList<Map>();
-			maps.add(mapa);
-			maps.add(mapa2);
-
-			viewGame.getGamePanel().setMaps(maps);
-			viewGame.getGamePanel().getMaps().forEach(map->map.getCamadas().forEach(camada->camada.montarMapa(640, 480)));
+			mapa.setObjetos(RegistrarNoJogo.gerarNumerosMapa1(mapa1_camada2));
+			
+			mapa.setObjetivoMapa("Pegar todos os números Primos!");
+			
+			return mapa;
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static Map criarMapa2() {
+		try {
+			Camada mapa1_camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_1.txt");
+			Camada mapa1_camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_1/camada_2.txt");
+			Camada mapa1_camada3 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_3.txt");
+
+			mapa1_camada2.setCamadaColisao(true);
+
+			ArrayList<Camada> camadas = new ArrayList<Camada>();
+
+			camadas.add(mapa1_camada1);
+			camadas.add(mapa1_camada2);
+			camadas.add(mapa1_camada3);
+
+			for (Camada camada: camadas) {
+				camada.montarMapa(640, 480);
+			}
+
+			Map mapa = new Map(camadas);
+			mapa.setActivated(true);
+			mapa.setObjetos(RegistrarNoJogo.gerarNumerosMapa1(mapa1_camada2));
+			
+			mapa.setObjetivoMapa("Pegar todos os números Primos!");
+			
+			return mapa;
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 
-	public static ArrayList<Objeto> gerarNumeros(Camada camada){
-		
+	
+
+	public static ArrayList<Objeto> gerarNumerosMapa1(Camada camada){
+
 		if (camada == null || !camada.isCamadaColisao()) return new ArrayList<Objeto>();
-		
+
 		Random random = new Random();
 		ArrayList<Objeto> objetosNumeros = new ArrayList<Objeto>();
-		
+
 		while(objetosNumeros.size() < 50) {
-			
+
 			int posX = random.nextInt(608)+16;
 			int posY = random.nextInt(448)+16;
 			int numero = random.nextInt(100);
-			
-			Objeto objetoNumero = new Objeto(Integer.toString(numero), posX, posY, 10, verificarPrimo(numero));
-			
+
+			Objeto objetoNumero = new Objeto(Integer.toString(numero), posX, posY, 10, MathGame.verificarPrimo(numero));
+
 			boolean intersectou = false;
-			
+
 			for(Rectangle rect: camada.getRectsColisao()) {				
 				if (objetoNumero.getRetangulo().intersects(rect)) {
 					intersectou = true;
 					break;
 				}
 			}
-			
+
 			for(Objeto obj: objetosNumeros) {				
 				if (objetoNumero.getRetangulo().intersects(obj.getRetangulo())) {
 					intersectou = true;
 					break;
 				}
 			}
-			
+
 			if(!intersectou) objetosNumeros.add(objetoNumero);
 		}
 		return objetosNumeros;
-	}
-	
-	private static boolean verificarPrimo(int numero) {
-	    for (int j = 2; j < numero; j++) {
-	        if (numero % j == 0)
-	            return false;   
-	    }
-	    return true;
 	}
 
 	public static ArrayList<Objeto> gerarFrutas() {

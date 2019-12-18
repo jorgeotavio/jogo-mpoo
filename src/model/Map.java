@@ -7,6 +7,7 @@ public class Map {
 	private boolean activated;
 	private ArrayList<Camada> camadas;
 	private ArrayList<Objeto> objetos;
+	private String objetivoMapa;
 
 	public Map(ArrayList<Camada> camadas) {
 		this.activated = false;
@@ -45,5 +46,12 @@ public class Map {
 	public void setObjetos(ArrayList<Objeto> itens) {
 		this.objetos = itens;
 	}
-	
+
+	public String getObjetivoMapa() {
+		return objetivoMapa;
+	}
+
+	public void setObjetivoMapa(String objetivoMapa) {
+		this.objetivoMapa = objetivoMapa;
+	}
 }

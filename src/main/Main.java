@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		ViewGame viewGame = new ViewGame();
 		ViewMenu viewMenu = new ViewMenu();
-		RegistrarNoJogo.registerMap(viewGame);
+		RegistrarNoJogo.allMaps(viewGame);
 		new ControllerMenu(viewMenu, viewGame);
 	}
 }
