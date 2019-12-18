@@ -31,21 +31,22 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		this.viewDialogo.addKeyListener(this);
 		novoJogo();
 	}
-	
+
 	public void novoJogo() {
 		this.maps = RegistrarNoJogo.allMaps();
 		atualizarFase();
 		System.gc();
 	}
-	
+
 	public void atualizarFase() {
 		addNovosHeros();
 		if(maps.size() > 0) {
 			this.map = maps.get(0);
 			viewGame.getGamePanel().setMap(map);;			
 		}
+		Mensagem.exibir("O objetivo dessa fase é: "+map.getObjetivoMapa());
 	}
-	
+
 	public void addNovosHeros() {
 		novosHeros = RegistrarNoJogo.gerarHerois();
 		atualizarComandosGame();
@@ -63,7 +64,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			ControllerHero ch = new ControllerHero(novosHeros[i]);
 			viewGame.addKeyListener(ch);
 		}		
-		
+
 		viewGame.addKeyListener(this);
 	}
 
@@ -75,16 +76,17 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			};
 		}
 	}
-	
+
 	public void atualizarDadosHero(Hero hero, Objeto objeto) {
-		
+
 		if(objeto.isObjetivo()) {
 			hero.getInventary().add(objeto);
 			hero.setVida(hero.getVida()+10);			
 		} else {
 			hero.setVida(hero.getVida()-10);						
 		}
-		
+		viewGame.getInfoPanel().
+		getInvent()[heros.indexOf(hero)].setText(Integer.toString(hero.getInventary().size()));
 		hero.somPegandoObjeto();
 		objeto.setCapturado(true);
 	}
@@ -94,7 +96,6 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		if(map.getObjetos().size() == 0 && maps.size() > 1) {
 			maps.remove(0);
 			atualizarFase();
-			Mensagem.exibir("O objetivo agora é: "+map.getObjetivoMapa());
 			return;
 		}
 
@@ -109,15 +110,6 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			if(objeto.isCapturado()) {
 				map.getObjetos().remove(objeto);
 				break;
-			}
-		}
-	}
-
-	public void limparComandos() {
-		if (viewDialogo.isVisible()) {
-			for (KeyListener kl: viewGame.getKeyListeners()) {
-				if(kl instanceof ControllerHero)
-					((ControllerHero) kl).getKeyPool().clear();
 			}
 		}
 	}

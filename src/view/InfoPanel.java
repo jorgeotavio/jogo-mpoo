@@ -1,38 +1,47 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.GridLayout;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Hero;
-import model.Player;
-import model.Pontuacao;
-
 public class InfoPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<JLabel> pontosTempoReal;
-	private JLabel tempoLabel;
-	private Font font;
-	private JLabel pontosLabel;
-
+	private JLabel[] pontos = new JLabel[2];
+	private JLabel[] invent = new JLabel[2];
+	
 	public InfoPanel() throws IOException {
-		setLayout(new GridLayout(4,1));
-		tempoLabel = new JLabel("tempo");
-		add(tempoLabel);
+		setLayout(new GridLayout(4,3));		
+		
+		JLabel labelPlayer = new JLabel(" Player");
+		JLabel pontosLabel1 = new JLabel("P1");
+		JLabel pontosLabel2 = new JLabel("P2");
+		JLabel labelPontos = new JLabel("Pontos");
+		pontos[0] = new JLabel("0");
+		pontos[1] = new JLabel("0");
+		JLabel labelInventario = new JLabel("Invent.");
+		invent[0] = new JLabel("0");
+		invent[1] = new JLabel("0");
+		
+		add(labelPlayer);
+		add(pontosLabel1);
+		add(pontosLabel2);
+		add(labelPontos);
+		add(pontos[0]);
+		add(pontos[1]);
+		add(labelInventario);
+		add(invent[0]);
+		add(invent[1]);
 	}
 
-	public void setTempo(int tempo) {
-		this.tempoLabel.setText(Integer.toString(tempo));
+	public JLabel[] getPontos() {
+		return pontos;
 	}
+
+	public JLabel[] getInvent() {
+		return invent;
+	}
+
 }

@@ -25,7 +25,7 @@ public class ViewGame extends AbstractView{
 			e.printStackTrace();
 		}
 		infoPanel.setBackground(new Color(179, 84,21));
-		infoPanel.setBounds(640, 0, 200, 480);
+		infoPanel.setBounds(640, 0, 200, 280);
 		
 		add(gamePanel);
 		add(infoPanel);
