@@ -14,9 +14,9 @@ public class RegistrarNoJogo {
 
 	public static void registerMap( ViewGame viewGame) {
 		try {
-			Camada mapa1_camada1 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_3va/mapa_1_camada_1.txt");
-			Camada mapa1_camada2 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png",  "img/mapa/mapa_3va/mapa_1_camada_2.txt");
-			Camada mapa1_camada3 = new Camada(30, 40, 16, 16, "img/mapa/tileset.png", "img/mapa/mapa_3va/mapa_1_camada_3.txt");
+			Camada mapa1_camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_1.txt");
+			Camada mapa1_camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_1/camada_2.txt");
+			Camada mapa1_camada3 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_3.txt");
 
 			mapa1_camada2.setCamadaColisao(true);
 
@@ -127,7 +127,7 @@ public class RegistrarNoJogo {
 
 	public static Hero[] gerarHerois() {
 
-		Sprite sprite = new Sprite("img/sprites/heroina.png", 2, 6, 4, 40, 20);
+		Sprite sprite = new Sprite("sprites/heroina.png", 2, 6, 4, 40, 20);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
 		comandos1.put("UP", KeyEvent.VK_UP);
 		comandos1.put("DOWN", KeyEvent.VK_DOWN);
@@ -135,7 +135,7 @@ public class RegistrarNoJogo {
 		comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
 		Hero hero = new Hero("Player 1",sprite, comandos1);
 
-		Sprite sprite2 = new Sprite("img/sprites/heroina2.png", 2, 6, 4, 20, 40);
+		Sprite sprite2 = new Sprite("sprites/heroina2.png", 2, 6, 4, 20, 40);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
 		comandos2.put("DOWN", KeyEvent.VK_S);

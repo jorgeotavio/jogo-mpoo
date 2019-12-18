@@ -31,15 +31,16 @@ public class Camada{
 		this.tileHeight=tileHeight;
 		mapa = new int[mapaWidth][mapaHeight];
 		mapa = carregaMatriz(mapa, arquivo);
-		tileSet = ImageIO.read(new File(img));
+		tileSet = ImageIO.read(getClass().getClassLoader().getResource(img));
 		this.camadaColisao = false;
 	}
 
 	public int[][] carregaMatriz(int[][] matz, String arquivo) throws IOException {
 		ArrayList<String> linhasMatrizCamada = new ArrayList<String>();
-		InputStream is = new FileInputStream(new File(arquivo));
-		@SuppressWarnings("resource")
-		BufferedReader br = new BufferedReader (new InputStreamReader (is));
+		
+		InputStream is = getClass().getClassLoader().getResource(arquivo).openStream();
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		String linha="";
 
 			while ((linha = br.readLine()) != null)

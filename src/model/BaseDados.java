@@ -17,7 +17,7 @@ import sun.security.krb5.internal.crypto.Des;
 public class BaseDados {
 
 	private static XStream xStream = new XStream(new Dom4JDriver());
-	private static File pontuacoesFile = new File("res/pontuacoes.xml");
+	private static File pontuacoesFile = new File("pontuacoes.xml");
 	
 	public static void atualizarPontuacao(Player player, int idMap) {
 		

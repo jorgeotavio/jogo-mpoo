@@ -19,7 +19,7 @@ public class Sprite {
 
 	public Sprite(String arquivo, int aparencia, int columns, int rows, int posX, int posY) {
 		try {
-			spriteSheet = ImageIO.read(new File(arquivo));
+			spriteSheet = ImageIO.read(getClass().getClassLoader().getResource(arquivo));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
