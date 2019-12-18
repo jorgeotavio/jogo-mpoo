@@ -39,7 +39,6 @@ public class RegistrarNoJogo {
 			}
 
 			Map mapa = new Map(camadas);
-			mapa.setActivated(true);
 			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("primos", camada2));
 			
 			mapa.setObjetivoMapa("Pegar todos os números Primos!");

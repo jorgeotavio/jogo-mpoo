@@ -12,6 +12,7 @@ import model.Hero;
 import model.Map;
 import model.RegistrarNoJogo;
 import view.ViewGame;
+import view.Mensagem;
 import view.ViewDialogo;
 
 public class ControllerGame implements Runnable, KeyListener, ActionListener {
@@ -26,10 +27,8 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 	public ControllerGame(ViewGame viewGame) {
 		this.viewGame = viewGame;
 		this.viewGame.setVisible(true);
-
 		this.viewDialogo = new ViewDialogo();
 		this.viewDialogo.addKeyListener(this);
-
 		novoJogo();
 	}
 
@@ -46,17 +45,15 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		this.heros.add(novosHeros[0]);
 		this.heros.add(novosHeros[1]);
 
-		avancarMapa();
+		definirMapa();
 
 		System.gc();
 	}
 
-	public void avancarMapa() {
-		for (int i = 0; i < maps.size(); i++) {
-			if(maps.get(i).isActivated()) {
-				this.map = maps.get(i);
-				viewGame.getGamePanel().setMap(map);;
-			}
+	public void definirMapa() {
+		if(maps.size() > 0) {
+			this.map = maps.get(0);
+			viewGame.getGamePanel().setMap(map);;			
 		}
 	}
 
@@ -83,11 +80,10 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 
 	public void checarObjetivos() {
 
-		if(map.getObjetos().size() == 0) {
-			map.setActivated(false);
-			int index = maps.indexOf(map);
-			maps.get(index+1).setActivated(true);
-			avancarMapa();
+		if(map.getObjetos().size() == 0 && maps.size() > 1) {
+			maps.remove(0);
+			definirMapa();
+			Mensagem.exibir("O objetivo agora é: "+map.getObjetivoMapa());
 			return;
 		}
 

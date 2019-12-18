@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Map {
 	
-	private boolean activated = false;
 	private ArrayList<Camada> camadas;
 	private ArrayList<Objeto> objetos;
 	private String objetivoMapa;
@@ -21,14 +20,7 @@ public class Map {
 		}
 		return null;
 	}
-	
-	public boolean isActivated() {
-		return activated;
-	}
 
-	public void setActivated(boolean activated) {
-		this.activated = activated;
-	}
 
 	public ArrayList<Camada> getCamadas() {
 		return camadas;
