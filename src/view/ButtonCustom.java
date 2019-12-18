@@ -4,9 +4,9 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 
-public class ButtonTeste extends JButton{
+public class ButtonCustom extends JButton{
 	
-	public ButtonTeste(String titulo) {
+	public ButtonCustom(String titulo) {
 		super(titulo);
 		setBackground(new Color(234, 234, 134));
 		setForeground(new Color(255,255,255));

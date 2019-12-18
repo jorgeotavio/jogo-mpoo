@@ -19,17 +19,16 @@ public class ViewGame extends AbstractView{
 		this.gamePanel = new GamePanel();
 		this.gamePanel.setBounds(0, 0, 640, 480);
 		
-//		try {
-//			this.infoPanel = new InfoPanel();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		infoPanel.setBackground(new Color(179, 84,21));
-//		infoPanel.setBounds(1, 369, 638, 110);
+		try {
+			this.infoPanel = new InfoPanel();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		infoPanel.setBackground(new Color(179, 84,21));
+		infoPanel.setBounds(640, 0, 200, 480);
 		
 		add(gamePanel);
-//		add(infoPanel);
+		add(infoPanel);
 		
 		setVisible(false);
 	}

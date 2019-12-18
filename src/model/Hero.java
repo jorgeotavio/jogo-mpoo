@@ -3,17 +3,18 @@ package model;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Hero {
 
 	private String nome;
 	private Sprite sprite;
+	private ArrayList<Objeto> inventary;
 	private int velocidade = 2;
 	private String direcao;
 	private HashMap<String, Integer> comandos;
 	private int vida = 100;
-	private Inventary inventary;
 	private Rectangle retangulo;
 	private AudioClip pegarObjeto;
 	private boolean congelar = false;
@@ -22,8 +23,8 @@ public class Hero {
 		this.sprite = sprite;
 		this.comandos = comandos;
 		this.nome = nome;
-		this.inventary = new Inventary();
-		this.pegarObjeto = Applet.newAudioClip(Som.class.getResource("/sounds/pegar_objeto.wav"));
+		this.pegarObjeto = Applet.newAudioClip(getClass().getClassLoader().getResource("pegar_objeto.wav"));
+		inventary = new ArrayList<Objeto>();
 	}
 
 	public void parar() {
@@ -110,7 +111,7 @@ public class Hero {
 			this.vida = vida;
 	}
 
-	public Inventary getInventary() {
+	public ArrayList<Objeto> getInventary() {
 		return inventary;
 	}
 

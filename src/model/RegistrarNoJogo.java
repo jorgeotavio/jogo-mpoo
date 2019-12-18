@@ -77,7 +77,6 @@ public class RegistrarNoJogo {
 			
 			if(!intersectou) objetosNumeros.add(objetoNumero);
 		}
-
 		return objetosNumeros;
 	}
 	
@@ -128,7 +127,7 @@ public class RegistrarNoJogo {
 
 	public static Hero[] gerarHerois() {
 
-		Sprite sprite = new Sprite("img/sprites/heroina_2.png", 2, 6, 4, 40, 20);
+		Sprite sprite = new Sprite("img/sprites/heroina.png", 2, 6, 4, 40, 20);
 		HashMap<String, Integer> comandos1 = new HashMap<String, Integer>();
 		comandos1.put("UP", KeyEvent.VK_UP);
 		comandos1.put("DOWN", KeyEvent.VK_DOWN);
@@ -136,7 +135,7 @@ public class RegistrarNoJogo {
 		comandos1.put("RIGHT", KeyEvent.VK_RIGHT);
 		Hero hero = new Hero("Player 1",sprite, comandos1);
 
-		Sprite sprite2 = new Sprite("img/sprites/heroina__.png", 2, 6, 4, 20, 40);
+		Sprite sprite2 = new Sprite("img/sprites/heroina2.png", 2, 6, 4, 20, 40);
 		HashMap<String, Integer> comandos2 = new HashMap<String, Integer>();
 		comandos2.put("UP", KeyEvent.VK_W);
 		comandos2.put("DOWN", KeyEvent.VK_S);

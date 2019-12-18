@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 public abstract class AbstractView extends JFrame{
 	
 	public AbstractView() {
-		setSize(640, 480);
+		setSize(840, 480);
 		setLayout(null);
 		setResizable(false);
 		setUndecorated(true);
