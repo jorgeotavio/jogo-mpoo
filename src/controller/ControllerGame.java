@@ -31,33 +31,31 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		this.viewDialogo.addKeyListener(this);
 		novoJogo();
 	}
-
+	
 	public void novoJogo() {
 		this.maps = RegistrarNoJogo.allMaps();
-
-		novosHeros = RegistrarNoJogo.gerarHerois();
-
-		addKeylistersGame();
-
-		this.viewGame.getGamePanel().setHeros(novosHeros);
-
-		this.heros = new ArrayList<Hero>();
-		this.heros.add(novosHeros[0]);
-		this.heros.add(novosHeros[1]);
-
-		definirMapa();
-
+		atualizarFase();
 		System.gc();
 	}
-
-	public void definirMapa() {
+	
+	public void atualizarFase() {
+		addNovosHeros();
 		if(maps.size() > 0) {
 			this.map = maps.get(0);
 			viewGame.getGamePanel().setMap(map);;			
 		}
 	}
+	
+	public void addNovosHeros() {
+		novosHeros = RegistrarNoJogo.gerarHerois();
+		atualizarComandosGame();
+		this.viewGame.getGamePanel().setHeros(novosHeros);
+		this.heros = new ArrayList<Hero>();
+		this.heros.add(novosHeros[0]);
+		this.heros.add(novosHeros[1]);
+	}
 
-	public void addKeylistersGame() {
+	public void atualizarComandosGame() {
 		for (int i = 0; i < viewGame.getKeyListeners().length; i++)
 			viewGame.removeKeyListener(viewGame.getKeyListeners()[i]);
 
@@ -65,8 +63,8 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			ControllerHero ch = new ControllerHero(novosHeros[i]);
 			viewGame.addKeyListener(ch);
 		}		
+		
 		viewGame.addKeyListener(this);
-
 	}
 
 	public void checarColisoes() {
@@ -77,23 +75,34 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			};
 		}
 	}
+	
+	public void atualizarDadosHero(Hero hero, Objeto objeto) {
+		
+		if(objeto.isObjetivo()) {
+			hero.getInventary().add(objeto);
+			hero.setVida(hero.getVida()+10);			
+		} else {
+			hero.setVida(hero.getVida()-10);						
+		}
+		
+		hero.somPegandoObjeto();
+		objeto.setCapturado(true);
+	}
 
 	public void checarObjetivos() {
 
 		if(map.getObjetos().size() == 0 && maps.size() > 1) {
 			maps.remove(0);
-			definirMapa();
+			atualizarFase();
 			Mensagem.exibir("O objetivo agora é: "+map.getObjetivoMapa());
 			return;
 		}
 
 		for(Objeto objeto: map.getObjetos()){
 			for(Hero hero: heros){
-				if(objeto.getRetangulo().intersects(hero.getRetangulo()) && hero.getControllerHero().getKeyPool().get(hero.getComandos().get("PEGAR")) != null) {
-					hero.getInventary().add(objeto);
-					hero.somPegandoObjeto();
-					hero.setVida(hero.getVida()+10);
-					objeto.setCapturado(true);
+				if(objeto.getRetangulo().intersects(hero.getRetangulo()) && 
+						hero.getControllerHero().getKeyPool().get(hero.getComandos().get("PEGAR")) != null) {
+					atualizarDadosHero(hero, objeto);
 				}
 			}
 

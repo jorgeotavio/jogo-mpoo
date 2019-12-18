@@ -6,10 +6,13 @@ public class MathGame {
 		switch (tipo) {
 			case "par":
 				return verificarPar(numero);
+			case "impar":
+				return !verificarPar(numero);
 			case "primo":
 				return verificarPrimo(numero);
+			default:
+				return false;
 		}
-		return false;
 	}
 
 	public static boolean verificarPrimo(int numero) {

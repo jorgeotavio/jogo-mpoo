@@ -39,9 +39,9 @@ public class RegistrarNoJogo {
 			}
 
 			Map mapa = new Map(camadas);
-			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("primos", camada2));
+			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("par", camada2));
 			
-			mapa.setObjetivoMapa("Pegar todos os números Primos!");
+			mapa.setObjetivoMapa("Pegar todos os números PARES!");
 			
 			return mapa;
 
@@ -68,9 +68,9 @@ public class RegistrarNoJogo {
 			}
 
 			Map mapa = new Map(camadas);
-			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("pares", camada2));
+			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("impar", camada2));
 			
-			mapa.setObjetivoMapa("Pegar todos os números pares!");
+			mapa.setObjetivoMapa("Pegar todos os números ÍMPARES!");
 			
 			return mapa;
 
@@ -78,7 +78,7 @@ public class RegistrarNoJogo {
 			e.printStackTrace();
 			return null;
 		}
-	}	
+	}
 
 	public static ArrayList<Objeto> gerarNumeros(String tipo, Camada camada){
 
@@ -87,7 +87,7 @@ public class RegistrarNoJogo {
 		Random random = new Random();
 		ArrayList<Objeto> objetosNumeros = new ArrayList<Objeto>();
 
-		while(objetosNumeros.size() < 1) {
+		while(objetosNumeros.size() < 10) {
 
 			int posX = random.nextInt(608)+16;
 			int posY = random.nextInt(448)+16;
