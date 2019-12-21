@@ -19,7 +19,7 @@ public class ControllerHero extends ControllerMovel implements KeyListener {
 
 	public void atualizaHero() {
 		
-		if (hero.isCongelar()) return;
+		if (hero.getVida() <= 0 || hero.isCongelar()) return;
 		
 		if (keyPool.get(hero.getComandos().get(UP)) != null && keyPool.get(hero.getComandos().get(RIGHT)) != null) {
 			hero.getSprite().setPosX(hero.getSprite().getPosX()+hero.getVelocidade());

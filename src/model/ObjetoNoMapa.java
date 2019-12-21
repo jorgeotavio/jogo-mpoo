@@ -8,7 +8,7 @@ import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 
-public class Objeto {
+public class ObjetoNoMapa {
 
 	private String name;
 	private BufferedImage imagem;
@@ -17,24 +17,17 @@ public class Objeto {
 	private Rectangle retangulo;
 	private int pontos;
 	private boolean objetivo;
+	private boolean congelaInimigo;
 
-	public Objeto(String name, String file, int posX, int posY, int pontos) {
-		this.name = name;
+	public ObjetoNoMapa(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
-		this.pontos = pontos;
-		this.capturado = false;
-		
+		this.capturado = false;	
 		this.retangulo = new Rectangle(posX, posY, 16, 16);
-		
-		try {
-			this.imagem = ImageIO.read(new File(file));
-		}catch(Exception e ) {
-			e.printStackTrace();
-		}
+		this.congelaInimigo = true;
 	}
 
-	public Objeto(String name, int posX, int posY, int pontos, boolean objetivo) {
+	public ObjetoNoMapa(String name, int posX, int posY, int pontos, boolean objetivo) {
 		this.name = name;
 		this.posX = posX;
 		this.posY = posY;
@@ -42,7 +35,6 @@ public class Objeto {
 		this.pontos = pontos;
 		this.capturado = false;
 		this.retangulo = new Rectangle(posX, posY, 16, 16);
-		
 	}
 
 	public String getNome() {
@@ -88,12 +80,16 @@ public class Objeto {
 	public int getPontos() {
 		return pontos;
 	}
-
-	public void setPontos(int pontos) {
-		this.pontos = pontos;
-	}
-
+	
 	public boolean isObjetivo() {
 		return objetivo;
+	}
+
+	public boolean isCongelaInimigo() {
+		return congelaInimigo;
+	}
+
+	public void setCongelaInimigo(boolean congelaInimigo) {
+		this.congelaInimigo = congelaInimigo;
 	}
 }

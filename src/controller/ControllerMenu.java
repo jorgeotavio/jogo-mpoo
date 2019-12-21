@@ -41,7 +41,7 @@ public class ControllerMenu implements ActionListener{
 
 		if (e.getSource() == viewMenu.getStartSoloButton()) {
 			this.viewMenu.setVisible(false);
-			gameThread = new Thread(new ControllerGame(this.viewGame));
+			gameThread = new Thread(new ControllerGame(this.viewGame, this.viewMenu));
 			gameThread.start();
 		}
 

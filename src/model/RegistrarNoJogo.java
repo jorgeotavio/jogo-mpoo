@@ -1,60 +1,39 @@
 package model;
 
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import com.sun.glass.events.KeyEvent;
-
-import view.ViewGame;
-
 public class RegistrarNoJogo {
-
-	public static ArrayList<Map> allMaps() {
-		ArrayList<Map> maps = new ArrayList<Map>();
-		maps.add(criarMapa1());
-		maps.add(criarMapa2());
+	
+	public static Map mapa = new Map();
+	public static String tileSet = "tileset.png";
+	
+	public static Map criarMapa(int fase) {
+		String objetivo;
+		String mapLocation;
 		
-		return maps;
-	}
-	
-	public static Map criarMapa1() {
-		try {
-			Camada camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_1.txt");
-			Camada camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_1/camada_2.txt");
-			Camada camada3 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_1/camada_3.txt");
-
-			camada2.setCamadaColisao(true);
-
-			ArrayList<Camada> camadas = new ArrayList<Camada>();
-
-			camadas.add(camada1);
-			camadas.add(camada2);
-			camadas.add(camada3);
-
-			for (Camada camada: camadas) {
-				camada.montarMapa(640, 480);
-			}
-
-			Map mapa = new Map(camadas);
-			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("par", camada2));
-			
-			mapa.setObjetivoMapa("Pegar todos os números PARES!");
-			
-			return mapa;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+		switch (fase) {
+		case 2:
+			objetivo = "IMPARES";
+			mapLocation = "mapa_2";
+			break;
+		case 3:
+			objetivo = "PRIMOS";
+			mapLocation = "mapa_1";
+			break;
+		default:
+			objetivo = "PARES";
+			mapLocation = "mapa_1";
+			break;
 		}
-	}
-	
-	public static Map criarMapa2() {
+
 		try {
-			Camada camada1 = new Camada(30, 40, 16, 16, "tileset.png", "mapa_2/camada_1.txt");
-			Camada camada2 = new Camada(30, 40, 16, 16, "tileset.png",  "mapa_2/camada_2.txt");
+			Camada camada1 = new Camada(30, 40, 16, 16, tileSet, mapLocation+"/camada_1.txt");
+			Camada camada2 = new Camada(30, 40, 16, 16, tileSet,  mapLocation+"/camada_2.txt");
 
 			camada2.setCamadaColisao(true);
 
@@ -66,11 +45,11 @@ public class RegistrarNoJogo {
 			for (Camada camada: camadas) {
 				camada.montarMapa(640, 480);
 			}
-
-			Map mapa = new Map(camadas);
-			mapa.setObjetos(RegistrarNoJogo.gerarNumeros("impar", camada2));
 			
-			mapa.setObjetivoMapa("Pegar todos os números ÍMPARES!");
+			mapa.setCamadas(camadas);
+			mapa.setObjetos(RegistrarNoJogo.gerarNumeros(objetivo, camada2));
+			mapa.setTotalObjetosValidos(MathGame.totalDeObjetivosValidos(mapa.getObjetos()));
+			mapa.setObjetivoMapa(objetivo);
 			
 			return mapa;
 
@@ -80,77 +59,45 @@ public class RegistrarNoJogo {
 		}
 	}
 
-	public static ArrayList<Objeto> gerarNumeros(String tipo, Camada camada){
+	public static ArrayList<ObjetoNoMapa> gerarNumeros(String tipo, Camada camada){
 
-		if (camada == null || !camada.isCamadaColisao()) return new ArrayList<Objeto>();
+		if (camada == null || !camada.isCamadaColisao()) return new ArrayList<ObjetoNoMapa>();
 
 		Random random = new Random();
-		ArrayList<Objeto> objetosNumeros = new ArrayList<Objeto>();
+		ArrayList<ObjetoNoMapa> objetosNoMapa = new ArrayList<ObjetoNoMapa>();
 
-		while(objetosNumeros.size() < 10) {
+		ObjetoNoMapa objetoNoMapa;
+		int totalCongeladores=4;
+		
+		while(objetosNoMapa.size() < 20) {
 
 			int posX = random.nextInt(608)+16;
 			int posY = random.nextInt(448)+16;
 			int numero = random.nextInt(100);
 
-			Objeto objetoNumero = new Objeto(Integer.toString(numero), posX, posY, 10, MathGame.verificarNumero(numero, tipo));
-
+			if (objetosNoMapa.size()<totalCongeladores) 
+				objetoNoMapa= new ObjetoNoMapa(posX, posY);				
+			else
+				objetoNoMapa= new ObjetoNoMapa(Integer.toString(numero), posX, posY, 10, MathGame.verificarNumero(numero, tipo));				
 			boolean intersectou = false;
 
 			for(Rectangle rect: camada.getRectsColisao()) {				
-				if (objetoNumero.getRetangulo().intersects(rect)) {
+				if (objetoNoMapa.getRetangulo().intersects(rect)) {
 					intersectou = true;
 					break;
 				}
 			}
 
-			for(Objeto obj: objetosNumeros) {				
-				if (objetoNumero.getRetangulo().intersects(obj.getRetangulo())) {
+			for(ObjetoNoMapa obj: objetosNoMapa) {				
+				if (objetoNoMapa.getRetangulo().intersects(obj.getRetangulo())) {
 					intersectou = true;
 					break;
 				}
 			}
 
-			if(!intersectou) objetosNumeros.add(objetoNumero);
+			if(!intersectou) objetosNoMapa.add(objetoNoMapa);
 		}
-		return objetosNumeros;
-	}
-
-	public static ArrayList<Objeto> gerarFrutas() {
-		Random random = new Random();
-		ArrayList<Objeto> itens = new ArrayList<Objeto>();
-
-		String[] arquivos = new String[3];
-		arquivos[0] = "img/objetos/frutas/maca_item.png";
-		arquivos[1] = "img/objetos/frutas/melancia_item.png";
-		arquivos[2] = "img/objetos/frutas/banana_item.png";
-
-		String[] frutas = new String[3];
-		frutas[0] = "Maçã";
-		frutas[1] = "Melancia";
-		frutas[2] = "Banana";
-
-		int[] pontos = new int[3];
-		pontos[0] = 10;
-		pontos[1] = 30;
-		pontos[2] = 15;
-
-		int totalItems = 30;
-
-		int[][] coordenadas = new int[totalItems][2];
-
-		for (int i = 0; i<totalItems; i++) {
-			for (int j = 0 ;j <= 1 ; j++) {
-
-				if (j == 0) coordenadas[i][j] =  random.nextInt(450)+100;
-				else coordenadas[i][j] = random.nextInt(250)+50;
-
-			}
-			int index = random.nextInt(3);
-			itens.add(new Objeto(frutas[index], arquivos[index],coordenadas[i][0], coordenadas[i][1], pontos[index]));
-		}
-
-		return itens;
+		return objetosNoMapa;
 	}
 
 	public static Hero[] gerarHerois() {

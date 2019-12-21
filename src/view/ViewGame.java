@@ -1,9 +1,7 @@
 package view;
 
-import java.awt.Color;
 import java.io.IOException;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
@@ -14,18 +12,18 @@ public class ViewGame extends AbstractView{
 	private InfoPanel infoPanel;
 	
 	public ViewGame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		this.gamePanel = new GamePanel();
 		this.gamePanel.setBounds(0, 0, 640, 480);
+		gamePanel.setFont(pixellari);
 		
 		try {
 			this.infoPanel = new InfoPanel();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		infoPanel.setBackground(new Color(179, 84,21));
-		infoPanel.setBounds(640, 0, 200, 280);
+		
+		infoPanel.setFont(pixellari);
+		infoPanel.setBounds(640, 0, 200, 480);
 		
 		add(gamePanel);
 		add(infoPanel);

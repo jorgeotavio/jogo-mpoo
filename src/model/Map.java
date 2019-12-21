@@ -5,12 +5,17 @@ import java.util.ArrayList;
 public class Map {
 	
 	private ArrayList<Camada> camadas;
-	private ArrayList<Objeto> objetos;
+	private ArrayList<ObjetoNoMapa> objetos;
 	private String objetivoMapa;
+	private int totalObjetosValidos;
 
+	public Map() {
+		this.objetos = new ArrayList<ObjetoNoMapa>();
+	}
+	
 	public Map(ArrayList<Camada> camadas) {
 		this.camadas = camadas;
-		this.objetos = new ArrayList<Objeto>();;
+		this.objetos = new ArrayList<ObjetoNoMapa>();
  	}
 	
 	public Camada getCamadaColisao() {
@@ -30,11 +35,11 @@ public class Map {
 		this.camadas = camadas;
 	}
 
-	public ArrayList<Objeto> getObjetos() {
+	public ArrayList<ObjetoNoMapa> getObjetos() {
 		return objetos;
 	}
 
-	public void setObjetos(ArrayList<Objeto> itens) {
+	public void setObjetos(ArrayList<ObjetoNoMapa> itens) {
 		this.objetos = itens;
 	}
 
@@ -44,5 +49,13 @@ public class Map {
 
 	public void setObjetivoMapa(String objetivoMapa) {
 		this.objetivoMapa = objetivoMapa;
+	}
+
+	public int getTotalObjetosValidos() {
+		return totalObjetosValidos;
+	}
+
+	public void setTotalObjetosValidos(int totalObjetosValidos) {
+		this.totalObjetosValidos = totalObjetosValidos;
 	}
 }

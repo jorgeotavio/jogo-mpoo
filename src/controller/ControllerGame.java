@@ -1,59 +1,100 @@
 package controller;
 
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Random;
 
-import model.Objeto;
+import model.ObjetoNoMapa;
+import model.BaseDados;
 import model.Hero;
 import model.Map;
 import model.RegistrarNoJogo;
 import view.ViewGame;
+import view.ViewMenu;
 import view.Mensagem;
-import view.ViewDialogo;
 
-public class ControllerGame implements Runnable, KeyListener, ActionListener {
+public class ControllerGame implements Runnable {
 
 	private ViewGame viewGame;
-	private ViewDialogo viewDialogo;
-	private ArrayList<Map> maps;
+	private ViewMenu viewMenu;
 	private Map map;
 	private ArrayList<Hero> heros;
+	private int faseAtual = 1;
+	private int totalDeFases = 3;
+	private double idPartida;
+	private Random random;
+	private boolean terminou = false;
 	Hero[] novosHeros;
 
-	public ControllerGame(ViewGame viewGame) {
+	public ControllerGame(ViewGame viewGame, ViewMenu viewMenu) {
 		this.viewGame = viewGame;
+		
+		this.viewGame.getInfoPanel().getBotaoMenu().addActionListener((e) -> {;
+			viewGame.setVisible(false);
+			viewMenu.setVisible(true);
+		});
+		
 		this.viewGame.setVisible(true);
-		this.viewDialogo = new ViewDialogo();
-		this.viewDialogo.addKeyListener(this);
-		novoJogo();
+		this.viewMenu = viewMenu;
+		random = new Random();
+		idPartida = random.nextDouble();
+		updateFase();
 	}
 
-	public void novoJogo() {
-		this.maps = RegistrarNoJogo.allMaps();
-		atualizarFase();
-		System.gc();
-	}
-
-	public void atualizarFase() {
-		addNovosHeros();
-		if(maps.size() > 0) {
-			this.map = maps.get(0);
-			viewGame.getGamePanel().setMap(map);;			
+	public void updateFase() {
+		if(faseAtual == totalDeFases+1) {
+			switch(Mensagem.confirmar(maiorPontuacao())) {
+			case 0:
+				faseAtual = 1;
+				break;
+			default:
+				terminou=true;
+				idPartida = random.nextDouble();
+				this.viewMenu.setVisible(true);
+				this.viewGame.setVisible(false);
+				return;
+			}
 		}
-		Mensagem.exibir("O objetivo dessa fase é: "+map.getObjetivoMapa());
+
+		atualizarHeros();
+		atualizarMap();
 	}
 
-	public void addNovosHeros() {
+	public String maiorPontuacao() {
+		Hero heroVencedor = heros.get(0);
+		for(Hero hero: heros) {
+			if(hero.getPontos()>heroVencedor.getPontos())
+				heroVencedor = hero;
+		}
+		return heroVencedor.getNome();
+	}
+
+	public void atualizarHeros() {
+		if(faseAtual > 1) 
+			for(Hero hero: heros) {
+				BaseDados.atualizarPontuacao(hero, idPartida);
+			}
+
 		novosHeros = RegistrarNoJogo.gerarHerois();
 		atualizarComandosGame();
+
 		this.viewGame.getGamePanel().setHeros(novosHeros);
 		this.heros = new ArrayList<Hero>();
 		this.heros.add(novosHeros[0]);
 		this.heros.add(novosHeros[1]);
+
+		for (int i =0; i< heros.size() ; i++) {
+			if (faseAtual>1)
+				heros.get(i).setPontos(BaseDados.getPontuacao(i, idPartida));
+			else
+				atualiarDadosHero(heros.get(i));
+		}
+	}
+
+	public void atualizarMap() {
+		this.map = RegistrarNoJogo.criarMapa(faseAtual);
+		this.viewGame.getGamePanel().setMap(map);
+		viewGame.getInfoPanel().getMissaoDescLabel().setText("<html>Pegue os "+this.map.getObjetivoMapa());
 	}
 
 	public void atualizarComandosGame() {
@@ -63,9 +104,7 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		for (int i = 0; i< novosHeros.length; i++){
 			ControllerHero ch = new ControllerHero(novosHeros[i]);
 			viewGame.addKeyListener(ch);
-		}		
-
-		viewGame.addKeyListener(this);
+		}
 	}
 
 	public void checarColisoes() {
@@ -77,33 +116,44 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 		}
 	}
 
-	public void atualizarDadosHero(Hero hero, Objeto objeto) {
-
+	public void atualizarHero(Hero hero, ObjetoNoMapa objeto) {
 		if(objeto.isObjetivo()) {
 			hero.getInventary().add(objeto);
-			hero.setVida(hero.getVida()+10);			
-		} else {
-			hero.setVida(hero.getVida()-10);						
+			hero.setVida(hero.getVida()+25);
+			hero.addPontos(objeto.getPontos());
+			map.setTotalObjetosValidos(map.getTotalObjetosValidos()-1);
+		}else if(!objeto.isCongelaInimigo()){
+			hero.setVida(hero.getVida()-25);						
 		}
-		viewGame.getInfoPanel().
-		getInvent()[heros.indexOf(hero)].setText(Integer.toString(hero.getInventary().size()));
+		atualiarDadosHero(hero);
 		hero.somPegandoObjeto();
 		objeto.setCapturado(true);
 	}
 
+	public void atualiarDadosHero(Hero hero) {
+		viewGame.getInfoPanel().
+		getInvent()[heros.indexOf(hero)].setText(Integer.toString(hero.getInventary().size()));
+		viewGame.getInfoPanel().
+		getPontos()[heros.indexOf(hero)].setText(Integer.toString(hero.getPontos()));
+	}
+
 	public void checarObjetivos() {
 
-		if(map.getObjetos().size() == 0 && maps.size() > 1) {
-			maps.remove(0);
-			atualizarFase();
-			return;
-		}
-
-		for(Objeto objeto: map.getObjetos()){
+		for(ObjetoNoMapa objeto: map.getObjetos()){
 			for(Hero hero: heros){
 				if(objeto.getRetangulo().intersects(hero.getRetangulo()) && 
 						hero.getControllerHero().getKeyPool().get(hero.getComandos().get("PEGAR")) != null) {
-					atualizarDadosHero(hero, objeto);
+
+					atualizarHero(hero, objeto);
+					
+					if(objeto.isCongelaInimigo()){
+						int index = heros.indexOf(hero);
+						if(index+1 == heros.size())
+							heros.get(index-1).ficarCongelado();
+						else
+							heros.get(index+1).ficarCongelado();
+						break;
+					}
 				}
 			}
 
@@ -112,11 +162,17 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 				break;
 			}
 		}
+
+		if(map.getTotalObjetosValidos() == 0) {
+			faseAtual++;
+			updateFase();
+		}
 	}
 
 	@Override
 	public void run() {
 		while (true) {
+			if(terminou) break;
 
 			checarColisoes();
 			checarObjetivos();
@@ -128,35 +184,6 @@ public class ControllerGame implements Runnable, KeyListener, ActionListener {
 			this.viewGame.getGamePanel().repaint();
 			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
 		}
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-		}
-
-		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-			viewDialogo.setVisible(false);
-			novoJogo();
-		}
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

@@ -4,10 +4,14 @@ public class Pontuacao {
 
 	private String nomePlayer;
 	private int pontos;
+	private int totalInventario;
+	private double idPartida;
 	
-	public Pontuacao(Player player, int idMap) {
-		this.nomePlayer = player.getNome();
-		this.pontos = player.getPontos();
+	public Pontuacao(Hero hero, double idPartida) {
+		this.nomePlayer = hero.getNome();
+		this.totalInventario = hero.getInventary().size();
+		this.pontos = hero.getPontos();
+		this.idPartida = idPartida;
 	}
 
 	public String getNomePlayer() {
@@ -25,4 +29,17 @@ public class Pontuacao {
 	public void setPontos(int pontos) {
 		this.pontos = pontos;
 	}
+
+	public double getIdPartida() {
+		return idPartida;
+	}
+
+	public int getTotalInventario() {
+		return totalInventario;
+	}
+
+	public void setTotalInventario(int totalInventario) {
+		this.totalInventario = totalInventario;
+	}
+	
 }

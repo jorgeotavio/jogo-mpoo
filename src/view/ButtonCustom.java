@@ -11,6 +11,6 @@ public class ButtonCustom extends JButton{
 		setBackground(new Color(63, 60, 197));
 		setForeground(new Color(255,255,255));
 		setBorderPainted(false);
-		setSize(200, 50);
+		setSize(300, 40);
 	}
 }

@@ -1,38 +1,52 @@
 package view;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class ViewMenu extends AbstractView{
 
 	private static final long serialVersionUID = 1L;
 	private JLabel titleLabel;
 	private JButton startButton, leaveButton, tutorialButton, aboutButton;
+	private JPanel panelButtons;
 	
 	public ViewMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		titleLabel = new JLabel("See The Moon");
-		titleLabel.setBounds(210, 150, 500, 10);
+		panelButtons = new JPanel();
+		panelButtons.setLayout(null);
+		panelButtons.setBounds(0, 0, this.getWidth()/2, this.getHeight());
 		
-		startButton = new ButtonCustom("Start");
-		startButton.setBounds(210, 200, 80, 30);
+		titleLabel = new JLabel("Olhe os Números");
+		titleLabel.setFont(pixellari.deriveFont(Font.TRUETYPE_FONT, 45));
+		titleLabel.setBounds(70, 50, 700, 50);
+		
+		startButton = new ButtonCustom("Iniciar");
+		startButton.setFont(pixellari.deriveFont(Font.TRUETYPE_FONT, 20));
+		startButton.setLocation(100, 200);
 		
 		tutorialButton = new ButtonCustom("Tutorial");
-		tutorialButton.setBounds(210, 250, 80, 30);
+		tutorialButton.setFont(pixellari.deriveFont(Font.TRUETYPE_FONT, 20));
+		tutorialButton.setLocation(100, 250);
 		
-		aboutButton = new ButtonCustom("About");
-		aboutButton.setBounds(210, 300, 80, 30);
+		aboutButton = new ButtonCustom("Sobre");
+		aboutButton.setFont(pixellari.deriveFont(Font.TRUETYPE_FONT, 20));
+		aboutButton.setLocation(100, 300);
 		
-		leaveButton = new ButtonCustom("Leave");
-		leaveButton.setBounds(210, 350, 80, 30);
+		leaveButton = new ButtonCustom("Sair");
+		leaveButton.setFont(pixellari.deriveFont(Font.TRUETYPE_FONT, 20));
+		leaveButton.setLocation(100, 350);
 		
-		add(titleLabel);
-		add(startButton);
-		add(tutorialButton);
-		add(aboutButton);
-		add(leaveButton);
+		panelButtons.add(titleLabel);
+		panelButtons.add(startButton);
+		panelButtons.add(tutorialButton);
+		panelButtons.add(aboutButton);
+		panelButtons.add(leaveButton);
+		add(panelButtons);
 		
 		setVisible(false);
 	}

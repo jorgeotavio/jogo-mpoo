@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <Pontuacao>
+    <nomePlayer>Player 1</nomePlayer>
+    <pontos>20</pontos>
+    <totalInventario>2</totalInventario>
+    <idPartida>0.220464154130673</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 2</nomePlayer>
+    <pontos>10</pontos>
+    <totalInventario>1</totalInventario>
+    <idPartida>0.220464154130673</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 1</nomePlayer>
+    <pontos>210</pontos>
+    <totalInventario>19</totalInventario>
+    <idPartida>0.07624376094319196</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 2</nomePlayer>
+    <pontos>110</pontos>
+    <totalInventario>10</totalInventario>
+    <idPartida>0.07624376094319196</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 1</nomePlayer>
+    <pontos>20</pontos>
+    <totalInventario>0</totalInventario>
+    <idPartida>0.32100912231070766</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 2</nomePlayer>
+    <pontos>10</pontos>
+    <totalInventario>0</totalInventario>
+    <idPartida>0.32100912231070766</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 1</nomePlayer>
+    <pontos>20</pontos>
+    <totalInventario>0</totalInventario>
+    <idPartida>0.3453654998483108</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 2</nomePlayer>
+    <pontos>10</pontos>
+    <totalInventario>0</totalInventario>
+    <idPartida>0.3453654998483108</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 1</nomePlayer>
+    <pontos>50</pontos>
+    <totalInventario>3</totalInventario>
+    <idPartida>0.3295279590049289</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 2</nomePlayer>
+    <pontos>20</pontos>
+    <totalInventario>1</totalInventario>
+    <idPartida>0.3295279590049289</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 1</nomePlayer>
+    <pontos>70</pontos>
+    <totalInventario>7</totalInventario>
+    <idPartida>0.14599141042927188</idPartida>
+  </Pontuacao>
+  <Pontuacao>
+    <nomePlayer>Player 2</nomePlayer>
+    <pontos>30</pontos>
+    <totalInventario>2</totalInventario>
+    <idPartida>0.14599141042927188</idPartida>
+  </Pontuacao>
+</list>
